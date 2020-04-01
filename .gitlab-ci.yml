@@ -20,8 +20,8 @@ variables:
     HEROKU_STAGING_APP: earlydetection-staging
     HEROKU_PRODUCTION_APP: earlydetection
     POSTGRES_USER: postgres
-    REGISTRY_NAME: registry.gitlab.com/early
-    CONTAINER_IMAGE: registry.gitlab.com/early:$CI_BUILD_REF_NAME
+    REGISTRY_NAME: registry.gitlab.com/piottt/early
+    CONTAINER_IMAGE: registry.gitlab.com/piottt/early:$CI_BUILD_REF_NAME
 
 
 test:
