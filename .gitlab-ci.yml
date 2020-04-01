@@ -21,7 +21,7 @@ variables:
     HEROKU_PRODUCTION_APP: earlydetection
     POSTGRES_USER: postgres
     REGISTRY_NAME: registry.gitlab.com/early
-    CONTAINER_IMAGE: REGISTRY_NAME:$CI_BUILD_REF_NAME
+    CONTAINER_IMAGE: registry.gitlab.com/early:$CI_BUILD_REF_NAME
 
 
 test:
