@@ -3,12 +3,13 @@ image: docker:latest
 services:
   - docker:dind
 
-before_script:
-  # Add Docker-compose to Docker image
-  - apk add --no-cache py-pip
-  - pip install docker-compose==1.23.2
-  - docker info
-  - docker-compose --version
+.before_script_template:
+  before_script:
+    # Add Docker-compose to Docker image
+    - apk add --no-cache py-pip
+    - pip install docker-compose==1.23.2
+    - docker info
+    - docker-compose --version
 
 stages:
   - test
@@ -29,12 +30,14 @@ variables:
 
 test:
   stage: test
+  extends: .before_script_template
   script:
     - echo "Starting tests"
     - docker-compose run web sh -c "python manage.py test"
 
 build:
   stage: build
+  extends: .before_script_template
   script:
     - echo "Building the app"
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
@@ -50,7 +53,6 @@ sonarcloud-check:
     key: "${CI_JOB_NAME}"
     paths:
       - .sonar/cache
-  before_script:
   script:
     - sonar-scanner
   only:
@@ -62,6 +64,7 @@ sonarcloud-check:
 
 deploy_staging:
   stage: deploy
+  extends: .before_script_template
   only:
   - staging
   script:
@@ -76,6 +79,7 @@ deploy_staging:
 
 deploy_production:
   stage: deploy
+  extends: .before_script_template
   only:
   - production
   script:
