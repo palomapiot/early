@@ -13,6 +13,7 @@ before_script:
 stages:
   - test
   - build
+  - sonar
   - deploy
 
 variables:
@@ -41,6 +42,7 @@ build:
     - docker push $CONTAINER_IMAGE
 
 sonarcloud-check:
+  stage: sonar
   image:
     name: sonarsource/sonar-scanner-cli:latest
     entrypoint: [""]
