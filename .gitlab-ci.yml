@@ -86,6 +86,6 @@ deploy_production:
     - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
     - docker pull $CONTAINER_IMAGE
     - docker tag $CONTAINER_IMAGE registry.heroku.com/$HEROKU_PRODUCTION_APP/web
-    - docker-compose run --f pro_var.env deploy_production sh -c "python manage.py migrate"
+    - docker-compose run --env-file pro_var.env deploy_production sh -c "python manage.py migrate"
     - docker push registry.heroku.com/$HEROKU_PRODUCTION_APP/web
     - docker run --rm -e $HEROKU_API_KEY=$HEROKU_API_KEY wingrunr21/alpine-heroku-cli container:release web --app $HEROKU_PRODUCTION_APP
