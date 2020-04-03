@@ -81,8 +81,6 @@ deploy_production:
   - master
   script:
     - echo "Deploying the app"
-    - cat $DEPLOY_PROD_ENV > .env
-    - cat .env
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
     - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
     - docker pull $CONTAINER_IMAGE
