@@ -67,6 +67,7 @@ deploy_staging:
   extends: .before_script_template
   only:
   - staging
+  - develop
   script:
     - echo "Deploying the app"
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
@@ -82,6 +83,7 @@ deploy_production:
   extends: .before_script_template
   only:
   - production
+  - master
   script:
     - echo "Deploying the app"
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
