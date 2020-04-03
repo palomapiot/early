@@ -29,8 +29,6 @@ services:
 
   deploy_production:
     build: .
-    env_file:
-      - deploy-production-var.env
       
 volumes:
     postgres_data:
