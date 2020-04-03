@@ -41,4 +41,5 @@ include/
 
 *.db
 .idea
-.DS_Store%
+.DS_Store%deploy-production-var.env
+deploy-production-var.env
