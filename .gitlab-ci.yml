@@ -18,12 +18,7 @@ stages:
   - deploy
 
 variables:
-    HEROKU_API_KEY: 27ba7f0f-736e-4393-91cf-9b81945ad70a
-    HEROKU_STAGING_APP: earlydetection-staging
-    HEROKU_PRODUCTION_APP: earlydetection
-    POSTGRES_USER: postgres
-    REGISTRY_NAME: registry.gitlab.com/piottt/early
-    CONTAINER_IMAGE: registry.gitlab.com/piottt/early:$CI_BUILD_REF_NAME
+    CONTAINER_IMAGE: $REGISTRY_NAME:$CI_BUILD_REF_NAME
     SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
     GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
 
