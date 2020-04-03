@@ -28,6 +28,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+*.env
 
 ### pyenv ###
 .python-version
@@ -40,4 +41,6 @@ include/
 
 *.db
 .idea
-.DS_Store%
+.DS_Store%deploy-production-var.env
+deploy-production-var.env
+deploy-staging-var.env

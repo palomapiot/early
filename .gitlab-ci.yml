@@ -3,46 +3,68 @@ image: docker:latest
 services:
   - docker:dind
 
-before_script:
-  # Add Docker-compose to Docker image
-  - apk add --no-cache py-pip
-  - pip install docker-compose==1.23.2
-  - docker info
-  - docker-compose --version
+.before_script_template:
+  before_script:
+    # Add Docker-compose to Docker image
+    - apk add --no-cache py-pip
+    - cat $DEPLOY_PROD_ENV > deploy-production-var.env
+    - cat $DEPLOY_STAG_ENV > deploy-staging-var.env
+    - pip install docker-compose==1.23.2
+    - docker info
+    - docker-compose --version
 
 stages:
   - test
   - build
+  - sonar
   - deploy
 
 variables:
-    HEROKU_API_KEY: 27ba7f0f-736e-4393-91cf-9b81945ad70a
-    HEROKU_STAGING_APP: earlydetection-staging
-    HEROKU_PRODUCTION_APP: earlydetection
-    POSTGRES_USER: postgres
-    REGISTRY_NAME: registry.gitlab.com/piottt/early
-    CONTAINER_IMAGE: registry.gitlab.com/piottt/early:$CI_BUILD_REF_NAME
+    CONTAINER_IMAGE: $REGISTRY_NAME:$CI_BUILD_REF_NAME
+    SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
+    GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
 
 
 test:
   stage: test
+  extends: .before_script_template
   script:
     - echo "Starting tests"
     - docker-compose run web sh -c "python manage.py test"
 
 build:
   stage: build
+  extends: .before_script_template
   script:
     - echo "Building the app"
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
     - docker build -t $CONTAINER_IMAGE .
     - docker push $CONTAINER_IMAGE
 
+sonarcloud-check:
+  stage: sonar
+  image:
+    name: sonarsource/sonar-scanner-cli:latest
+    entrypoint: [""]
+  cache:
+    key: "${CI_JOB_NAME}"
+    paths:
+      - .sonar/cache
+  script:
+    - sonar-scanner
+  only:
+    - merge_requests
+    - master
+    - develop
+    - staging
+    - production
 
 deploy_staging:
   stage: deploy
+  extends: .before_script_template
   only:
   - staging
+  - develop
   script:
     - echo "Deploying the app"
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
@@ -55,8 +77,10 @@ deploy_staging:
 
 deploy_production:
   stage: deploy
+  extends: .before_script_template
   only:
   - production
+  - master
   script:
     - echo "Deploying the app"
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
@@ -65,4 +89,4 @@ deploy_production:
     - docker tag $CONTAINER_IMAGE registry.heroku.com/$HEROKU_PRODUCTION_APP/web
     - docker-compose run deploy_production sh -c "python manage.py migrate"
     - docker push registry.heroku.com/$HEROKU_PRODUCTION_APP/web
-    - docker run --rm -e HEROKU_API_KEY=$HEROKU_API_KEY wingrunr21/alpine-heroku-cli container:release web --app $HEROKU_PRODUCTION_APP
+    - docker run --rm -e $HEROKU_API_KEY=$HEROKU_API_KEY wingrunr21/alpine-heroku-cli container:release web --app $HEROKU_PRODUCTION_APP
