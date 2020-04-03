@@ -7,7 +7,8 @@ services:
   before_script:
     # Add Docker-compose to Docker image
     - apk add --no-cache py-pip
-    - cat $DEPLOY_PROD_ENV > deploy-production-vr.env
+    - cat $DEPLOY_PROD_ENV > deploy-production-var.env
+    - cat $DEPLOY_STAG_ENV > deploy-staging-var.env
     - pip install docker-compose==1.23.2
     - docker info
     - docker-compose --version
@@ -82,7 +83,6 @@ deploy_production:
   - master
   script:
     - echo "Deploying the app"
-    - cat deploy-production-vr.env
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
     - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
     - docker pull $CONTAINER_IMAGE
