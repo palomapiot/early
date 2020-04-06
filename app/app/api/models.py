@@ -49,7 +49,7 @@ class Comment(models.Model):
 class Profile(models.Model):
     experiment_id = models.TextField(max_length=50)
     reddit_username = models.TextField(max_length=50, blank=True, null=True)
-    data = models.ForeignKey(
+    system_data = models.ForeignKey(
         ProfileData, 
         on_delete=models.CASCADE,
         related_name='%(class)s_system_data',

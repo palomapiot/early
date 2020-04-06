@@ -4,7 +4,7 @@ from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
 from rest_framework.decorators import action
-from app.api.serializers import UserSerializer, GroupSerializer, ProfileSerializer, ProfileDataSerializer, ReasonSerializer
+from app.api.serializers import UserSerializer, GroupSerializer, ProfileSerializer, ProfileDataSerializer, ReasonSerializer, ExportSerializer
 from app.api.models import Profile, ProfileData, Reason
 from rest_framework.response import Response
 
@@ -24,6 +24,14 @@ class GroupViewSet(viewsets.ModelViewSet):
     """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+class ExportViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows profiles to export to be viewed.
+    """
+    queryset = Profile.objects.filter(validated_data__isnull=False).all()
+    serializer_class = ExportSerializer
     permission_classes = [permissions.IsAuthenticated]
 
 class ProfileViewSet(viewsets.ModelViewSet):

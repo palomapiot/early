@@ -29,23 +29,30 @@ class ProfileDataSerializer(serializers.ModelSerializer):
         model = ProfileData
         fields = '__all__'
 
+class ExportSerializer(serializers.ModelSerializer):
+    validated_data = ProfileDataSerializer()
+    class Meta:
+        model = Profile        
+        fields = ['experiment_id', 'validated_data']
+        read_only_fields = ['experiment_id', 'validated_data']
+
 class ProfileSerializer(serializers.ModelSerializer):
-    data = ProfileDataSerializer(read_only=True)
+    system_data = ProfileDataSerializer(read_only=True)
     validated_data = ProfileDataSerializer()
 
     # Create a custom method field
-    datas = serializers.SerializerMethodField('_datas')
+    data = serializers.SerializerMethodField('_datas')
 
     # Use this method for the custom field
     def _datas(self, obj):
         if (obj.validated_data != None):
             return ProfileDataSerializer(obj.validated_data).data
-        return ProfileDataSerializer(obj.data).data
+        return ProfileDataSerializer(obj.system_data).data
 
     class Meta:
         model = Profile
-        fields = ['datas', 'experiment_id', 'reddit_username', 'is_valid', 'validated_by', 'data', 'validated_data']
-        read_only_fields = ['experiment_id', 'reddit_username', 'is_valid', 'validated_by', 'data']
+        fields = ['data', 'experiment_id', 'reddit_username', 'is_valid', 'validated_by', 'system_data', 'validated_data']
+        read_only_fields = ['experiment_id', 'reddit_username', 'is_valid', 'validated_by', 'system_data']
 
     def update(self, instance, v_data):
         validated_data_v_data = v_data.pop('validated_data')
