@@ -1,4 +1,0 @@
-{
-    "python.pythonPath": "/Users/palomapiot/Dev/early/earlyenv/bin/python3",
-    "python.linting.pylintArgs": ["--load-plugins", "pylint_django"]
-}
