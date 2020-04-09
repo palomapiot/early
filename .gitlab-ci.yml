@@ -46,6 +46,7 @@ sonarcloud-check:
   image:
     name: sonarsource/sonar-scanner-cli:latest
     entrypoint: [""]
+  allow_failure: true
   cache:
     key: "${CI_JOB_NAME}"
     paths:

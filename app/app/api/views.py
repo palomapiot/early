@@ -4,7 +4,7 @@ from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
 from rest_framework.decorators import action
-from app.api.serializers import UserSerializer, GroupSerializer, ProfileSerializer, ProfileDataSerializer, ReasonSerializer, ExportSerializer
+from app.api.serializers import UserSerializer, GroupSerializer, ProfileSerializer, ProfileDataSerializer, ReasonSerializer, ExportSerializer, ProfileNLPSerializer
 from app.api.models import Profile, ProfileData, Reason
 from rest_framework.response import Response
 
@@ -56,6 +56,11 @@ class ProfileViewSet(viewsets.ModelViewSet):
         profile_data_type = self.request.query_params.get('type')
         reasons = Reason.objects.filter(profile=profile, profile_data_type=profile_data_type).all()
         return Response([reason.reason for reason in reasons])
+    
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return ProfileNLPSerializer
+        return ProfileSerializer
 
 class ProfileDataViewSet(viewsets.ModelViewSet):
     """

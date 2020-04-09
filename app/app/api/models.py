@@ -10,8 +10,9 @@ class Reason(models.Model):
         GENDER = 'G', _('Gender')
         LOCATION = 'L', _('Location')
         PERSONALITY = 'P', _('Personality')
+        DEPRESSION = 'D', _('Depression')
 
-    profile = models.ForeignKey('Profile', on_delete=models.CASCADE)
+    profile = models.ForeignKey('Profile', related_name='reasons', on_delete=models.CASCADE)
     profile_data_type = models.CharField(
         max_length=1, 
         choices=ProfileDataType.choices
@@ -34,6 +35,7 @@ class ProfileData(models.Model):
     )
     location = models.TextField(max_length=100, blank=True, null=True)
     personality = models.TextField(max_length=100, blank=True, null=True)
+    depressed = models.BooleanField(default=False)
 
     def __str__(self):
         """String for representing the Model object."""
@@ -43,7 +45,7 @@ class ProfileData(models.Model):
 class Comment(models.Model):
     date = models.DateTimeField()
     text = models.TextField(max_length=1000)
-    profile = models.ForeignKey('Profile', on_delete=models.CASCADE)
+    profile = models.ForeignKey('Profile', related_name='comments', on_delete=models.CASCADE)
 
 # Profile class
 class Profile(models.Model):
@@ -56,7 +58,7 @@ class Profile(models.Model):
         blank=True,
         null=True
     )
-    is_valid = models.BooleanField()
+    is_valid = models.BooleanField(default=False)
     validated_by = models.ForeignKey(
         User, 
         on_delete=models.SET_NULL, 
