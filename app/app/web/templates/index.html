@@ -1,0 +1,11 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="row">
+    <h1 class="text-center col-12"><a href="{% url 'index' %}">Early</a></h1>
+
+        {% if user.is_not_authenticated %}
+        <p> login </p>
+        {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <div id="content-container" class="container p-none">
+        <div class="lgn-container col-lg-6">
+            <form id="login-form" method="post" 
+                  action="{% url 'login' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label class="col-form-label" for="id_username">Username</label>
+                    <input type="text" name="username" class="form-control" placeholder="Username" id="id_username">
+                    <div class="invalid-feedback">Blank username.</div>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label" for="id_password">Password</label>
+                    <input type="password" name="password" class="form-control" placeholder="Password" id="id_password">
+                    <div class="invalid-feedback">Blank password.</div>
+                </div>
+
+                {% if form.errors %}
+                    <p class="text-danger">Wrong username and/or password. Please try again.</p>
+                {% endif %}
+
+                <input type="submit" value="Login" 
+                       class="btn btn-primary" />
+                <input type="hidden" name="next" value="{{ next }}" />
+            </form>
+        </div>
+    </div>
+{% endblock content %}
