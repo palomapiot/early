@@ -8,42 +8,62 @@
   {% load static %}
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/font/flaticon.css' %}">
   <script src="https://kit.fontawesome.com/3e1fa959fc.js" crossorigin="anonymous"></script>
 </head>
 <body>
+
+  <div id="wrapper">
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#"><img src="/static/images/early.png" width="40" height="40" alt="Early"></a>
+    <a class="navbar-brand" href="{% url 'index' %}"><img src="/static/images/early.png" width="40" height="40" alt="Early"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <li class="nav-item {% if request.resolver_match.url_name == 'index' %}active{% endif %}">
+          <a class="nav-link" href="{% url 'index' %}">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
+
+        {% if user.is_staff %}
+        <li class="nav-item {% if request.resolver_match.url_name == 'profiles' %}active{% endif %}">
+          <a class="nav-link" href="{% url 'profiles' %}">Profiles</a>
+        </li>
+        {% endif %}
+        <li class="nav-item {% if request.resolver_match.url_name == 'about' %}active{% endif %}">
+          <a class="nav-link" href="{% url 'about' %}">About</a>
         </li>
       </ul>
       <ul class="navbar-nav">
         {% if user.is_authenticated %}
-        <li class="nav-item">
+        <li class="nav-item {% if request.resolver_match.url_name == 'account' %}active{% endif %}">
           <a class="nav-link" href="{% url 'account' %}">Account <i class="far fa-user-circle"></i></a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'logout' %}">Log out <i class="fas fa-sign-out-alt"></i></a>
+        <li class="nav-item mr-8">
+          <a class="nav-link" href="{% url 'logout' %}">Logout <i class="fas fa-sign-out-alt"></i></a>
         </li>
         {% else %}
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'login' %}">Log in <i class="fas fa-sign-in-alt"></i></a>
+          <a class="nav-link" href="{% url 'login' %}">Login <i class="fas fa-sign-in-alt"></i></a>
         </li>
         {% endif %}
       </ul>
     </div>
   </nav>
-  <div class="container">
-      {% block content %}{% endblock %}
+    <div id="main">
+    {% block content %}{% endblock %}
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="page-footer font-small">
+      <hr>
+      <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href="https://earlydetection.herokuapp.com/"> early</a>
+      </div>
+    </footer>
+    <!-- Footer -->
   </div>
 </body>
 </html>

@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['earlydetection-staging.herokuapp.com', 'earlydetection.herokua
 # Application definition
 
 INSTALLED_APPS = [
+    'app.web',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'app.api',
-    'app.web',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -126,7 +127,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-REST_FRAMEWORK = {
+REST_FRAMEWORK = {   
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 50
 }

@@ -1,12 +1,15 @@
+from django.contrib.auth import authenticate
+from django.contrib.auth.models import Group, User
 from django.shortcuts import render
-
-from django.contrib.auth.models import User, Group
-from rest_framework import viewsets
-from rest_framework import permissions
+from rest_framework import permissions, viewsets
 from rest_framework.decorators import action
-from app.api.serializers import UserSerializer, GroupSerializer, ProfileSerializer, ProfileDataSerializer, ReasonSerializer, ExportSerializer, ProfileNLPSerializer
-from app.api.models import Profile, ProfileData, Reason
 from rest_framework.response import Response
+
+from app.api.models import Profile, ProfileData, Reason
+from app.api.serializers import (ExportSerializer, GroupSerializer,
+                                 ProfileDataSerializer, ProfileNLPSerializer,
+                                 ProfileSerializer, ReasonSerializer,
+                                 UserSerializer)
 
 
 class UserViewSet(viewsets.ModelViewSet):

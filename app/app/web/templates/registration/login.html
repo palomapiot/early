@@ -3,7 +3,9 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-    <div id="content-container" class="container p-none">
+<div class="container">
+    <div id="login-content" class="row">
+        <h1 class="col-12 mb-4">Login</h1>
         <div class="lgn-container col-lg-6">
             <form id="login-form" method="post" 
                   action="{% url 'login' %}">
@@ -23,10 +25,12 @@
                     <p class="text-danger">Wrong username and/or password. Please try again.</p>
                 {% endif %}
 
+                <a href="{% url 'password_reset' %}"><p class="text-primary">Forgot password?</p></a>
                 <input type="submit" value="Login" 
                        class="btn btn-primary" />
                 <input type="hidden" name="next" value="{{ next }}" />
             </form>
         </div>
     </div>
+</div>
 {% endblock content %}

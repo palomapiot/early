@@ -7,6 +7,9 @@ import app
 
 urlpatterns = [
     path('account/', include('django.contrib.auth.urls')),
-    path('', TemplateView.as_view(template_name='index.html'), name='index'),
+    path('', views.index, name='index'),
     path('account/', TemplateView.as_view(template_name='account.html'), name='account'),
+    path('profiles/', views.profiles, name='profiles'),
+    path('administration/', TemplateView.as_view(template_name='administration.html'), name='administration'),
+    path('about/', TemplateView.as_view(template_name='about.html'), name='about'),
 ]

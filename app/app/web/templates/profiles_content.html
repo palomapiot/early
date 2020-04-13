@@ -1,0 +1,44 @@
+<div id="profiles-content" class="row">
+    <h1 class="col-12 mb-4">Profiles</h1>
+    {% for profile in results %}
+    <div class="col-lg-3 col-md-6 col-xs-12">
+        <a href="{% url 'profiles' %}{{ profile.id }}" class="profile-link">
+            <div class="card shadow mb-3">
+                <h5 class="tooltip-div card-header text-center soft-blue">{{ profile.experiment_id }}
+                    {% if profile.is_valid %}
+                    <span title="Data validated by {{ profile.validated_by.username }}" data-toggle="tooltip" >
+                        <i class="fas fa-check-circle green"></i>
+                    </span>
+                    {% endif %}
+                </h5>
+                <ul class="list-group list-group-flush ellipsis">
+                    <li class="list-group-item"><i class="fas fa-birthday-cake"></i> 
+                        {% if profile.data.age != "" %} {{ profile.data.age }} years 
+                        {% else %} - {% endif %}
+                    </li>
+                    <li class="list-group-item"><i class="fas fa-venus-mars"></i> 
+                        {% if profile.data.gender is not None %} {{ profile.data.gender }} 
+                        {% else %} Unknown {% endif %}
+                    </li>
+                    <li class="list-group-item"><i class="fas fa-map-marker-alt"></i> 
+                        {% if profile.data.location != "" %} {{ profile.data.location }} 
+                        {% else %} - {% endif %}
+                    </li>
+                    <li class="list-group-item"><i class="flaticon-network">
+                    </i> 
+                        {% if profile.data.personality != "" %} {{ profile.data.personality }} 
+                        {% else %} - {% endif %}
+                    </li>
+                </ul>
+                <div class="p-2 text-muted text-center">
+                    {% if profile.data.depressed %}
+                    <span class="badge badge-pill badge-danger">Depressed</span> 
+                    {% else %}
+                    <span class="badge badge-pill badge-primary">Non depressed</span> 
+                    {% endif %}
+                </div>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>

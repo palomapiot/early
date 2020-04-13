@@ -8,6 +8,10 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['url', 'username', 'email', 'groups']
 
+class UserNameSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username']
 
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
@@ -29,6 +33,7 @@ class ExportSerializer(serializers.ModelSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
     system_data = ProfileDataSerializer(read_only=True)
     validated_data = ProfileDataSerializer()
+    validated_by = UserNameSerializer()
 
     # Create a custom method field
     data = serializers.SerializerMethodField('_datas')
