@@ -1,0 +1,144 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-14 19:19+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: templates/account.html:6 templates/base_generic.html:42
+msgid "Account"
+msgstr "Account"
+
+#: templates/account.html:13
+msgid "Account details"
+msgstr "Account details"
+
+#: templates/account.html:24
+#: templates/registration/password_change_form.html:35
+msgid "Change password"
+msgstr "Change password"
+
+#: templates/administration_content.html:2
+msgid "Administration"
+msgstr "Administration"
+
+#: templates/administration_content.html:8
+msgid "Load Reddit data"
+msgstr "Load Reddit data"
+
+#: templates/administration_content.html:19
+msgid "Export data"
+msgstr "Export data"
+
+#: templates/base_generic.html:32 templates/profiles_content.html:2
+msgid "Profiles"
+msgstr "Profiles"
+
+#: templates/profiles_content.html:16
+msgid "years"
+msgstr "years"
+
+#: templates/profiles_content.html:21
+msgid "Unknown"
+msgstr "Unknown"
+
+#: templates/profiles_content.html:34
+msgid "Depression"
+msgstr "Depression"
+
+#: templates/profiles_content.html:36
+msgid "No depression"
+msgstr "No depression"
+
+#: templates/registration/login.html:14 templates/registration/login.html:15
+msgid "Username"
+msgstr "Username"
+
+#: templates/registration/login.html:18 templates/registration/login.html:19
+msgid "Password"
+msgstr "Password"
+
+#: templates/registration/login.html:23
+msgid "Wrong username and/or password. Please try again."
+msgstr "Wrong username and/or password. Please try again."
+
+#: templates/registration/login.html:26
+msgid "Forgot password?"
+msgstr "Forgot password?"
+
+#: templates/registration/password_change_done.html:7
+msgid "Password change successful"
+msgstr "Password change successful"
+
+#: templates/registration/password_change_done.html:10
+msgid "Your password was changed."
+msgstr "Your password was changed."
+
+#: templates/registration/password_change_form.html:7
+msgid "Password change"
+msgstr "Password change"
+
+#: templates/registration/password_change_form.html:14
+msgid ""
+"Please enter your old password, for security’s sake, and then enter your new "
+"password twice so we can verify you typed it in correctly."
+msgstr ""
+"Please enter your old password, for security’s sake, and then enter your new "
+"password twice so we can verify you typed it in correctly."
+
+#: templates/registration/password_change_form.html:17
+#: templates/registration/password_change_form.html:18
+msgid "Old password"
+msgstr "Old password"
+
+#: templates/registration/password_change_form.html:23
+#: templates/registration/password_change_form.html:24
+msgid "New password"
+msgstr "New password"
+
+#: templates/registration/password_change_form.html:29
+#: templates/registration/password_change_form.html:30
+msgid "New password confirmation"
+msgstr "New password confirmation"
+
+#: templates/registration/password_reset_done.html:7
+#: templates/registration/password_reset_form.html:7
+msgid "Password reset"
+msgstr "Password reset"
+
+#: templates/registration/password_reset_done.html:10
+msgid ""
+"We’ve emailed you instructions for setting your password, if an account "
+"exists with the email you entered. You should receive them shortly."
+msgstr ""
+"We’ve emailed you instructions for setting your password, if an account "
+"exists with the email you entered. You should receive them shortly."
+
+#: templates/registration/password_reset_done.html:11
+msgid ""
+"If you don’t receive an email, please make sure you’ve entered the address "
+"you registered with, and check your spam folder."
+msgstr ""
+"If you don’t receive an email, please make sure you’ve entered the address "
+"you registered with, and check your spam folder."
+
+#: templates/registration/password_reset_form.html:14
+msgid "Email"
+msgstr "Email"
+
+#: templates/registration/password_reset_form.html:20
+msgid "Reset password"
+msgstr "Reset password"

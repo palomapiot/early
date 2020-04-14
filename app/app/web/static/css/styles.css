@@ -66,3 +66,12 @@ html, body {
 .container .row h1 {
     margin-top: 1em;
 }
+
+.full-center {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}

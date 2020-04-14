@@ -1,6 +1,9 @@
+
+{% load i18n %}
 <div id="profiles-content" class="row">
-    <h1 class="col-12 mb-4">Profiles</h1>
+    <h1 class="col-12 mb-4">{% trans 'Profiles' %}</h1>
     {% for profile in results %}
+    {{ profile }}
     <div class="col-lg-3 col-md-6 col-xs-12">
         <a href="{% url 'profiles' %}{{ profile.id }}" class="profile-link">
             <div class="card shadow mb-3">
@@ -13,28 +16,27 @@
                 </h5>
                 <ul class="list-group list-group-flush ellipsis">
                     <li class="list-group-item"><i class="fas fa-birthday-cake"></i> 
-                        {% if profile.data.age != "" %} {{ profile.data.age }} years 
+                        {% if profile.data.age != "" %} {{ profile.data.age }} {% trans 'years' %} 
                         {% else %} - {% endif %}
                     </li>
                     <li class="list-group-item"><i class="fas fa-venus-mars"></i> 
                         {% if profile.data.gender is not None %} {{ profile.data.gender }} 
-                        {% else %} Unknown {% endif %}
+                        {% else %} {% trans 'Unknown' %} {% endif %}
                     </li>
                     <li class="list-group-item"><i class="fas fa-map-marker-alt"></i> 
                         {% if profile.data.location != "" %} {{ profile.data.location }} 
                         {% else %} - {% endif %}
                     </li>
-                    <li class="list-group-item"><i class="flaticon-network">
-                    </i> 
+                    <li class="list-group-item"><i class="flaticon-network"></i> 
                         {% if profile.data.personality != "" %} {{ profile.data.personality }} 
                         {% else %} - {% endif %}
                     </li>
                 </ul>
                 <div class="p-2 text-muted text-center">
                     {% if profile.data.depressed %}
-                    <span class="badge badge-pill badge-danger">Depressed</span> 
+                    <span class="badge badge-pill badge-danger">{% trans 'Depression' %}</span> 
                     {% else %}
-                    <span class="badge badge-pill badge-primary">Non depressed</span> 
+                    <span class="badge badge-pill badge-primary">{% trans 'No depression' %}</span> 
                     {% endif %}
                 </div>
             </div>

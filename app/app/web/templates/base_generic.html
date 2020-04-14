@@ -12,7 +12,7 @@
   <script src="https://kit.fontawesome.com/3e1fa959fc.js" crossorigin="anonymous"></script>
 </head>
 <body>
-
+  {% load i18n %}
   <div id="wrapper">
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" href="{% url 'index' %}"><img src="/static/images/early.png" width="40" height="40" alt="Early"></a>
@@ -28,7 +28,7 @@
 
         {% if user.is_staff %}
         <li class="nav-item {% if request.resolver_match.url_name == 'profiles' %}active{% endif %}">
-          <a class="nav-link" href="{% url 'profiles' %}">Profiles</a>
+          <a class="nav-link" href="{% url 'profiles' %}">{% trans 'Profiles' %}</a>
         </li>
         {% endif %}
         <li class="nav-item {% if request.resolver_match.url_name == 'about' %}active{% endif %}">
@@ -38,7 +38,7 @@
       <ul class="navbar-nav">
         {% if user.is_authenticated %}
         <li class="nav-item {% if request.resolver_match.url_name == 'account' %}active{% endif %}">
-          <a class="nav-link" href="{% url 'account' %}">Account <i class="far fa-user-circle"></i></a>
+          <a class="nav-link" href="{% url 'account' %}">{% trans 'Account' %} <i class="far fa-user-circle"></i></a>
         </li>
         <li class="nav-item mr-8">
           <a class="nav-link" href="{% url 'logout' %}">Logout <i class="fas fa-sign-out-alt"></i></a>
