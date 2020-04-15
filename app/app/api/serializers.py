@@ -92,7 +92,7 @@ class ProfileNLPSerializer(serializers.ModelSerializer):
         instance = Profile.objects.create(**v_data)
         system_data_serializer = self.fields['system_data']
         instance.system_data = system_data_serializer.create(system_data_v_data)
-        #TODO: no se persiste el system data -> esta a null tras una creacion
+        instance.save()
         for reason in reasons_v_data:
             Reason.objects.create(profile=instance, **reason)
         for comment in comments_v_data:

@@ -3,7 +3,6 @@
 <div id="profiles-content" class="row">
     <h1 class="col-12 mb-4">{% trans 'Profiles' %}</h1>
     {% for profile in results %}
-    {{ profile }}
     <div class="col-lg-3 col-md-6 col-xs-12">
         <a href="{% url 'profiles' %}{{ profile.id }}" class="profile-link">
             <div class="card shadow mb-3">

@@ -14,7 +14,7 @@ class Reason(models.Model):
 
     profile = models.ForeignKey('Profile', related_name='reasons', on_delete=models.CASCADE)
     profile_data_type = models.CharField(
-        max_length=1, 
+        max_length=1,
         choices=ProfileDataType.choices
     )
     reason = models.TextField(max_length=1000, blank=True, null=True)
