@@ -3,4 +3,3 @@ djangorestframework==3.11.0
 psycopg2==2.7.3.2
 six
 requests
-csv
