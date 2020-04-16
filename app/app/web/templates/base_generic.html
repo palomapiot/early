@@ -38,14 +38,14 @@
       <ul class="navbar-nav">
         {% if user.is_authenticated %}
         <li class="nav-item {% if request.resolver_match.url_name == 'account' %}active{% endif %}">
-          <a class="nav-link" href="{% url 'account' %}">{% trans 'Account' %} <i class="far fa-user-circle"></i></a>
+          <a class="nav-link" href="{% url 'account' %}">{% trans 'Account' %} <em class="far fa-user-circle"></em></a>
         </li>
         <li class="nav-item mr-8">
-          <a class="nav-link" href="{% url 'logout' %}">Logout <i class="fas fa-sign-out-alt"></i></a>
+          <a class="nav-link" href="{% url 'logout' %}">Logout <em class="fas fa-sign-out-alt"></em></a>
         </li>
         {% else %}
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'login' %}">Login <i class="fas fa-sign-in-alt"></i></a>
+          <a class="nav-link" href="{% url 'login' %}">Login <em class="fas fa-sign-in-alt"></em></a>
         </li>
         {% endif %}
       </ul>

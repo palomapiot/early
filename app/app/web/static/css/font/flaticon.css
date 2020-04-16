@@ -24,7 +24,7 @@
 
 [class^="flaticon-"]:before, [class*=" flaticon-"]:before,
 [class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
-  font-family: Flaticon;
+  font-family: Flaticon, sans-serif;
   font-style: normal;
 }
 

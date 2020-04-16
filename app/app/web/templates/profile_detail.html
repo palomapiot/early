@@ -4,9 +4,27 @@
 {% block content %}
 <div class="container">
     <div id="account-content" class="row">
-        <h1 class="col-12 mb-4">{% trans 'Account' %}</h1>
-
-        {{ profile }}
+        <h1 class="col-12 mb-4">{% trans 'Profile details' %} {{ profile.experiment_id }}</h1>
+        <div class="col-6">
+            <ul class="list-group list-group-flush ellipsis">
+                <li class="list-group-item"><em class="fas fa-birthday-cake"></em> 
+                    {% if profile.data.age != "" %} {{ profile.data.age }} {% trans 'years' %} 
+                    {% else %} - {% endif %}
+                </li>
+                <li class="list-group-item"><em class="fas fa-venus-mars"></em> 
+                    {% if profile.data.gender is not None %} {{ profile.data.gender }} 
+                    {% else %} {% trans 'Unknown' %} {% endif %}
+                </li>
+                <li class="list-group-item"><em class="fas fa-map-marker-alt"></em> 
+                    {% if profile.data.location != "" %} {{ profile.data.location }} 
+                    {% else %} - {% endif %}
+                </li>
+                <li class="list-group-item"><em class="flaticon-network"></em> 
+                    {% if profile.data.personality != "" %} {{ profile.data.personality }} 
+                    {% else %} - {% endif %}
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
 {% endblock %}

@@ -9,24 +9,24 @@
                 <h5 class="tooltip-div card-header text-center soft-blue">{{ profile.experiment_id }}
                     {% if profile.is_valid %}
                     <span title="Data validated by {{ profile.validated_by.username }}" data-toggle="tooltip" >
-                        <i class="fas fa-check-circle green"></i>
+                        <em class="fas fa-check-circle green"></em>
                     </span>
                     {% endif %}
                 </h5>
                 <ul class="list-group list-group-flush ellipsis">
-                    <li class="list-group-item"><i class="fas fa-birthday-cake"></i> 
+                    <li class="list-group-item"><em class="fas fa-birthday-cake"></em> 
                         {% if profile.data.age != "" %} {{ profile.data.age }} {% trans 'years' %} 
                         {% else %} - {% endif %}
                     </li>
-                    <li class="list-group-item"><i class="fas fa-venus-mars"></i> 
+                    <li class="list-group-item"><em class="fas fa-venus-mars"></em> 
                         {% if profile.data.gender is not None %} {{ profile.data.gender }} 
                         {% else %} {% trans 'Unknown' %} {% endif %}
                     </li>
-                    <li class="list-group-item"><i class="fas fa-map-marker-alt"></i> 
+                    <li class="list-group-item"><em class="fas fa-map-marker-alt"></em> 
                         {% if profile.data.location != "" %} {{ profile.data.location }} 
                         {% else %} - {% endif %}
                     </li>
-                    <li class="list-group-item"><i class="flaticon-network"></i> 
+                    <li class="list-group-item"><em class="flaticon-network"></em> 
                         {% if profile.data.personality != "" %} {{ profile.data.personality }} 
                         {% else %} - {% endif %}
                     </li>
