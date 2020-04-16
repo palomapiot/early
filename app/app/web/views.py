@@ -1,3 +1,4 @@
+import csv
 import requests
 from django.contrib import auth
 from django.contrib.auth import authenticate
@@ -10,19 +11,29 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.status import (HTTP_200_OK, HTTP_400_BAD_REQUEST,
                                    HTTP_404_NOT_FOUND)
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib import messages
 
 # Create your views here.
 
-def profiles(request):
+def _api_request(request, url):
     protocol = 'http://'
     if request.is_secure():
         protocol = 'https://'
     token, _ = Token.objects.get_or_create(user=request.user)
-    response = requests.get(protocol + request.get_host() + '/api/profiles/', headers={"Authorization":"Token " + token.key})
-    json = response.json()
+    response = requests.get(protocol + request.get_host() + url, headers={"Authorization":"Token " + token.key})
+    return response.json()
+
+def profiles(request):
+    json = _api_request(request, '/api/profiles/')
     return render(request, 'profiles.html', {
         'results': json['results']
+    })
+
+def profile_detail(request, pk):
+    json = _api_request(request, '/api/profiles/' + str(pk))
+    return render(request, 'profile_detail.html', {
+        'profile': json
     })
 
 def index(request):
@@ -31,3 +42,17 @@ def index(request):
             return render(request, 'administration.html', {})
         return profiles(request)
     return render(request, 'index.html', {})
+
+def export(request):
+    json = _api_request(request, '/api/export/')
+
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="export.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['Experiment ID', 'Age', 'Gender', 'Location', 'Personality', 'Depressed'])
+    for obj in json['results']:
+        data = obj['validated_data']
+        writer.writerow([obj['experiment_id'], data['age'], data['gender'], data['location'], data['personality'], data['depressed']])
+    #messages.add_message(request, messages.INFO, 'Export successfully completed.')
+    return response

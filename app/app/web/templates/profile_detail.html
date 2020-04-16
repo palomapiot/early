@@ -1,0 +1,12 @@
+{% extends "base_generic.html" %}
+
+{% load i18n %}
+{% block content %}
+<div class="container">
+    <div id="account-content" class="row">
+        <h1 class="col-12 mb-4">{% trans 'Account' %}</h1>
+
+        {{ profile }}
+    </div>
+</div>
+{% endblock %}

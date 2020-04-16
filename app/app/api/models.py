@@ -6,15 +6,14 @@ from django.utils.translation import gettext_lazy as _
 class Reason(models.Model):
 
     class ProfileDataType(models.TextChoices):
-        AGE = 'A', _('Age')
-        GENDER = 'G', _('Gender')
-        LOCATION = 'L', _('Location')
-        PERSONALITY = 'P', _('Personality')
-        DEPRESSION = 'D', _('Depression')
+        AGE = 'Age', _('Age')
+        GENDER = 'Gender', _('Gender')
+        LOCATION = 'Location', _('Location')
+        PERSONALITY = 'Personality', _('Personality')
+        DEPRESSION = 'Depression', _('Depression')
 
     profile = models.ForeignKey('Profile', related_name='reasons', on_delete=models.CASCADE)
-    profile_data_type = models.CharField(
-        max_length=1,
+    profile_data_type = models.TextField(
         choices=ProfileDataType.choices
     )
     reason = models.TextField(max_length=1000, blank=True, null=True)
@@ -23,13 +22,12 @@ class Reason(models.Model):
 class ProfileData(models.Model):
 
     class Gender(models.TextChoices):
-        MALE = 'M', _('Male')
-        FEMALE = 'F', _('Female')
-        UNKNOWN = 'U', _('Unknown')
+        MALE = 'Male', _('Male')
+        FEMALE = 'Female', _('Female')
+        UNKNOWN = 'Unknown', _('Unknown')
 
     age = models.TextField(max_length=50, blank=True, null=True)
-    gender = models.CharField(
-        max_length=1, 
+    gender = models.TextField(
         choices=Gender.choices,
         default=Gender.UNKNOWN
     )

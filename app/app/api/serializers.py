@@ -30,10 +30,16 @@ class ExportSerializer(serializers.ModelSerializer):
         fields = ['experiment_id', 'validated_data']
         read_only_fields = ['experiment_id', 'validated_data']
 
+class ReasonSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Reason
+        fields = ['reason', 'profile_data_type']
+
 class ProfileSerializer(serializers.ModelSerializer):
     system_data = ProfileDataSerializer(read_only=True)
     validated_data = ProfileDataSerializer()
     validated_by = UserNameSerializer()
+    reasons = ReasonSerializer(many=True)
 
     # Create a custom method field
     data = serializers.SerializerMethodField('_datas')
@@ -46,8 +52,8 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ['id', 'experiment_id', 'reddit_username', 'is_valid', 'validated_by', 'system_data', 'validated_data', 'data', 'reasons', 'comments']
-        read_only_fields = ['experiment_id', 'reddit_username', 'is_valid', 'validated_by', 'system_data', 'reasons', 'comments']
+        fields = ['id', 'experiment_id', 'reddit_username', 'is_valid', 'validated_by', 'system_data', 'validated_data', 'data', 'reasons']
+        read_only_fields = ['experiment_id', 'reddit_username', 'is_valid', 'validated_by', 'system_data', 'reasons']
 
     def update(self, instance, v_data):
         validated_data_v_data = v_data.pop('validated_data')
@@ -61,17 +67,10 @@ class ProfileSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
-class ReasonSerializer(serializers.ModelSerializer):
-    profile = ProfileSerializer(required=False)
-    class Meta:
-        model = Reason
-        fields = '__all__'
-
 class CommentSerializer(serializers.ModelSerializer):
-    profile = ProfileSerializer(required=False)
     class Meta:
         model = Comment
-        fields = '__all__'
+        fields = ['date', 'text']
 
 class ProfileNLPSerializer(serializers.ModelSerializer):
     system_data = ProfileDataSerializer()
@@ -81,7 +80,7 @@ class ProfileNLPSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile        
-        fields = ['experiment_id', 'reddit_username', 'system_data', 'validated_data', 'reasons', 'comments']
+        fields = ['id', 'experiment_id', 'reddit_username', 'system_data', 'validated_data', 'reasons', 'comments']
         read_only_fields = ['validated_data']
 
     def create(self, v_data):
