@@ -1,0 +1,124 @@
+
+{% load i18n %}
+<script type="text/javascript">
+    function showHide(id) {
+        var x = document.getElementById(id);
+        x.classList.toggle("open");
+    }
+</script>
+{% if detail == "true" %}
+<!-- Profiling data -->
+<div class="col-lg-6 col-md-6 col-xs-12">
+    <h3 class="text-center text-primary">{% trans 'Profiling' %}</h3>
+    <hr>
+{% endif %}
+
+    <ul class="list-group list-group-flush ellipsis">
+        <li class="list-group-item profile-list">
+            {% if detail == "true" %}
+            <h3>{% trans 'Age' %} </h3>
+            {% endif %}
+            <span class="col-xs-8">
+                <em class="fas fa-birthday-cake"></em> 
+                {% if profile.data.age != "" %} 
+                {{ profile.data.age }} {% trans 'years' %} 
+                {% else %} - {% endif %}
+            </span>
+
+            {% if detail == "true" %}
+            <span class="col-xs-4 reason-check-right custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="age-switch" onclick="showHide('Age')" checked="">
+                <label class="custom-control-label" for="age-switch"></label>
+                <span title="Activate to see more information" data-toggle="tooltip">
+                    <em class="fas fa-info-circle"></em>
+                </span>
+            </span>
+            {% endif %}
+        </li>
+        <li class="list-group-item profile-list">
+            {% if detail == "true" %}
+            <h3>{% trans 'Gender' %} </h3>
+            {% endif %}
+            <span class="col-xs-8">
+                <em class="fas fa-venus-mars"></em> 
+                {% if profile.data.gender is not None %} 
+                {{ profile.data.gender }} 
+                {% else %} {% trans 'Unknown' %} {% endif %}
+            </span>
+
+            {% if detail == "true" %}
+            <span class="col-xs-4 reason-check-right custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="gender-switch" onclick="showHide('Gender')"  checked="">
+                <label class="custom-control-label" for="gender-switch"></label>
+                <span title="Activate to see more information" data-toggle="tooltip">
+                    <em class="fas fa-info-circle"></em>
+                </span>
+            </span>
+            {% endif %}
+        </li>
+        <li class="list-group-item profile-list">
+            {% if detail == "true" %}
+            <h3>{% trans 'Location' %} </h3>
+            {% endif %}
+            <span class="col-xs-8">
+                <em class="fas fa-map-marker-alt"></em> 
+                {% if profile.data.location != "" %} 
+                {{ profile.data.location }} 
+                {% else %} - {% endif %}
+            </span>
+
+            {% if detail == "true" %}
+            <span class="col-xs-4 reason-check-right custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="location-switch" onclick="showHide('Location')"  checked="">
+                <label class="custom-control-label" for="location-switch"></label>
+                <span title="Activate to see more information" data-toggle="tooltip">
+                    <em class="fas fa-info-circle"></em>
+                </span>
+            </span>
+            {% endif %}
+        </li>
+        <li class="list-group-item profile-list">
+            {% if detail == "true" %}
+            <h3>{% trans 'Personality' %} </h3>
+            {% endif %}
+            <span class="col-xs-8">
+                <em class="flaticon-network"></em> 
+                {% if profile.data.personality != "" %} 
+                {{ profile.data.personality }} 
+                {% else %} - {% endif %}
+            </span>
+
+            {% if detail == "true" %}
+            <span class="col-xs-4 reason-check-right custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="personality-switch" onclick="showHide('Personality')" checked="">
+                <label class="custom-control-label" for="personality-switch"></label>
+                <span title="Activate to see more information" data-toggle="tooltip">
+                    <em class="fas fa-info-circle"></em>
+                </span>
+            </span>
+            {% endif %}
+        </li>
+    </ul>
+
+{% if detail == "true" %}
+</div>
+{% endif %}
+
+{% if detail == "true" %}    
+    <!-- Reasons -->
+    <div class="col-lg-6 col-md-6 col-xs-12">
+        <h3 class="text-center text-primary">{% trans 'Reasons' %}</h3>
+        <hr>
+        <ul class="list-group list-group-flush ellipsis">
+        {% for reason in profile.reasons %}
+            <!-- Age -->
+            <li id="{{ reason.profile_data_type }}" class="list-group-item profile-list">
+                <h3>{{ reason.profile_data_type }}</h3>
+                <span class="col-xs-12">{{ reason.reason }}</span>
+            </li>
+        {% endfor %}    
+        </ul>
+    </div>
+{% endif %}
+
+

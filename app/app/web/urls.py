@@ -11,6 +11,7 @@ urlpatterns = [
     path('account/', TemplateView.as_view(template_name='account.html'), name='account'),
     path('profiles/', views.profiles, name='profiles'),
     path('profiles/<int:pk>/', views.profile_detail, name='profile-detail'),
+    path('profiles/<int:pk>/edit/', views.edit_profile, name='edit-profile'),
     path('export/', views.export, name='export'),
     path('administration/', TemplateView.as_view(template_name='administration.html'), name='administration'),
     path('about/', TemplateView.as_view(template_name='about.html'), name='about'),

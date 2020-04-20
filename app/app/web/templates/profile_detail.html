@@ -3,27 +3,32 @@
 {% load i18n %}
 {% block content %}
 <div class="container">
-    <div id="account-content" class="row">
-        <h1 class="col-12 mb-4">{% trans 'Profile details' %} {{ profile.experiment_id }}</h1>
-        <div class="col-6">
-            <ul class="list-group list-group-flush ellipsis">
-                <li class="list-group-item"><em class="fas fa-birthday-cake"></em> 
-                    {% if profile.data.age != "" %} {{ profile.data.age }} {% trans 'years' %} 
-                    {% else %} - {% endif %}
-                </li>
-                <li class="list-group-item"><em class="fas fa-venus-mars"></em> 
-                    {% if profile.data.gender is not None %} {{ profile.data.gender }} 
-                    {% else %} {% trans 'Unknown' %} {% endif %}
-                </li>
-                <li class="list-group-item"><em class="fas fa-map-marker-alt"></em> 
-                    {% if profile.data.location != "" %} {{ profile.data.location }} 
-                    {% else %} - {% endif %}
-                </li>
-                <li class="list-group-item"><em class="flaticon-network"></em> 
-                    {% if profile.data.personality != "" %} {{ profile.data.personality }} 
-                    {% else %} - {% endif %}
-                </li>
-            </ul>
+    <div id="account-content">
+        <div class="row col-12">
+            <h1 class="col-lg-6 col-md-6 col-xs-6 mb-4">
+                {% trans 'Profile: ' %} {{ profile.experiment_id }}
+                {% if profile.is_valid %}
+                <span title="Data validated by {{ profile.validated_by.username }}" data-toggle="tooltip" >
+                    <em class="fas fa-check-circle green"></em>
+                </span>
+                {% endif %}
+            </h1>
+            <h4 class="col-lg-6 col-md-6 col-xs-6 mb-4 p-2 text-muted">
+                {% if profile.data.depressed %}
+                <span class="badge badge-pill badge-danger align-right">{% trans 'Depression' %}</span> 
+                {% else %}
+                <span class="badge badge-pill badge-primary align-right">{% trans 'No depression' %}</span> 
+                {% endif %}
+            </h4>
+        </div>
+        <hr>
+        <div class="row col-12 mb-4">
+            {% include "profile_fields.html" with profile=profile detail="true" %}
+        </div>
+        <div class="row col-12">
+            <button type="button" data-toggle="modal" data-target="#edit-profile" class="btn btn-outline-primary btn-lg btn-block">Validate and edit data</button>
+            {% include "edit_profile_modal.html" with profile=profile %}
+
         </div>
     </div>
 </div>

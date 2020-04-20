@@ -75,3 +75,16 @@ html, body {
     -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
 }
+
+.align-right {
+    position: absolute;
+    top: 70%;
+    left: 90%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.profile-list span.reason-check-right {
+    float: right;
+}

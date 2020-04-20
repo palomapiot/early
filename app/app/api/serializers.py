@@ -39,7 +39,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     system_data = ProfileDataSerializer(read_only=True)
     validated_data = ProfileDataSerializer()
     validated_by = UserNameSerializer()
-    reasons = ReasonSerializer(many=True)
+    reasons = ReasonSerializer(many=True, read_only=True)
 
     # Create a custom method field
     data = serializers.SerializerMethodField('_datas')

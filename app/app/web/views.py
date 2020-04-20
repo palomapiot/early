@@ -13,15 +13,21 @@ from rest_framework.status import (HTTP_200_OK, HTTP_400_BAD_REQUEST,
                                    HTTP_404_NOT_FOUND)
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
+import json
 
 # Create your views here.
 
-def _api_request(request, url):
+def _api_request(request, url, requestType='GET', body=None):
     protocol = 'http://'
     if request.is_secure():
         protocol = 'https://'
     token, _ = Token.objects.get_or_create(user=request.user)
-    response = requests.get(protocol + request.get_host() + url, headers={"Authorization":"Token " + token.key})
+    if requestType == 'GET':
+        response = requests.get(protocol + request.get_host() + url,
+        headers={"Authorization":"Token " + token.key})
+    if requestType == 'PUT':
+        response = requests.put(protocol + request.get_host() + url,
+        headers={"Authorization":"Token " + token.key}, json=body)
     return response.json()
 
 def profiles(request):
@@ -32,6 +38,23 @@ def profiles(request):
 
 def profile_detail(request, pk):
     json = _api_request(request, '/api/profiles/' + str(pk))
+    return render(request, 'profile_detail.html', {
+        'profile': json
+    })
+
+def edit_profile(request, pk):
+    body = {
+        "validated_data":
+        {
+            "age": request.POST.get("age"),
+            "gender": request.POST.get("gender"),
+            "location": request.POST.get("location"),
+            "personality": request.POST.get("personality"),
+            "depressed": request.POST.get("depressed")
+        },
+        "validated_by": {"username": "me"}
+    }
+    json = _api_request(request, '/api/profiles/' + str(pk) + '/', 'PUT', body)
     return render(request, 'profile_detail.html', {
         'profile': json
     })
