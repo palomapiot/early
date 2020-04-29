@@ -88,3 +88,30 @@ html, body {
 .profile-list span.reason-check-right {
     float: right;
 }
+
+.wordwrap { 
+    white-space: pre-wrap;      /* CSS3 */   
+    white-space: -moz-pre-wrap; /* Firefox */    
+    white-space: -pre-wrap;     /* Opera <7 */   
+    white-space: -o-pre-wrap;   /* Opera 7 */    
+    word-wrap: break-word;      /* IE */
+ }
+
+ .hide {
+    display: none;
+  }
+
+  .border {
+    border: 1px solid gray;
+  }
+  
+  .fas {
+    font-size: 18px;
+  }
+  .fas {
+    transition: transform .2s;
+  }
+  
+  .fas.active {
+    transform: rotateZ(180deg);
+  }
