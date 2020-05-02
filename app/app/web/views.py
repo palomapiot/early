@@ -11,9 +11,11 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.status import (HTTP_200_OK, HTTP_400_BAD_REQUEST,
                                    HTTP_404_NOT_FOUND)
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.contrib import messages
+from app.settings import REST_FRAMEWORK
 import json
+import math as m
 
 # Create your views here.
 
@@ -31,10 +33,44 @@ def _api_request(request, url, requestType='GET', body=None):
     return response.json()
 
 def profiles(request):
-    json = _api_request(request, '/api/profiles/')
-    return render(request, 'profiles.html', {
-        'results': json['results']
-    })
+    try:
+        active_page = int(request.GET['page'][0])
+    except:
+        active_page = 1
+    try:
+        json = _api_request(request, '/api/profiles/?page=' + str(active_page))
+        total_pages = m.ceil(json['count'] / REST_FRAMEWORK['PAGE_SIZE'])
+        pages = []
+        if total_pages <= 7:
+            for page in range(1, total_pages + 1):
+                pages.append({'page': page, 'active': page == active_page})
+        else:
+            if active_page <= 4:
+                for page in range(1, 6):
+                    pages.append({'page': page, 'active': page == active_page})
+                pages.append({'page': '...', 'active': False})
+                pages.append({'page': total_pages, 'active': False})
+            elif active_page >= total_pages - 3:
+                pages.append({'page': 1, 'active': False})
+                pages.append({'page': '...', 'active': False})
+                for page in range(total_pages - 4, total_pages + 1):
+                    pages.append({'page': page, 'active': page == active_page})
+            else:
+                pages.append({'page': 1, 'active': False})
+                pages.append({'page': '...', 'active': False})
+                pages.append({'page': active_page - 1, 'active': False})
+                pages.append({'page': active_page, 'active': True})
+                pages.append({'page': active_page + 1, 'active': False})
+                pages.append({'page': '...', 'active': False})
+                pages.append({'page': total_pages, 'active': False})
+        return render(request, 'profiles.html', {
+            'results': json['results'],
+            'previous': None if json['previous'] == None else active_page - 1,
+            'next': None if json['next'] == None else active_page + 1,
+            'pages': pages,
+        })
+    except:
+        raise Http404 
 
 def profile_detail(request, pk):
     json = _api_request(request, '/api/profiles/' + str(pk))

@@ -26,3 +26,20 @@
     </div>
     {% endfor %}
 </div>
+{% if next is not None or previous is not None %}
+<div class="row d-flex justify-content-center">
+    <ul class="pagination">
+        <li class="page-item {% if previous is None %} disabled{% endif %}">
+            <a class="page-link" href="{% url 'profiles' %}?page={{previous}}">&laquo;</a>
+        </li>
+        {% for page in pages %}
+        <li class="page-item {% if page.active %} active{% endif %}{% if page.page == '...' %} disabled{% endif %}">
+            <a class="page-link" href="{% url 'profiles' %}?page={{page.page}}">{{page.page}}</a>
+        </li>
+        {% endfor %}
+        <li class="page-item {% if next is None %} disabled{% endif %}">
+            <a class="page-link" href="{% url 'profiles' %}?page={{next}}">&raquo;</a>
+        </li>
+    </ul>
+</div>
+{% endif %}
