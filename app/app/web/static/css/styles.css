@@ -12,15 +12,15 @@
     color: #373a3c !important;
 }
 
-.profile-link .card:hover {
+.profile-link:hover {
     background-color:rgba(144, 148, 152, 0.13);
 }
 
-.profile-link .card:hover ul li {
+.profile-link:hover ul li {
     background-color:rgba(144, 148, 152, 0.13);
 }
 
-.profile-link .card:hover div {
+.profile-link:hover div {
     background-color:rgba(144, 148, 152, 0.13);
 }
 
@@ -114,4 +114,8 @@ html, body {
   
   .fas.active {
     transform: rotateZ(180deg);
+  }
+
+  .h1-size {
+      font-size: 2.34375rem;
   }

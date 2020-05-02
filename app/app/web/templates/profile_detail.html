@@ -1,16 +1,23 @@
 {% extends "base_generic.html" %}
-
 {% load i18n %}
 {% block content %}
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('[data-toggle="popover"]').popover();   
+    });
+</script>
 <div class="container">
     <div id="account-content">
         <div class="row col-12 d-flex justify-content-between align-items-end">
             <h1>
                 {% trans 'Profile: ' %} {{ profile.experiment_id }}
                 {% if profile.is_valid %}
-                <span title="Data validated by {{ profile.validated_by.username }}" data-toggle="tooltip" >
-                    <em class="fas fa-check-circle green"></em>
-                </span>
+                <a href="#" data-toggle="popover"
+                    title="Valid profile"
+                    data-trigger="hover" 
+                    data-content="Data validated by {{ profile.validated_by.username }}">
+                    <em class="fas fa-check-circle green h1-size"></em>
+                </a>
                 {% endif %}
             </h1>
             <h3>
@@ -26,7 +33,7 @@
             {% include "profile_fields.html" with profile=profile detail="true" %}
         </div>
         <div class="row col-12">
-            <button type="button" data-toggle="modal" data-target="#edit-profile" class="btn btn-outline-primary btn-lg btn-block">Validate and edit data</button>
+            <button type="button" data-toggle="modal" data-target="#edit-profile" class="btn btn-outline-primary btn-lg btn-block">{% trans 'Validate and edit data' %}</button>
             {% include "edit_profile_modal.html" with profile=profile %}
 
         </div>
