@@ -18,6 +18,7 @@
 </head>
 <body>
   {% load i18n %}
+  {% load template_extras %}
   <div id="wrapper">
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" href="{% url 'index' %}"><img src="/static/images/early.png" width="40" height="40" alt="Early"></a>
@@ -31,7 +32,7 @@
           <a class="nav-link" href="{% url 'index' %}">Home</a>
         </li>
 
-        {% if user.is_staff %}
+        {% if request.user|has_group:"eadmin" %}
         <li class="nav-item {% if request.resolver_match.url_name == 'profiles' %}active{% endif %}">
           <a class="nav-link" href="{% url 'profiles' %}">{% trans 'Profiles' %}</a>
         </li>

@@ -97,7 +97,7 @@ def edit_profile(request, pk):
 
 def index(request):
     if request.user.is_authenticated:
-        if request.user.is_staff:
+        if request.user.groups.filter(name = "eadmin").exists():
             return render(request, 'administration.html', {})
         return profiles(request)
     return render(request, 'index.html', {})
