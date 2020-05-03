@@ -33,22 +33,22 @@
         <li class="list-group-item profile-list">
             {% if detail == "true" %}
             <h3 class="age-data">{% trans 'Age' %} 
-                {% if profile.reasons|reason:'A' %}
+                {% if profile.reasons != NoneType and profile.reasons|reason:'Age' %}
                 <span class="reason-check-right"><em class="fas fa-chevron-up"></em></span>
                 {% endif %}
             </h3>
             {% endif %}
             <span class="col-xs-8">
-                <em class="fas fa-birthday-cake"></em> 
+                <em class="fas fa-birthday-cake">&nbsp;&nbsp;</em> 
                 {% if profile.data.age != "" %} 
                 {{ profile.data.age }} {% trans 'years' %} 
                 {% else %} - {% endif %}
             </span>
 
-            {% if detail == "true" and profile.reasons|reason:'A' %}
+            {% if detail == "true" and profile.reasons|reason:'Age' %}
             <div class="age-reasons mt-3 hide border">
                 <h5 class="mt-3 ml-3 mr-3">{% trans 'Reasons' %}</h5>
-                {% for reason in profile.reasons|reason:'A' %}
+                {% for reason in profile.reasons|reason:'Age' %}
                 <p class="wordwrap mt-1 ml-3 mr-3">{{ reason.reason }}</p>
                 {% endfor %}
             </div>
@@ -57,18 +57,18 @@
         <li class="list-group-item profile-list">
             {% if detail == "true" %}
             <h3 class="gender-data">{% trans 'Gender' %} 
-                {% if profile.reasons|reason:'G' %}
+                {% if profile.reasons != NoneType and profile.reasons|reason:'Gender' %}
                 <span class="reason-check-right"><em class="fas fa-chevron-up"></em></span>
                 {% endif %}
             </h3>
             {% endif %}
             <span class="col-xs-8">
                 {% if profile.data.gender == "Male" %}                
-                <em class="fas fa-male"></em> 
+                <em class="fas fa-male">&nbsp;&nbsp;&nbsp;&nbsp;</em> 
                 {% elif profile.data.gender == "Female" %}            
-                <em class="fas fa-female"></em> 
+                <em class="fas fa-female">&nbsp;&nbsp;&nbsp;&nbsp;</em> 
                 {% else %}
-                <em class="fas fa-venus-mars"></em> 
+                <em class="fas fa-venus-mars">&nbsp;</em> 
                 {% endif %}
 
                 {% if profile.data.gender is not None %} 
@@ -76,10 +76,10 @@
                 {% else %} {% trans 'Unknown' %} {% endif %}
             </span>
 
-            {% if detail == "true" and profile.reasons|reason:'G' %}
+            {% if detail == "true" and profile.reasons|reason:'Gender' %}
             <div class="gender-reasons mt-3 hide border">
                 <h5 class="mt-3 ml-3 mr-3">{% trans 'Reasons' %}</h5>
-                {% for reason in profile.reasons|reason:'G' %}
+                {% for reason in profile.reasons|reason:'Gender' %}
                 <p class="wordwrap mt-1 ml-3 mr-3">{{ reason.reason }}</p>
                 {% endfor %}
             </div>
@@ -88,22 +88,24 @@
         <li class="list-group-item profile-list">
             {% if detail == "true" %}
             <h3 class="location-data">{% trans 'Location' %}                 
-                {% if profile.reasons|reason:'L' %}
+                {% if profile.reasons != NoneType and profile.reasons|reason:'Location' %}
                 <span class="reason-check-right"><em class="fas fa-chevron-up"></em></span>
                 {% endif %}
             </h3>
             {% endif %}
             <span class="col-xs-8">
-                <em class="fas fa-map-marker-alt"></em> 
                 {% if profile.data.location != "" %} 
+                <em class="{{ profile.data.location|lower }} flag"></em>
                 {{ profile.data.location }} 
-                {% else %} - {% endif %}
+                {% else %} 
+                <em class="fas fa-map-marker-alt">&nbsp;&nbsp;</em> - 
+                {% endif %}
             </span>
 
-            {% if detail == "true" and profile.reasons|reason:'L' %}
+            {% if detail == "true" and profile.reasons|reason:'Location' %}
             <div class="location-reasons mt-3 hide border">
                 <h5 class="mt-3 ml-3 mr-3">{% trans 'Reasons' %}</h5>
-                {% for reason in profile.reasons|reason:'L' %}
+                {% for reason in profile.reasons|reason:'Location' %}
                 <p class="wordwrap mt-1 ml-3 mr-3">{{ reason.reason }}</p>
                 {% endfor %}
             </div>
@@ -112,22 +114,22 @@
         <li class="list-group-item profile-list">
             {% if detail == "true" %}
             <h3 class="personality-data">{% trans 'Personality' %} 
-                {% if profile.reasons|reason:'P' %}
+                {% if profile.reasons != NoneType and profile.reasons|reason:'Personality' %}
                 <span class="reason-check-right"><em class="fas fa-chevron-up"></em></span>
                 {% endif %}
             </h3>
             {% endif %}
             <span class="col-xs-8">
-                <em class="flaticon-network"></em> 
+                <em class="flaticon-network">&nbsp;&nbsp;&nbsp;</em> 
                 {% if profile.data.personality != "" %} 
                 {{ profile.data.personality }} 
                 {% else %} - {% endif %}
             </span>
 
-            {% if detail == "true" and profile.reasons|reason:'P' %}
+            {% if detail == "true" and profile.reasons|reason:'Personality' %}
             <div class="personality-reasons mt-3 hide border">
                 <h5 class="mt-3 ml-3 mr-3">{% trans 'Reasons' %}</h5>
-                {% for reason in profile.reasons|reason:'P' %}
+                {% for reason in profile.reasons|reason:'Personality' %}
                 <p class="wordwrap mt-1 ml-3 mr-3">{{ reason.reason }}</p>
                 {% endfor %}
             </div>

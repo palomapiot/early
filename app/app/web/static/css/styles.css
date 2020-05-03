@@ -13,15 +13,15 @@
 }
 
 .profile-link:hover {
-    background-color:rgba(144, 148, 152, 0.13);
+    background-color:rgb(223, 236, 251);
 }
 
 .profile-link:hover ul li {
-    background-color:rgba(144, 148, 152, 0.13);
+    background-color:rgb(223, 236, 251);
 }
 
 .profile-link:hover div {
-    background-color:rgba(144, 148, 152, 0.13);
+    background-color:rgb(223, 236, 251);
 }
 
 .ellipsis li {

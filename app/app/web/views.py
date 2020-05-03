@@ -86,7 +86,7 @@ def edit_profile(request, pk):
             "gender": request.POST.get("gender"),
             "location": request.POST.get("location"),
             "personality": request.POST.get("personality"),
-            "depressed": request.POST.get("depressed")
+            "depressed": request.POST.get("depressed") if request.POST.get("depressed") is not None else False
         },
         "validated_by": {"username": "me"}
     }
@@ -113,5 +113,9 @@ def export(request):
     for obj in json['results']:
         data = obj['validated_data']
         writer.writerow([obj['experiment_id'], data['age'], data['gender'], data['location'], data['personality'], data['depressed']])
-    #messages.add_message(request, messages.INFO, 'Export successfully completed.')
+    #messages.add_message(request, messages.SUCCESS, 'Export successfully completed.')
     return response
+
+def password_change_done(request):
+    messages.add_message(request, messages.SUCCESS, 'Password successfully changed.')
+    return render(request, 'account.html', {})

@@ -6,6 +6,7 @@ from django.views.generic.base import TemplateView
 import app
 
 urlpatterns = [
+    path('account/password_change/done/', views.password_change_done), 
     path('account/', include('django.contrib.auth.urls')),
     path('', views.index, name='index'),
     path('account/', TemplateView.as_view(template_name='account.html'), name='account'),
