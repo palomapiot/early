@@ -1,0 +1,26 @@
+
+{% load i18n %}
+<div id="administration-content" class="row">
+    <h1 class="col-12 mb-4">{% trans 'Administration' %}</h1>
+    <div class="col-6">
+        <a href="#" class="menu-link">
+            <div class="card shadow p-3 mb-5">
+                <div class="card-body text-center">
+                    <h6 class="card-title mb-3"><em class="fab fa-reddit-alien fa-4x"></em></h6>
+                    <h4 class="card-subtitle">{% trans 'Load Reddit data' %}</h4>
+                </div>
+            </div>
+        </a>
+    </div>
+    
+    <div class="col-6">
+        <a href="{% url 'export' %}" class="menu-link">
+            <div class="card shadow p-3 mb-5">
+                <div class="card-body text-center">
+                    <h6 class="card-title mb-3"><em class="fas fa-download fa-4x"></em></h6>
+                    <h4 class="card-subtitle">{% trans 'Export data' %}</h4>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>

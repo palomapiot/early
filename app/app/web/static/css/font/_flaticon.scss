@@ -1,0 +1,44 @@
+    /*
+    Flaticon icon font: Flaticon
+    Creation date: 14/04/2020 13:21
+    */
+
+    @font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff2") format("woff2"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+    .fi:before{
+      display: inline-block;
+      font-style: normal;
+      font-weight: normal;
+      font-variant: normal;
+      line-height: 1;
+      text-decoration: inherit;
+      text-rendering: optimizeLegibility;
+      text-transform: none;
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .flaticon-stress:before { content: "\f100"; }
+.flaticon-natural-language-processing:before { content: "\f101"; }
+.flaticon-network:before { content: "\f102"; }
+    
+    $font-Flaticon-stress: "\f100";
+    $font-Flaticon-natural-language-processing: "\f101";
+    $font-Flaticon-network: "\f102";

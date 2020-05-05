@@ -1,0 +1,197 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-05-03 16:03+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: templates/account.html:7
+msgid "Account"
+msgstr "Account"
+
+#: templates/account.html:14
+msgid "Account details"
+msgstr "Account details"
+
+#: templates/account.html:25
+#: templates/registration/password_change_form.html:34
+msgid "Change password"
+msgstr "Change password"
+
+#: templates/administration_content.html:4
+msgid "Administration"
+msgstr "Administration"
+
+#: templates/administration_content.html:10
+msgid "Load Reddit data"
+msgstr "Load Reddit data"
+
+#: templates/administration_content.html:21
+msgid "Export data"
+msgstr "Export data"
+
+#: templates/base_generic.html:37 templates/profiles_content.html:9
+msgid "Profiles"
+msgstr "Profiles"
+
+#: templates/edit_profile_modal.html:7 templates/profile_detail.html:36
+#, fuzzy
+#| msgid "Load Reddit data"
+msgid "Validate and edit data"
+msgstr "Load Reddit data"
+
+#: templates/edit_profile_modal.html:16 templates/edit_profile_modal.html:17
+#: templates/profile_fields.html:35
+msgid "Age"
+msgstr "Age"
+
+#: templates/edit_profile_modal.html:20 templates/profile_fields.html:59
+msgid "Gender"
+msgstr "Gender"
+
+#: templates/edit_profile_modal.html:22
+msgid "Female"
+msgstr "Female"
+
+#: templates/edit_profile_modal.html:23
+msgid "Male"
+msgstr "Male"
+
+#: templates/edit_profile_modal.html:24 templates/profile_fields.html:76
+msgid "Unknown"
+msgstr "Unknown"
+
+#: templates/edit_profile_modal.html:28 templates/edit_profile_modal.html:29
+#: templates/profile_fields.html:90
+msgid "Location"
+msgstr "Location"
+
+#: templates/edit_profile_modal.html:32 templates/edit_profile_modal.html:33
+#: templates/profile_fields.html:116
+msgid "Personality"
+msgstr "Personality"
+
+#: templates/edit_profile_modal.html:37 templates/profile_detail.html:25
+#: templates/profiles_content.html:27
+msgid "Depression"
+msgstr "Depression"
+
+#: templates/edit_profile_modal.html:41
+msgid "Save and validate"
+msgstr "Save and validate"
+
+#: templates/edit_profile_modal.html:42
+msgid "Close"
+msgstr "Close"
+
+#: templates/profile_detail.html:13
+#, fuzzy
+#| msgid "Profiles"
+msgid "Profile: "
+msgstr "Profile: "
+
+#: templates/profile_detail.html:27 templates/profiles_content.html:29
+msgid "No depression"
+msgstr "No depression"
+
+#: templates/profile_fields.html:44
+msgid "years"
+msgstr "years"
+
+#: templates/profile_fields.html:50 templates/profile_fields.html:81
+#: templates/profile_fields.html:107 templates/profile_fields.html:131
+msgid "Reasons"
+msgstr "Reasons"
+
+#: templates/registration/login.html:14 templates/registration/login.html:15
+msgid "Username"
+msgstr "Username"
+
+#: templates/registration/login.html:18 templates/registration/login.html:19
+msgid "Password"
+msgstr "Password"
+
+#: templates/registration/login.html:23
+msgid "Wrong username and/or password. Please try again."
+msgstr "Wrong username and/or password. Please try again."
+
+#: templates/registration/login.html:26
+msgid "Forgot password?"
+msgstr "Forgot password?"
+
+#: templates/registration/password_change_done.html:8
+msgid "Password change successful"
+msgstr "Password change successful"
+
+#: templates/registration/password_change_done.html:11
+msgid "Your password was changed."
+msgstr "Your password was changed."
+
+#: templates/registration/password_change_form.html:9
+msgid "Password change"
+msgstr "Password change"
+
+#: templates/registration/password_change_form.html:13
+msgid ""
+"Please enter your old password, for security’s sake, and then enter your new "
+"password twice so we can verify you typed it in correctly."
+msgstr ""
+"Please enter your old password, for security’s sake, and then enter your new "
+"password twice so we can verify you typed it in correctly."
+
+#: templates/registration/password_change_form.html:16
+#: templates/registration/password_change_form.html:17
+msgid "Old password"
+msgstr "Old password"
+
+#: templates/registration/password_change_form.html:22
+#: templates/registration/password_change_form.html:23
+msgid "New password"
+msgstr "New password"
+
+#: templates/registration/password_change_form.html:28
+#: templates/registration/password_change_form.html:29
+msgid "New password confirmation"
+msgstr "New password confirmation"
+
+#: templates/registration/password_reset_done.html:8
+#: templates/registration/password_reset_form.html:8
+msgid "Password reset"
+msgstr "Password reset"
+
+#: templates/registration/password_reset_done.html:11
+msgid ""
+"We’ve emailed you instructions for setting your password, if an account "
+"exists with the email you entered. You should receive them shortly."
+msgstr ""
+"We’ve emailed you instructions for setting your password, if an account "
+"exists with the email you entered. You should receive them shortly."
+
+#: templates/registration/password_reset_done.html:12
+msgid ""
+"If you don’t receive an email, please make sure you’ve entered the address "
+"you registered with, and check your spam folder."
+msgstr ""
+"If you don’t receive an email, please make sure you’ve entered the address "
+"you registered with, and check your spam folder."
+
+#: templates/registration/password_reset_form.html:15
+msgid "Email"
+msgstr "Email"
+
+#: templates/registration/password_reset_form.html:21
+msgid "Reset password"
+msgstr "Reset password"

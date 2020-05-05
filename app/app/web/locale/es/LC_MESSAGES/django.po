@@ -1,0 +1,201 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-05-03 16:03+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: templates/account.html:7
+msgid "Account"
+msgstr "Cuenta"
+
+#: templates/account.html:14
+msgid "Account details"
+msgstr "Detalles cuenta"
+
+#: templates/account.html:25
+#: templates/registration/password_change_form.html:34
+msgid "Change password"
+msgstr "Cambiar contraseña"
+
+#: templates/administration_content.html:4
+msgid "Administration"
+msgstr "Administración"
+
+#: templates/administration_content.html:10
+msgid "Load Reddit data"
+msgstr "Cargar datos de Reddit"
+
+#: templates/administration_content.html:21
+msgid "Export data"
+msgstr "Exportar datos"
+
+#: templates/base_generic.html:37 templates/profiles_content.html:9
+msgid "Profiles"
+msgstr "Perfiles"
+
+#: templates/edit_profile_modal.html:7 templates/profile_detail.html:36
+#, fuzzy
+#| msgid "Load Reddit data"
+msgid "Validate and edit data"
+msgstr "Cargar datos de Reddit"
+
+#: templates/edit_profile_modal.html:16 templates/edit_profile_modal.html:17
+#: templates/profile_fields.html:35
+msgid "Age"
+msgstr "Edad"
+
+#: templates/edit_profile_modal.html:20 templates/profile_fields.html:59
+msgid "Gender"
+msgstr "Género"
+
+#: templates/edit_profile_modal.html:22
+msgid "Female"
+msgstr "Mujer"
+
+#: templates/edit_profile_modal.html:23
+msgid "Male"
+msgstr "Hombre"
+
+#: templates/edit_profile_modal.html:24 templates/profile_fields.html:76
+msgid "Unknown"
+msgstr "Desconocido"
+
+#: templates/edit_profile_modal.html:28 templates/edit_profile_modal.html:29
+#: templates/profile_fields.html:90
+msgid "Location"
+msgstr "Ubicación"
+
+#: templates/edit_profile_modal.html:32 templates/edit_profile_modal.html:33
+#: templates/profile_fields.html:116
+msgid "Personality"
+msgstr "Personalidad"
+
+#: templates/edit_profile_modal.html:37 templates/profile_detail.html:25
+#: templates/profiles_content.html:27
+msgid "Depression"
+msgstr "Con depresión"
+
+#: templates/edit_profile_modal.html:41
+msgid "Save and validate"
+msgstr "Guardar y validar"
+
+#: templates/edit_profile_modal.html:42
+msgid "Close"
+msgstr "Cerrar"
+
+#: templates/profile_detail.html:13
+#, fuzzy
+#| msgid "Profiles"
+msgid "Profile: "
+msgstr "Perfil: "
+
+#: templates/profile_detail.html:27 templates/profiles_content.html:29
+msgid "No depression"
+msgstr "Sin depresión"
+
+#: templates/profile_fields.html:44
+msgid "years"
+msgstr "años"
+
+#: templates/profile_fields.html:50 templates/profile_fields.html:81
+#: templates/profile_fields.html:107 templates/profile_fields.html:131
+msgid "Reasons"
+msgstr "Motivos"
+
+#: templates/registration/login.html:14 templates/registration/login.html:15
+msgid "Username"
+msgstr "Nombre de usuario"
+
+#: templates/registration/login.html:18 templates/registration/login.html:19
+msgid "Password"
+msgstr "Contraseña"
+
+#: templates/registration/login.html:23
+msgid "Wrong username and/or password. Please try again."
+msgstr ""
+"Nombre de usuario y/o contraseña erróneos. Por favor, vuelva a intentarlo."
+
+#: templates/registration/login.html:26
+msgid "Forgot password?"
+msgstr "¿Olvidaste tu contraseña?"
+
+#: templates/registration/password_change_done.html:8
+msgid "Password change successful"
+msgstr "Cambio de contraseña exitoso"
+
+#: templates/registration/password_change_done.html:11
+msgid "Your password was changed."
+msgstr "Tu contraseña ha sido cambiada."
+
+#: templates/registration/password_change_form.html:9
+msgid "Password change"
+msgstr "Cambio de contraseña"
+
+#: templates/registration/password_change_form.html:13
+msgid ""
+"Please enter your old password, for security’s sake, and then enter your new "
+"password twice so we can verify you typed it in correctly."
+msgstr ""
+"Por favor, introduzca su contraseña antigua, por seguridad, y luego "
+"introduzca su nueva contraseña dos veces para verificar que ha sido "
+"introducida conrrectamente."
+
+#: templates/registration/password_change_form.html:16
+#: templates/registration/password_change_form.html:17
+msgid "Old password"
+msgstr "Contraseña antigua"
+
+#: templates/registration/password_change_form.html:22
+#: templates/registration/password_change_form.html:23
+msgid "New password"
+msgstr "Contraseña nueva"
+
+#: templates/registration/password_change_form.html:28
+#: templates/registration/password_change_form.html:29
+msgid "New password confirmation"
+msgstr "Confirmación de contraseña nueva"
+
+#: templates/registration/password_reset_done.html:8
+#: templates/registration/password_reset_form.html:8
+msgid "Password reset"
+msgstr "Restablecimiento de contraseña"
+
+#: templates/registration/password_reset_done.html:11
+msgid ""
+"We’ve emailed you instructions for setting your password, if an account "
+"exists with the email you entered. You should receive them shortly."
+msgstr ""
+"Le hemos enviado las instrucciones para configurar su contraseña, si existe "
+"una cuenta con el correo electrónico introducido. Debería recibirlo en "
+"breves momentos."
+
+#: templates/registration/password_reset_done.html:12
+msgid ""
+"If you don’t receive an email, please make sure you’ve entered the address "
+"you registered with, and check your spam folder."
+msgstr ""
+"Si no recives el correco electrónico, por favor, asegúrese que ha "
+"introducido la dirección con la que se ha registrado, y compruebe su bandeja "
+"de correo no deseado."
+
+#: templates/registration/password_reset_form.html:15
+msgid "Email"
+msgstr "Email"
+
+#: templates/registration/password_reset_form.html:21
+msgid "Reset password"
+msgstr "Restablecimiento de contraseña"

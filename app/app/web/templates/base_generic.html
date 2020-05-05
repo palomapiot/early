@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <title>Early</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Add additional CSS in static file -->
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/font/flaticon.css' %}">
+  <!-- MDBootstrap flags -->
+  <link rel="stylesheet" href="{% static 'css/flag.min.css' %}">
+  <script src="{% static 'js/fontawesome.min.js' %}"></script>
+  <script src="{% static 'js/jquery-3.4.1.min.js' %}" ></script>
+  <script src="{% static 'js/popper.min.js' %}" ></script>
+  <script src="{% static 'js/bootstrap-4.4.1.min.js' %}" ></script>
+</head>
+<body>
+  {% load i18n %}
+  {% load template_extras %}
+  <div id="wrapper">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="{% url 'index' %}"><img src="/static/images/early.png" width="40" height="40" alt="Early"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item {% if request.resolver_match.url_name == 'index' %}active{% endif %}">
+          <a class="nav-link" href="{% url 'index' %}">Home</a>
+        </li>
+
+        {% if request.user|has_group:"eadmin" %}
+        <li class="nav-item {% if request.resolver_match.url_name == 'profiles' %}active{% endif %}">
+          <a class="nav-link" href="{% url 'profiles' %}">{% trans 'Profiles' %}</a>
+        </li>
+        {% endif %}
+        <li class="nav-item {% if request.resolver_match.url_name == 'about' %}active{% endif %}">
+          <a class="nav-link" href="{% url 'about' %}">About</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        {% if user.is_authenticated %}
+        <li class="nav-item {% if request.resolver_match.url_name == 'account' %}active{% endif %}">
+          <a class="nav-link" href="{% url 'account' %}">{{ user.get_username }} <em class="far fa-user-circle"></em></a>
+        </li>
+        <li class="nav-item mr-8">
+          <a class="nav-link" href="{% url 'logout' %}">Logout <em class="fas fa-sign-out-alt"></em></a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'login' %}">Login <em class="fas fa-sign-in-alt"></em></a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+    <div id="main">
+      {% include 'partials/messages.html' %}
+      {% block content %}
+      {% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="page-footer font-small">
+      <hr>
+      <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href="https://earlydetection.herokuapp.com/"> early</a>
+      </div>
+    </footer>
+    <!-- Footer -->
+  </div>
+</body>
+</html>

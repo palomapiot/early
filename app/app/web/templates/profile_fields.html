@@ -1,0 +1,144 @@
+
+{% load i18n %}
+{% load template_extras %}
+<script type="text/javascript">
+    function showHide(id) {
+        var x = document.getElementById(id);
+        x.classList.toggle("open");
+    }
+    $(document).ready(function() {
+        $(this).on("click", ".age-data", function() {
+            $(this).parent().find(".age-reasons").toggle();
+            $(this).find(".fas").toggleClass('active');
+        });
+        $(this).on("click", ".gender-data", function() {
+            $(this).parent().find(".gender-reasons").toggle();
+            $(this).find(".fas").toggleClass('active');
+        });
+        $(this).on("click", ".location-data", function() {
+            $(this).parent().find(".location-reasons").toggle();
+            $(this).find(".fas").toggleClass('active');
+        });
+        $(this).on("click", ".personality-data", function() {
+            $(this).parent().find(".personality-reasons").toggle();
+            $(this).find(".fas").toggleClass('active');
+        });
+    });
+</script>
+{% if detail == "true" %}
+<!-- Profiling data -->
+<div class="col-lg-12 col-md-12 col-xs-12">
+{% endif %}
+    <ul class="list-group list-group-flush ellipsis">
+        <li class="list-group-item profile-list">
+            {% if detail == "true" %}
+            <h3 class="age-data">{% trans 'Age' %} 
+                {% if profile.reasons != NoneType and profile.reasons|reason:'Age' %}
+                <span class="reason-check-right"><em class="fas fa-chevron-up"></em></span>
+                {% endif %}
+            </h3>
+            {% endif %}
+            <span class="col-xs-8">
+                <em class="fas fa-birthday-cake">&nbsp;&nbsp;</em> 
+                {% if profile.data.age != "" %} 
+                {{ profile.data.age }} {% trans 'years' %} 
+                {% else %} - {% endif %}
+            </span>
+
+            {% if detail == "true" and profile.reasons|reason:'Age' %}
+            <div class="age-reasons mt-3 hide border">
+                <h5 class="mt-3 ml-3 mr-3">{% trans 'Reasons' %}</h5>
+                {% for reason in profile.reasons|reason:'Age' %}
+                <p class="wordwrap mt-1 ml-3 mr-3">{{ reason.reason }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </li>
+        <li class="list-group-item profile-list">
+            {% if detail == "true" %}
+            <h3 class="gender-data">{% trans 'Gender' %} 
+                {% if profile.reasons != NoneType and profile.reasons|reason:'Gender' %}
+                <span class="reason-check-right"><em class="fas fa-chevron-up"></em></span>
+                {% endif %}
+            </h3>
+            {% endif %}
+            <span class="col-xs-8">
+                {% if profile.data.gender == "Male" %}                
+                <em class="fas fa-male">&nbsp;&nbsp;&nbsp;&nbsp;</em> 
+                {% elif profile.data.gender == "Female" %}            
+                <em class="fas fa-female">&nbsp;&nbsp;&nbsp;&nbsp;</em> 
+                {% else %}
+                <em class="fas fa-venus-mars">&nbsp;</em> 
+                {% endif %}
+
+                {% if profile.data.gender is not None %} 
+                {{ profile.data.gender }} 
+                {% else %} {% trans 'Unknown' %} {% endif %}
+            </span>
+
+            {% if detail == "true" and profile.reasons|reason:'Gender' %}
+            <div class="gender-reasons mt-3 hide border">
+                <h5 class="mt-3 ml-3 mr-3">{% trans 'Reasons' %}</h5>
+                {% for reason in profile.reasons|reason:'Gender' %}
+                <p class="wordwrap mt-1 ml-3 mr-3">{{ reason.reason }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </li>
+        <li class="list-group-item profile-list">
+            {% if detail == "true" %}
+            <h3 class="location-data">{% trans 'Location' %}                 
+                {% if profile.reasons != NoneType and profile.reasons|reason:'Location' %}
+                <span class="reason-check-right"><em class="fas fa-chevron-up"></em></span>
+                {% endif %}
+            </h3>
+            {% endif %}
+            <span class="col-xs-8">
+                {% if profile.data.location != "" %} 
+                <em class="{{ profile.data.location|lower }} flag"></em>
+                {{ profile.data.location }} 
+                {% else %} 
+                <em class="fas fa-map-marker-alt">&nbsp;&nbsp;</em> - 
+                {% endif %}
+            </span>
+
+            {% if detail == "true" and profile.reasons|reason:'Location' %}
+            <div class="location-reasons mt-3 hide border">
+                <h5 class="mt-3 ml-3 mr-3">{% trans 'Reasons' %}</h5>
+                {% for reason in profile.reasons|reason:'Location' %}
+                <p class="wordwrap mt-1 ml-3 mr-3">{{ reason.reason }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </li>
+        <li class="list-group-item profile-list">
+            {% if detail == "true" %}
+            <h3 class="personality-data">{% trans 'Personality' %} 
+                {% if profile.reasons != NoneType and profile.reasons|reason:'Personality' %}
+                <span class="reason-check-right"><em class="fas fa-chevron-up"></em></span>
+                {% endif %}
+            </h3>
+            {% endif %}
+            <span class="col-xs-8">
+                <em class="flaticon-network">&nbsp;&nbsp;&nbsp;</em> 
+                {% if profile.data.personality != "" %} 
+                {{ profile.data.personality }} 
+                {% else %} - {% endif %}
+            </span>
+
+            {% if detail == "true" and profile.reasons|reason:'Personality' %}
+            <div class="personality-reasons mt-3 hide border">
+                <h5 class="mt-3 ml-3 mr-3">{% trans 'Reasons' %}</h5>
+                {% for reason in profile.reasons|reason:'Personality' %}
+                <p class="wordwrap mt-1 ml-3 mr-3">{{ reason.reason }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </li>
+    </ul>
+
+{% if detail == "true" %}
+</div>
+{% endif %}
+
+

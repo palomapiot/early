@@ -1,0 +1,34 @@
+{% extends "base_generic.html" %}
+
+{% load i18n %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div id="login-content" class="row">
+        <h1 class="col-12 mb-4">Login</h1>
+        <div class="col-lg-6">
+            <form id="login-form" method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label class="col-form-label" for="id_username">{% trans 'Username' %}</label>
+                    <input type="text" name="username" class="form-control" placeholder="{% trans 'Username' %}" id="id_username">
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label" for="id_password">{% trans 'Password' %}</label>
+                    <input type="password" name="password" class="form-control" placeholder="{% trans 'Password' %}" id="id_password">
+                </div>
+
+                {% if form.errors %}
+                    <p class="text-danger">{% trans 'Wrong username and/or password. Please try again.' %}</p>
+                {% endif %}
+
+                <a href="{% url 'password_reset' %}"><p class="text-primary">{% trans 'Forgot password?' %}</p></a>
+                <input type="submit" value="Login" 
+                       class="btn btn-primary" />
+                <input type="hidden" name="next" value="{{ next }}" />
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

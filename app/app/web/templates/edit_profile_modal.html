@@ -1,0 +1,48 @@
+
+{% load i18n %}
+<div class="modal fade" id="edit-profile" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{% trans 'Validate and edit data' %}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <form role="form" method="POST" action="{% url 'edit-profile' profile.id %}">
+        <div class="modal-body">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label class="col-form-label" for="age">{% trans 'Age' %}</label>
+                    <input type="text" name="age" class="form-control" placeholder="{% trans 'Age' %}" id="age" value="{{ profile.data.age }}">
+                </div>
+                <div class="form-group">
+                  <label class="col-form-label" for="gender">{% trans 'Gender' %}</label>
+                  <select class="form-control" name="gender" id="gender">
+                    <option selected="{% if profile.data.gender == 'Female' %}selected {% endif %}">{% trans 'Female' %}</option>
+                    <option selected="{% if profile.data.gender == 'Male' %}selected {% endif %}">{% trans 'Male' %}</option>
+                    <option selected="{% if profile.data.gender == 'Unknown' %}selected {% endif %}">{% trans 'Unknown' %}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label" for="location">{% trans 'Location' %}</label>
+                    <input type="text" name="location" class="form-control" placeholder="{% trans 'Location' %}" id="location" value="{{ profile.data.location }}">
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label" for="personality">{% trans 'Personality' %}</label>
+                    <input type="text" name="personality" class="form-control" placeholder="{% trans 'Personality' %}" id="personality" value="{{ profile.data.personality }}">
+                </div>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="depressed" name="depressed" {% if profile.data.depressed %} checked="" {% endif %}>
+                    <label class="custom-control-label" for="depressed">{% trans 'Depression' %}</label>
+                </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">{% trans 'Save and validate' %}</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans 'Close' %}</button>
+        </div>
+
+        </form>
+    </div>
+  </div>
+</div>
