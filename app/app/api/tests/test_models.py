@@ -1,5 +1,6 @@
 from django.test import TestCase
 from app.api.models import Reason, Profile, ProfileData
+from django_countries.fields import CountryField
 
 class ReasonModelTest(TestCase):
     @classmethod
@@ -20,13 +21,13 @@ class ProfileDataModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         # Set up non-modified objects used by all test methods
-        profile_data = ProfileData.objects.create(age="20", gender="Female", location="Austria", personality="Extrovert", depressed=False)
+        profile_data = ProfileData.objects.create(age="20", gender="Female", location='AU', personality="Extrovert", depressed=False)
 
-    def test_reason_max_length(self):
+    def test_profile_data(self):
         data = ProfileData.objects.get(id=1)
         age_max_length = data._meta.get_field('age').max_length
         self.assertEquals(age_max_length, 50)
         self.assertEquals(isinstance(data.gender, str), True)
-        self.assertEquals(isinstance(data.location, str), True)
+        self.assertEquals(data.location.name, "Australia")
         self.assertEquals(isinstance(data.personality, str), True)
         self.assertEquals(isinstance(data.depressed, bool), True)
