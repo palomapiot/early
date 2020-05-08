@@ -9,8 +9,8 @@
     <h1 class="col-12 mb-4">{% trans 'Profiles' %}</h1>
     {% for profile in results %}
     <div class="col-lg-3 col-md-6 col-xs-12">
-        <div class="card shadow mb-3">
-            <h5 class="tooltip-div card-header text-center soft-blue"><strong>{{ profile.experiment_id }}</strong>
+        <div class="card mb-3 bordershadow rounded shadow">
+            <h5 class="tooltip-div card-header text-center card-header-color"><strong>{{ profile.experiment_id }}</strong>
                 {% if profile.is_valid %}
                 <a href="#" data-toggle="popover"
                     title="Valid profile"
@@ -26,7 +26,7 @@
                     {% if profile.data.depressed %}
                     <span class="badge badge-pill badge-danger">{% trans 'Depression' %}</span> 
                     {% else %}
-                    <span class="badge badge-pill badge-primary">{% trans 'No depression' %}</span> 
+                    <span class="badge badge-pill early-badge-primary">{% trans 'No depression' %}</span> 
                     {% endif %}
                 </div>
             </a>
@@ -42,7 +42,7 @@
         </li>
         {% for page in pages %}
         <li class="page-item {% if page.active %} active{% endif %}{% if page.page == '...' %} disabled{% endif %}">
-            <a class="page-link" href="{% url 'profiles' %}?page={{page.page}}">{{page.page}}</a>
+            <a class="page-link {% if page.active %}page-item-color{% endif %}" href="{% url 'profiles' %}?page={{page.page}}">{{page.page}}</a>
         </li>
         {% endfor %}
         <li class="page-item {% if next is None %} disabled{% endif %}">

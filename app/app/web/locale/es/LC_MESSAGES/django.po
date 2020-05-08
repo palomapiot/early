@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-03 16:03+0200\n"
+"POT-Creation-Date: 2020-05-07 15:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,53 +47,58 @@ msgstr "Exportar datos"
 msgid "Profiles"
 msgstr "Perfiles"
 
-#: templates/edit_profile_modal.html:7 templates/profile_detail.html:36
-#, fuzzy
-#| msgid "Load Reddit data"
-msgid "Validate and edit data"
-msgstr "Cargar datos de Reddit"
+#: templates/base_generic.html:50
+msgid "Logout"
+msgstr "Cerrar sesión"
 
-#: templates/edit_profile_modal.html:16 templates/edit_profile_modal.html:17
-#: templates/profile_fields.html:35
+#: templates/base_generic.html:54
+msgid "Login"
+msgstr "Iniciar sesión"
+
+#: templates/edit_profile_modal.html:9 templates/profile_detail.html:36
+msgid "Validate and edit data"
+msgstr "Validar y editar datos"
+
+#: templates/edit_profile_modal.html:18 templates/edit_profile_modal.html:19
+#: templates/profile_fields.html:37
 msgid "Age"
 msgstr "Edad"
 
-#: templates/edit_profile_modal.html:20 templates/profile_fields.html:59
+#: templates/edit_profile_modal.html:22 templates/profile_fields.html:61
 msgid "Gender"
 msgstr "Género"
 
-#: templates/edit_profile_modal.html:22
+#: templates/edit_profile_modal.html:24
 msgid "Female"
 msgstr "Mujer"
 
-#: templates/edit_profile_modal.html:23
+#: templates/edit_profile_modal.html:25
 msgid "Male"
 msgstr "Hombre"
 
-#: templates/edit_profile_modal.html:24 templates/profile_fields.html:76
+#: templates/edit_profile_modal.html:26 templates/profile_fields.html:78
 msgid "Unknown"
 msgstr "Desconocido"
 
-#: templates/edit_profile_modal.html:28 templates/edit_profile_modal.html:29
-#: templates/profile_fields.html:90
+#: templates/edit_profile_modal.html:30 templates/profile_fields.html:92
 msgid "Location"
 msgstr "Ubicación"
 
-#: templates/edit_profile_modal.html:32 templates/edit_profile_modal.html:33
-#: templates/profile_fields.html:116
+#: templates/edit_profile_modal.html:38 templates/edit_profile_modal.html:39
+#: templates/profile_fields.html:119
 msgid "Personality"
 msgstr "Personalidad"
 
-#: templates/edit_profile_modal.html:37 templates/profile_detail.html:25
+#: templates/edit_profile_modal.html:43 templates/profile_detail.html:25
 #: templates/profiles_content.html:27
 msgid "Depression"
 msgstr "Con depresión"
 
-#: templates/edit_profile_modal.html:41
+#: templates/edit_profile_modal.html:47
 msgid "Save and validate"
 msgstr "Guardar y validar"
 
-#: templates/edit_profile_modal.html:42
+#: templates/edit_profile_modal.html:48
 msgid "Close"
 msgstr "Cerrar"
 
@@ -107,12 +112,12 @@ msgstr "Perfil: "
 msgid "No depression"
 msgstr "Sin depresión"
 
-#: templates/profile_fields.html:44
+#: templates/profile_fields.html:46
 msgid "years"
 msgstr "años"
 
-#: templates/profile_fields.html:50 templates/profile_fields.html:81
-#: templates/profile_fields.html:107 templates/profile_fields.html:131
+#: templates/profile_fields.html:52 templates/profile_fields.html:83
+#: templates/profile_fields.html:110 templates/profile_fields.html:134
 msgid "Reasons"
 msgstr "Motivos"
 

@@ -1,0 +1,7 @@
+$theme-colors: (
+  "primary": #00909e
+);
+
+@import "bootswatch/dist/cosmo/variables";
+@import "bootstrap/scss/bootstrap";
+@import "bootswatch/dist/cosmo/bootswatch";

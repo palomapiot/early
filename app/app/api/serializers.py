@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 from app.api.models import Profile, ProfileData, Comment, Reason
-
+from django_countries.serializer_fields import CountryField
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -19,6 +19,7 @@ class GroupSerializer(serializers.ModelSerializer):
         fields = ['url', 'name']
 
 class ProfileDataSerializer(serializers.ModelSerializer):
+    location = CountryField()
     class Meta:
         model = ProfileData
         fields = '__all__'

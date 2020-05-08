@@ -7,10 +7,9 @@
   <!-- Add additional CSS in static file -->
   {% load static %}
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/font/flaticon.css' %}">
-  <!-- MDBootstrap flags -->
-  <link rel="stylesheet" href="{% static 'css/flag.min.css' %}">
+  <link rel="stylesheet" href="{% static 'flags/sprite.css' %}">
   <script src="{% static 'js/fontawesome.min.js' %}"></script>
   <script src="{% static 'js/jquery-3.4.1.min.js' %}" ></script>
   <script src="{% static 'js/popper.min.js' %}" ></script>
@@ -20,7 +19,7 @@
   {% load i18n %}
   {% load template_extras %}
   <div id="wrapper">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-color">
     <a class="navbar-brand" href="{% url 'index' %}"><img src="/static/images/early.png" width="40" height="40" alt="Early"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -47,11 +46,11 @@
           <a class="nav-link" href="{% url 'account' %}">{{ user.get_username }} <em class="far fa-user-circle"></em></a>
         </li>
         <li class="nav-item mr-8">
-          <a class="nav-link" href="{% url 'logout' %}">Logout <em class="fas fa-sign-out-alt"></em></a>
+          <a class="nav-link" href="{% url 'logout' %}">{% trans 'Logout' %} <em class="fas fa-sign-out-alt"></em></a>
         </li>
         {% else %}
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'login' %}">Login <em class="fas fa-sign-in-alt"></em></a>
+          <a class="nav-link" href="{% url 'login' %}">{% trans 'Login' %} <em class="fas fa-sign-in-alt"></em></a>
         </li>
         {% endif %}
       </ul>

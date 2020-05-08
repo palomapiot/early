@@ -1,6 +1,8 @@
 
 {% load i18n %}
 {% load template_extras %}
+{% load countries %}
+{% get_countries as countries %}
 <script type="text/javascript">
     function showHide(id) {
         var x = document.getElementById(id);
@@ -72,7 +74,7 @@
                 {% endif %}
 
                 {% if profile.data.gender is not None %} 
-                {{ profile.data.gender }} 
+                {% trans profile.data.gender %}
                 {% else %} {% trans 'Unknown' %} {% endif %}
             </span>
 
@@ -94,9 +96,10 @@
             </h3>
             {% endif %}
             <span class="col-xs-8">
-                {% if profile.data.location != "" %} 
-                <em class="{{ profile.data.location|lower }} flag"></em>
-                {{ profile.data.location }} 
+                {% if profile.data.location is not None %} 
+                {% get_country profile.data.location as country %}
+                <em class="{{ country.flag_css }}"></em>
+                &nbsp;&nbsp; {{ country.name }}
                 {% else %} 
                 <em class="fas fa-map-marker-alt">&nbsp;&nbsp;</em> - 
                 {% endif %}

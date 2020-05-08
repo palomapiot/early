@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
+from django_countries.fields import CountryField
 
 # Reason class
 class Reason(models.Model):
@@ -31,7 +32,7 @@ class ProfileData(models.Model):
         choices=Gender.choices,
         default=Gender.UNKNOWN
     )
-    location = models.TextField(max_length=100, blank=True, null=True)
+    location = CountryField(blank=True, null=True)
     personality = models.TextField(max_length=100, blank=True, null=True)
     depressed = models.BooleanField(default=False)
 

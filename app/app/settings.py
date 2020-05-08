@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'app.api',
     'rest_framework.authtoken',
+    'django_countries'
 ]
 
 MIDDLEWARE = [

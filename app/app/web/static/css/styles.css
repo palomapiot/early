@@ -12,16 +12,17 @@
     color: #373a3c !important;
 }
 
-.profile-link:hover {
-    background-color:rgb(223, 236, 251);
+.bordershadow {
+    box-shadow: 3px 3px 3px 1px #ccc;
 }
 
-.profile-link:hover ul li {
-    background-color:rgb(223, 236, 251);
+.bordershadow:hover {
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
+    transform: scale(1.01, 1.01);
+    -webkit-transform: scale(1.01, 1.01);
 }
-
-.profile-link:hover div {
-    background-color:rgb(223, 236, 251);
+.bordershadow:hover::after {
+    opacity: 1;
 }
 
 .ellipsis li {
@@ -30,12 +31,26 @@
     text-overflow: ellipsis; 
 }
 
+.early-badge-primary {
+    color: white;
+    background-color: #27496d;
+}
+
 .green {
     color: #3FB618;
 }
 
-.soft-blue {
-    background-color: rgba(39, 128, 227, 0.15) !important;
+.page-item-color {
+    background-color: #00909e !important;
+    border-color: #00909e !important;
+}
+
+.navbar-color {
+    background-color: #00909e !important;
+}
+
+.card-header-color {
+    background-color: #dae1e7 !important;
 }
 
 footer.page-footer {
