@@ -21,6 +21,7 @@
     transform: scale(1.01, 1.01);
     -webkit-transform: scale(1.01, 1.01);
 }
+
 .bordershadow:hover::after {
     opacity: 1;
 }
