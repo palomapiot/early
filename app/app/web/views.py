@@ -1,21 +1,19 @@
 import csv
 import requests
-from django.contrib import auth
-from django.contrib.auth import authenticate
+from app.web.reddit import get_submissions, get_users, get_user_comments
 from django.shortcuts import render
-from django.views.decorators.csrf import csrf_exempt
-from requests.auth import HTTPBasicAuth
 from rest_framework.authtoken.models import Token
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny
-from rest_framework.response import Response
-from rest_framework.status import (HTTP_200_OK, HTTP_400_BAD_REQUEST,
-                                   HTTP_404_NOT_FOUND)
-from django.http import Http404, HttpResponse, HttpResponseRedirect
+from django.http import Http404, HttpResponse
 from django.contrib import messages
 from app.settings import REST_FRAMEWORK
-import json
-import math as m
+import math as math
+import asyncio
+
+def background(f):
+    def wrapped(*args, **kwargs):
+        return asyncio.get_event_loop().run_in_executor(None, f, *args, **kwargs)
+
+    return wrapped
 
 # Create your views here.
 
@@ -30,16 +28,20 @@ def _api_request(request, url, requestType='GET', body=None):
     if requestType == 'PUT':
         response = requests.put(protocol + request.get_host() + url,
         headers={"Authorization":"Token " + token.key}, json=body)
+    if requestType == 'POST':
+        response = requests.post(protocol + request.get_host() + url,
+        headers={"Authorization":"Token " + token.key}, json=body)
+    #print(response.json())
     return response.json()
 
 def profiles(request):
     try:
-        active_page = int(request.GET['page'][0])
+        active_page = int(request.GET['page'])
     except:
         active_page = 1
     try:
         json = _api_request(request, '/api/profiles/?page=' + str(active_page))
-        total_pages = m.ceil(json['count'] / REST_FRAMEWORK['PAGE_SIZE'])
+        total_pages = math.ceil(json['count'] / REST_FRAMEWORK['PAGE_SIZE'])
         pages = []
         if total_pages <= 7:
             for page in range(1, total_pages + 1):
@@ -116,6 +118,41 @@ def export(request):
     #messages.add_message(request, messages.SUCCESS, 'Export successfully completed.')
     return response
 
+def loaddata(request):
+    print('initttttttttttttttttt')
+    #submissions = get_submissions("depression")
+    #users = get_users(submissions)
+    #print(users)
+    users = ['maninashed', 'Spirituuus', 'rbllmelba', 'return_idol', 'D8nkmemelord']  
+    #download_thread = threading.Thread(target=_process_all_users, args=(request, users))
+    #download_thread.start()
+    #loop = asyncio.new_event_loop()
+    #asyncio.set_event_loop(loop)
+    for user in users:
+        print('forrrrrrrrrrrrrrrr: ')
+        print(user)
+        _process_user(request, user)
+
+    print('loaddddddddddddddddddddddddddddddddd')
+    return render(request, 'account.html', {})
+
 def password_change_done(request):
     messages.add_message(request, messages.SUCCESS, 'Password successfully changed.')
     return render(request, 'account.html', {})
+
+def _process_all_users(request, users):
+    for user in users:
+        _process_user(request, user)
+
+#@background
+def _process_user(request, user):
+    print('processsssssssssssssssssssss: ')
+    print(user)
+    comments = get_user_comments(user)
+    body = {
+        "experiment_id": str(user),
+        "reddit_username": str(user),
+        "comments": comments
+    }
+    print('lets call request')
+    _api_request(request, '/api/profiles/', 'POST', body)

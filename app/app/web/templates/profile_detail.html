@@ -10,7 +10,7 @@
     <div id="account-content">
         <div class="row col-12 d-flex justify-content-between align-items-end">
             <h1>
-                {% trans 'Profile: ' %} {{ profile.experiment_id }}
+                {% trans 'Profile: ' %} {{ profile.experiment_id }} 
                 {% if profile.is_valid %}
                 <a href="#" data-toggle="popover"
                     title="Valid profile"
@@ -21,11 +21,14 @@
                 {% endif %}
             </h1>
             <h3>
-                {% if profile.data.depressed %}
+                {% if profile.processed == False %}
+                <span class="badge badge-pill badge-info">{% trans 'Not processed' %}</span> 
+                {% elif profile.data.depressed %}
                 <span class="badge badge-pill badge-danger">{% trans 'Depression' %}</span> 
-                {% else %}
+                {% elif profile.data.depressed == False %}
                 <span class="badge badge-pill early-badge-primary">{% trans 'No depression' %}</span> 
                 {% endif %}
+                
             </h3>
         </div>
         <hr>

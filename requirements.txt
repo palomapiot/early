@@ -4,3 +4,6 @@ psycopg2==2.7.3.2
 six
 requests
 django-countries
+praw
+#redis==3.5.2
+#celery==4.4.3

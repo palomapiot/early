@@ -43,7 +43,7 @@ class ProfileData(models.Model):
 # Comment class
 class Comment(models.Model):
     date = models.DateTimeField()
-    text = models.TextField(max_length=1000)
+    text = models.TextField()
     profile = models.ForeignKey('Profile', related_name='comments', on_delete=models.CASCADE)
 
 # Profile class
@@ -71,3 +71,5 @@ class Profile(models.Model):
         blank=True,
         null=True
     )
+    processed = models.BooleanField(default=False)
+    last_retrieved_comment_date = models.DateTimeField(blank=True, null=True)

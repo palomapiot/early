@@ -156,3 +156,8 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
+
+# Reddit
+
+REDDIT_CLIENT_ID = os.environ.get('REDDIT_CLIENT_ID', '')
+REDDIT_SECRET = os.environ.get('REDDIT_SECRET', '')

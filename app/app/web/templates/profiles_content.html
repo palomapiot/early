@@ -23,9 +23,11 @@
             <a href="{% url 'profile-detail' profile.id %}" class="profile-link">
                 {% include "profile_fields.html" with profile=profile detail="false" %}
                 <div class="p-2 text-muted text-center">
-                    {% if profile.data.depressed %}
+                    {% if profile.processed == False %}
+                    <span class="badge badge-pill badge-info">{% trans 'Not processed' %}</span> 
+                    {% elif profile.data.depressed %}
                     <span class="badge badge-pill badge-danger">{% trans 'Depression' %}</span> 
-                    {% else %}
+                    {% elif profile.data.depressed == False %}
                     <span class="badge badge-pill early-badge-primary">{% trans 'No depression' %}</span> 
                     {% endif %}
                 </div>
