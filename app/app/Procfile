@@ -1,0 +1,1 @@
+worker: celery worker -A app.tasks -l info

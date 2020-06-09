@@ -39,7 +39,6 @@ def process_user(request_user, request_is_secure, request_host, user):
 @app.task(bind=True, name="load_data")
 def load_reddit_data(self, request_user, request_is_secure, request_host):
     from app.web.reddit import get_submissions, get_users
-    print('puto asco de vida')
     body = {
         "load_in_progress": True,
         "task_id": str(current_task.request.id)
@@ -48,7 +47,6 @@ def load_reddit_data(self, request_user, request_is_secure, request_host):
     #submissions = get_submissions("depression")
     #users = get_users(submissions)
     users = ['bastardlass', 'kjirstinn', 'cmarq07', 'Kocheeze', 'TheBlackMambas87']
-    print('los usuarios')
     total_work_to_do = len(users)
     progress_recorder = ProgressRecorder(self)
     result = 0
