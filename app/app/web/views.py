@@ -99,12 +99,13 @@ def edit_profile(request, pk):
     })
 
 def index(request):
+    globaldata = {}
     if request.user.is_authenticated:
         if request.user.groups.filter(name = "eadmin").exists():
             globaldata = _api_request(request, '/api/globaldata/1/', 'GET')
             return render(request, 'administration.html', {'globaldata': globaldata})
         return profiles(request)
-    globaldata = _api_request(request, '/api/globaldata/1/', 'GET')
+        globaldata = _api_request(request, '/api/globaldata/1/', 'GET')
     return render(request, 'index.html', {'globaldata': globaldata})
 
 def export(request):
