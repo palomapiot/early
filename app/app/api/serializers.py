@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
-from app.api.models import Profile, ProfileData, Comment, Reason
+from app.api.models import Profile, ProfileData, Comment, Reason, GlobalData
 from django_countries.serializer_fields import CountryField
 
 class UserSerializer(serializers.ModelSerializer):
@@ -35,6 +35,11 @@ class ReasonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reason
         fields = ['reason', 'profile_data_type']
+
+class GlobalDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GlobalData
+        fields = ['id', 'load_in_progress', 'task_id']
 
 class ProfileSerializer(serializers.ModelSerializer):
     system_data = ProfileDataSerializer(read_only=True)
@@ -90,9 +95,6 @@ class ProfileNLPSerializer(serializers.ModelSerializer):
         comments_v_data = v_data.pop('comments', [])
         system_data_v_data = v_data.pop('system_data', None)
 
-        #instance = Profile.objects.create(**v_data)
-        print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
-        print()
         try:
             instance = Profile.objects.get(reddit_username=v_data.get('reddit_username', None))
         except Profile.DoesNotExist:
@@ -112,7 +114,6 @@ class ProfileNLPSerializer(serializers.ModelSerializer):
             if instance.last_retrieved_comment_date is None or instance.last_retrieved_comment_date < comment.date:
                 Comment.objects.create(profile=instance, **comment)
 
-        print(c_date)
         instance.last_retrieved_comment_date = c_date
         return instance
 

@@ -7,6 +7,16 @@
     background-color: #e2e2e2;
 }
 
+.not-active {
+    pointer-events: none !important;
+    cursor: not-allowed !important;
+    text-decoration: none !important;
+}
+
+.not-active > div {
+    background-color: #e9ecef !important;
+}
+
 .profile-link {
     text-decoration: none !important;
     color: #373a3c !important;

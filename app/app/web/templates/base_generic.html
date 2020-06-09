@@ -14,6 +14,8 @@
   <script src="{% static 'js/jquery-3.4.1.min.js' %}" ></script>
   <script src="{% static 'js/popper.min.js' %}" ></script>
   <script src="{% static 'js/bootstrap-4.4.1.min.js' %}" ></script>
+  <script src="{% static 'celery_progress/celery_progress.js' %}"></script>
+
 </head>
 <body>
   {% load i18n %}
@@ -58,6 +60,7 @@
   </nav>
     <div id="main">
       {% include 'partials/messages.html' %}
+      {% include 'partials/progress.html' %}
       {% block content %}
       {% endblock %}
     </div>

@@ -1,6 +1,5 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import Group, User
-from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import permissions, viewsets
 from rest_framework.authtoken.models import Token
@@ -13,11 +12,11 @@ from rest_framework.status import (
     HTTP_200_OK
 )
 
-from app.api.models import Profile, ProfileData, Reason
+from app.api.models import Profile, ProfileData, Reason, GlobalData
 from app.api.serializers import (ExportSerializer, GroupSerializer,
                                  ProfileDataSerializer, ProfileNLPSerializer,
                                  ProfileSerializer, ReasonSerializer,
-                                 UserSerializer)
+                                 UserSerializer, GlobalDataSerializer)
 
 
 @csrf_exempt
@@ -66,7 +65,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows profiles to be viewed or edited.
     """
-    queryset = Profile.objects.all()
+    queryset = Profile.objects.all().order_by('experiment_id')
     serializer_class = ProfileSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -104,4 +103,12 @@ class ReasonViewSet(viewsets.ModelViewSet):
     """
     queryset = Reason.objects.all()
     serializer_class = ReasonSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+class GlobalDataViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows global data to be viewed or edited.
+    """
+    queryset = GlobalData.objects.all()
+    serializer_class = GlobalDataSerializer
     permission_classes = [permissions.IsAuthenticated]

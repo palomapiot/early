@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
 from rest_framework import routers
 from app.api import views
 
@@ -23,6 +23,7 @@ router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 router.register(r'profiles', views.ProfileViewSet)
 router.register(r'export', views.ExportViewSet, 'export')
+router.register(r'globaldata', views.GlobalDataViewSet, 'globaldata')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,4 +31,5 @@ urlpatterns = [
     path('api/login', views.login),
     path('', include('app.web.urls')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    re_path(r'^celery-progress/', include('celery_progress.urls')),
 ]

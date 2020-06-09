@@ -1,6 +1,6 @@
 ### VS Code ###
 .vscode/*
-!.vscode/settings.json
+.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
@@ -44,3 +44,10 @@ include/
 .DS_Store%deploy-production-var.env
 deploy-production-var.env
 deploy-staging-var.env
+
+### node ###
+app/node_modules
+
+### requis copy ###
+requis.txt
+app/requis.txt

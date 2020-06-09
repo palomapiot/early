@@ -73,3 +73,7 @@ class Profile(models.Model):
     )
     processed = models.BooleanField(default=False)
     last_retrieved_comment_date = models.DateTimeField(blank=True, null=True)
+
+class GlobalData(models.Model):
+    load_in_progress = models.BooleanField(default=False)
+    task_id = models.TextField(max_length=100, blank=True, null=True)
