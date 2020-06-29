@@ -44,6 +44,7 @@ def load_reddit_data(self, request_user, request_is_secure, request_host):
         "task_id": str(current_task.request.id)
     }
     _api_request(request_user, request_is_secure, request_host, '/api/globaldata/1/', 'PUT', body)
+    # TODO: switch in order to have the complete funtionality
     #submissions = get_submissions("depression")
     #users = get_users(submissions)
     users = ['bastardlass', 'kjirstinn', 'cmarq07', 'Kocheeze', 'TheBlackMambas87']

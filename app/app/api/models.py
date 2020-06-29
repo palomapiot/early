@@ -22,18 +22,39 @@ class Reason(models.Model):
 # Profile data class
 class ProfileData(models.Model):
 
+    class Age(models.TextChoices):
+        ADOLESCENCE = '12-20', _('12-20')
+        EARLY_ADULTHOOD = '20-30', _('20-30')
+        MATURE_ADULTHOOD = '30-65', _('30-65')
+        OLD_AGE = '65+', _('65+')
+        UNKNOWN = 'Unknown', _('Unknown')
+
     class Gender(models.TextChoices):
         MALE = 'Male', _('Male')
         FEMALE = 'Female', _('Female')
         UNKNOWN = 'Unknown', _('Unknown')
 
-    age = models.TextField(max_length=50, blank=True, null=True)
+    class Personality(models.TextChoices):
+        EXTRAVERSION = 'Extraversion', _('Extraversion')
+        AGREEABLENESS = 'Agreeableness', _('Agreeableness')
+        CONSCIENTIOUSNESS = 'Conscientiousness', _('Conscientiousness')
+        NEUROTICISM = 'Neuroticism', _('Neuroticism')
+        OPENNESS = 'Openness', _('Openness')
+        UNKNOWN = 'Unknown', _('Unknown')
+
+    age = models.TextField(
+        choices=Age.choices,
+        default=Age.UNKNOWN
+    )
     gender = models.TextField(
         choices=Gender.choices,
         default=Gender.UNKNOWN
     )
     location = CountryField(blank=True, null=True)
-    personality = models.TextField(max_length=100, blank=True, null=True)
+    personality = models.TextField(
+        choices=Personality.choices,
+        default=Personality.UNKNOWN
+    )
     depressed = models.BooleanField(default=False)
 
     def __str__(self):

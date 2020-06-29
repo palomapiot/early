@@ -42,7 +42,7 @@
             {% endif %}
             <span class="col-xs-8">
                 <em class="fas fa-birthday-cake">&nbsp;&nbsp;</em> 
-                {% if profile.data.age != "" %} 
+                {% if profile.data.age != "" and profile.data.age != None %} 
                 {{ profile.data.age }} {% trans 'years' %} 
                 {% else %} - {% endif %}
             </span>
@@ -75,7 +75,7 @@
 
                 {% if profile.data.gender is not None %} 
                 {% trans profile.data.gender %}
-                {% else %} {% trans 'Unknown' %} {% endif %}
+                {% else %} - {% endif %}
             </span>
 
             {% if detail == "true" and profile.reasons|reason:'Gender' %}
@@ -124,7 +124,7 @@
             {% endif %}
             <span class="col-xs-8">
                 <em class="flaticon-network">&nbsp;&nbsp;&nbsp;</em> 
-                {% if profile.data.personality != "" %} 
+                {% if profile.data.personality != "" and profile.data.personality is not None %} 
                 {{ profile.data.personality }} 
                 {% else %} - {% endif %}
             </span>

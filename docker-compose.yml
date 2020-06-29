@@ -1,6 +1,11 @@
 version: '3'
 
 services:
+  redis:
+    image: redis
+    command: redis-server
+    ports:
+      - '6379:6379'
   web:
     build:
       context: .
@@ -23,6 +28,14 @@ services:
         - "POSTGRES_HOST_AUTH_METHOD=trust"
     volumes:
         - postgres_data:/var/lib/postgresql/data/
+  celery:
+    build: .
+    command: celery -A app.tasks worker -B
+    volumes:
+      - .:/code
+    links:
+      - db
+      - redis
 
   deploy_staging:
     build: .

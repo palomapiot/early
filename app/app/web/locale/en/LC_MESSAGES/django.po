@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-07 16:00+0200\n"
+"POT-Creation-Date: 2020-06-29 18:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,74 +31,93 @@ msgstr "Account details"
 msgid "Change password"
 msgstr "Change password"
 
-#: templates/administration_content.html:4
+#: templates/administration_content.html:13
 msgid "Administration"
 msgstr "Administration"
 
-#: templates/administration_content.html:10
+#: templates/administration_content.html:19
 msgid "Load Reddit data"
 msgstr "Load Reddit data"
 
-#: templates/administration_content.html:21
+#: templates/administration_content.html:30
 msgid "Export data"
 msgstr "Export data"
 
-#: templates/base_generic.html:37 templates/profiles_content.html:9
+#: templates/base_generic.html:38 templates/profiles_content.html:9
 msgid "Profiles"
 msgstr "Profiles"
 
-#: templates/base_generic.html:50
+#: templates/base_generic.html:51
 msgid "Logout"
 msgstr "Logout"
 
-#: templates/base_generic.html:54
+#: templates/base_generic.html:55
 msgid "Login"
 msgstr "Login"
 
-#: templates/edit_profile_modal.html:9 templates/profile_detail.html:36
+#: templates/edit_profile_modal.html:9 templates/profile_detail.html:39
 msgid "Validate and edit data"
 msgstr "Validate and edit data"
 
-#: templates/edit_profile_modal.html:18 templates/edit_profile_modal.html:19
-#: templates/profile_fields.html:37
+#: templates/edit_profile_modal.html:18 templates/profile_fields.html:37
 msgid "Age"
 msgstr "Age"
 
-#: templates/edit_profile_modal.html:22 templates/profile_fields.html:61
-msgid "Gender"
-msgstr "Gender"
-
-#: templates/edit_profile_modal.html:24
-msgid "Female"
-msgstr "Female"
-
-#: templates/edit_profile_modal.html:25
-msgid "Male"
-msgstr "Male"
-
-#: templates/edit_profile_modal.html:26 templates/profile_fields.html:78
+#: templates/edit_profile_modal.html:24 templates/edit_profile_modal.html:32
+#: templates/edit_profile_modal.html:51
 msgid "Unknown"
 msgstr "Unknown"
 
-#: templates/edit_profile_modal.html:30 templates/profile_fields.html:92
+#: templates/edit_profile_modal.html:28 templates/profile_fields.html:61
+msgid "Gender"
+msgstr "Gender"
+
+#: templates/edit_profile_modal.html:30
+msgid "Female"
+msgstr "Female"
+
+#: templates/edit_profile_modal.html:31
+msgid "Male"
+msgstr "Male"
+
+#: templates/edit_profile_modal.html:36 templates/profile_fields.html:92
 msgid "Location"
 msgstr "Location"
 
-#: templates/edit_profile_modal.html:38 templates/edit_profile_modal.html:39
-#: templates/profile_fields.html:119
+#: templates/edit_profile_modal.html:44 templates/profile_fields.html:119
 msgid "Personality"
 msgstr "Personality"
 
-#: templates/edit_profile_modal.html:43 templates/profile_detail.html:25
-#: templates/profiles_content.html:27
+#: templates/edit_profile_modal.html:46
+msgid "Extraversion"
+msgstr "Extraversion"
+
+#: templates/edit_profile_modal.html:47
+msgid "Agreeableness"
+msgstr "Agreeableness"
+
+#: templates/edit_profile_modal.html:48
+msgid "Conscientiousness"
+msgstr "Conscientiousness"
+
+#: templates/edit_profile_modal.html:49
+msgid "Neuroticism"
+msgstr "Neuroticism"
+
+#: templates/edit_profile_modal.html:50
+msgid "Openness"
+msgstr "Openness"
+
+#: templates/edit_profile_modal.html:56 templates/profile_detail.html:27
+#: templates/profiles_content.html:29
 msgid "Depression"
 msgstr "Depression"
 
-#: templates/edit_profile_modal.html:47
+#: templates/edit_profile_modal.html:60
 msgid "Save and validate"
 msgstr "Save and validate"
 
-#: templates/edit_profile_modal.html:48
+#: templates/edit_profile_modal.html:61
 msgid "Close"
 msgstr "Close"
 
@@ -108,7 +127,11 @@ msgstr "Close"
 msgid "Profile: "
 msgstr "Profile: "
 
-#: templates/profile_detail.html:27 templates/profiles_content.html:29
+#: templates/profile_detail.html:25 templates/profiles_content.html:27
+msgid "Not processed"
+msgstr "Not processed"
+
+#: templates/profile_detail.html:29 templates/profiles_content.html:31
 msgid "No depression"
 msgstr "No depression"
 
