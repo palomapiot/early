@@ -13,6 +13,7 @@
             <div class="modal-body">
                 {% csrf_token %}
                 <fieldset class="form-group">
+                    <legend><h4>{% trans 'Exporta data' %}</h4></legend>
                     <div class="form-check">
                         <label class="form-check-label">
                         <input type="radio" class="form-check-input" name="exportOptions" id="exportOptionsDemographic" value="demographic" checked="">

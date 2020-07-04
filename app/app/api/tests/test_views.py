@@ -37,6 +37,10 @@ BODY = {
         ]
     }
 
+PROFILES_ENDPOINT = '/api/profiles/'
+GLOBALDATA_ENDPOINT = '/api/globaldata/'
+EXPORT_ENDPOINT = '/api/export/'
+
 class ProfilesTestCase(APITestCase):
     def setUp(self):
         self.username = 'john_doe'
@@ -45,7 +49,7 @@ class ProfilesTestCase(APITestCase):
         self.client.force_authenticate(user=self.user)
 
     def test_profiles(self):
-        response = self.client.get('/api/profiles/', format='json')
+        response = self.client.get(PROFILES_ENDPOINT, format='json')
         self.assertEqual(response.status_code, 200)
 
 class ExportTestCase(APITestCase):
@@ -56,7 +60,7 @@ class ExportTestCase(APITestCase):
         self.client.force_authenticate(user=self.user)
 
     def test_export(self):
-        response = self.client.get('/api/export/', format='json')
+        response = self.client.get(EXPORT_ENDPOINT, format='json')
         self.assertEqual(response.status_code, 200)
 
 class ProfilePostTestCase(APITestCase):
@@ -67,7 +71,7 @@ class ProfilePostTestCase(APITestCase):
         self.client.force_authenticate(user=self.user)
 
     def test_post_profiles(self):
-        response = self.client.post('/api/profiles/', BODY, format='json')
+        response = self.client.post(PROFILES_ENDPOINT, BODY, format='json')
         self.assertEqual(response.status_code, 201)
 
 class ProfileTestCase(APITestCase):
@@ -78,9 +82,9 @@ class ProfileTestCase(APITestCase):
         self.client.force_authenticate(user=self.user)
 
     def test_get_profile(self):
-        profile = self.client.post('/api/profiles/', BODY, format='json')
+        profile = self.client.post(PROFILES_ENDPOINT, BODY, format='json')
         data = json.loads(str(profile.content, encoding='utf8'))
-        response = self.client.get('/api/profiles/' + str(data['id']) + '/', format='json')
+        response = self.client.get(PROFILES_ENDPOINT + str(data['id']) + '/', format='json')
         self.assertEqual(response.status_code, 200)
 
 class ProfileEditTestCase(APITestCase):
@@ -91,7 +95,7 @@ class ProfileEditTestCase(APITestCase):
         self.client.force_authenticate(user=self.user)
 
     def test_put_profile(self):
-        profile = self.client.post('/api/profiles/', BODY, format='json')
+        profile = self.client.post(PROFILES_ENDPOINT, BODY, format='json')
         data = json.loads(str(profile.content, encoding='utf8'))
         edition = {
             "validated_data": {
@@ -103,7 +107,7 @@ class ProfileEditTestCase(APITestCase):
             },
             "validated_by": {"username": "me"}
         }
-        response = self.client.put('/api/profiles/' + str(data['id']) + '/', edition, format='json')
+        response = self.client.put(PROFILES_ENDPOINT + str(data['id']) + '/', edition, format='json')
         updated_data = json.loads(str(response.content, encoding='utf8'))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(updated_data['is_valid'], True)
@@ -116,9 +120,9 @@ class ReasonTestCase(APITestCase):
         self.client.force_authenticate(user=self.user)
 
     def test_get_reasons(self):
-        profile = self.client.post('/api/profiles/', BODY, format='json')
+        profile = self.client.post(PROFILES_ENDPOINT, BODY, format='json')
         data = json.loads(str(profile.content, encoding='utf8'))
-        response = self.client.get('/api/profiles/' + str(data['id']) + '/reasons/?type=Age', format='json')
+        response = self.client.get(PROFILES_ENDPOINT + str(data['id']) + '/reasons/?type=Age', format='json')
         reasons = json.loads(str(response.content, encoding='utf8'))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(reasons, ['user said she was 25'])
@@ -131,7 +135,7 @@ class GlobalDataTestCase(APITestCase):
         self.client.force_authenticate(user=self.user)
 
     def test_get_globaldata(self):
-        response = self.client.get('/api/globaldata/', format='json')
+        response = self.client.get(GLOBALDATA_ENDPOINT, format='json')
         self.assertEqual(response.status_code, 200)
 
 class GlobalDataCreateTestCase(APITestCase):
@@ -147,5 +151,5 @@ class GlobalDataCreateTestCase(APITestCase):
             "task_id": "6ca7c616-d2d8-442a-9af7-074d8f4aef9c"
         }
 
-        response = self.client.post('/api/globaldata/', globaldata, format='json')
+        response = self.client.post(GLOBALDATA_ENDPOINT, globaldata, format='json')
         self.assertEqual(response.status_code, 201)

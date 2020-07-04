@@ -15,6 +15,10 @@ import time
 
 # Create your views here.
 
+TOKEN = "Token "
+AUTHORIZATION = "Authorization"
+GLOBALDATA_ENDPOINT = '/api/globaldata/1/'
+
 def _api_request(request, url, request_type='GET', body=None):
     protocol = 'http://'
     if request.is_secure():
@@ -22,13 +26,13 @@ def _api_request(request, url, request_type='GET', body=None):
     token, _ = Token.objects.get_or_create(user=request.user)
     if request_type == 'GET':
         response = requests.get(protocol + request.get_host() + url,
-        headers={"Authorization":"Token " + token.key})
+        headers={AUTHORIZATION:TOKEN + token.key})
     if request_type == 'PUT':
         response = requests.put(protocol + request.get_host() + url,
-        headers={"Authorization":"Token " + token.key}, json=body)
+        headers={AUTHORIZATION:TOKEN + token.key}, json=body)
     if request_type == 'POST':
         response = requests.post(protocol + request.get_host() + url,
-        headers={"Authorization":"Token " + token.key}, json=body)
+        headers={AUTHORIZATION:TOKEN + token.key}, json=body)
     return response.json()
 
 def profiles(request):
@@ -62,7 +66,7 @@ def profiles(request):
                 pages.append({'page': active_page + 1, 'active': False})
                 pages.append({'page': '...', 'active': False})
                 pages.append({'page': total_pages, 'active': False})
-        globaldata = _api_request(request, '/api/globaldata/1/', 'GET')
+        globaldata = _api_request(request, GLOBALDATA_ENDPOINT, 'GET')
         return render(request, 'profiles.html', {
             'results': json['results'],
             'previous': None if json['previous'] == None else active_page - 1,
@@ -75,7 +79,7 @@ def profiles(request):
 
 def profile_detail(request, pk):
     json = _api_request(request, '/api/profiles/' + str(pk))
-    globaldata = _api_request(request, '/api/globaldata/1/', 'GET')
+    globaldata = _api_request(request, GLOBALDATA_ENDPOINT, 'GET')
     return render(request, 'profile_detail.html', {
         'profile': json,
         'globaldata': globaldata
@@ -94,7 +98,7 @@ def edit_profile(request, pk):
         "validated_by": {"username": "me"}
     }
     json = _api_request(request, '/api/profiles/' + str(pk) + '/', 'PUT', body)
-    globaldata = _api_request(request, '/api/globaldata/1/', 'GET')
+    globaldata = _api_request(request, GLOBALDATA_ENDPOINT, 'GET')
     return render(request, 'profile_detail.html', {
         'profile': json,
         'globaldata': globaldata
@@ -103,7 +107,7 @@ def edit_profile(request, pk):
 def index(request):
     globaldata = {}
     if request.user.is_authenticated:
-        globaldata = _api_request(request, '/api/globaldata/1/', 'GET')
+        globaldata = _api_request(request, GLOBALDATA_ENDPOINT, 'GET')
         print(globaldata)
         if request.user.groups.filter(name = "eadmin").exists():
             return render(request, 'administration.html', {'globaldata': globaldata})
@@ -148,6 +152,6 @@ def loaddata(request):
 
 def password_change_done(request):
     messages.add_message(request, messages.SUCCESS, 'Password successfully changed.')
-    globaldata = _api_request(request, '/api/globaldata/1/', 'GET')
+    globaldata = _api_request(request, GLOBALDATA_ENDPOINT, 'GET')
     return render(request, 'account.html', {'globaldata': globaldata})
 

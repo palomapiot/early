@@ -22,7 +22,7 @@ class ProfileDataModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         # Set up non-modified objects used by all test methods
-        profile_data = ProfileData.objects.create(age="20-30", gender="Female", location='AU', personality="Agreeableness", depressed=False)
+        ProfileData.objects.create(age="20-30", gender="Female", location='AU', personality="Agreeableness", depressed=False)
 
     def test_profile_data(self):
         data = ProfileData.objects.get(id=1)
@@ -48,7 +48,7 @@ class ProfileModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         # Set up non-modified objects used by all test methods
-        profile = Profile.objects.create(experiment_id="test_subject")
+        Profile.objects.create(experiment_id="test_subject")
 
     def test_profile(self):
         data = Profile.objects.first()
@@ -58,7 +58,7 @@ class GlobalDataModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         # Set up non-modified objects used by all test methods
-        golbaldata = GlobalData.objects.create(load_in_progress=True, task_id="d52cd57a-86ba-4ccf-bc24-6bd2743ca627")
+        GlobalData.objects.create(load_in_progress=True, task_id="d52cd57a-86ba-4ccf-bc24-6bd2743ca627")
 
     def test_globaldata(self):
         data = GlobalData.objects.get(id=1)
