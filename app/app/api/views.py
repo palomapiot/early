@@ -57,6 +57,7 @@ class ExportViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows profiles to export to be viewed.
     """
+    pagination_class = None
     queryset = Profile.objects.filter(validated_data__isnull=False).all()
     serializer_class = ExportSerializer
     permission_classes = [permissions.IsAuthenticated]
