@@ -1,0 +1,49 @@
+
+{% load i18n %}
+<div class="modal fade" id="export" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title">{% trans 'Exporta data' %}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <form role="form" method="POST" action="{% url 'export' %}">
+            <div class="modal-body">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="exportOptions" id="exportOptionsDemographic" value="demographic" checked="">
+                        <h5>{% trans 'Export demographic data' %}</h5>
+                        </label>
+                        <div class="form-group">
+                            <select class="form-control" id="demographicFormat" name="demographicFormat">
+                                <option>CSV</option>
+                                <option>JSON</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="exportOptions" id="exportOptionsDataset" value="dataset">
+                        <h5>{% trans 'Export dataset' %}</h5>
+                        </label>
+                        <div class="form-group">
+                            <select class="form-control" id="datasetFormat" name="datasetFormat">
+                                <option>CSV</option>
+                                <option>JSON</option>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">{% trans 'Export data' %}</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans 'Close' %}</button>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>

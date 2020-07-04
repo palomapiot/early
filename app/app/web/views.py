@@ -2,8 +2,9 @@ import csv
 import requests
 from django.shortcuts import render
 from rest_framework.authtoken.models import Token
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpResponse, JsonResponse
 from django.contrib import messages
+from django.core import serializers
 from django.shortcuts import redirect
 from app.settings import REST_FRAMEWORK
 import math as math
@@ -111,18 +112,34 @@ def index(request):
     return render(request, 'index.html', {'globaldata': globaldata})
 
 def export(request):
-    json = _api_request(request, '/api/export/')
-
-    response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="export.csv"'
-
-    writer = csv.writer(response)
-    writer.writerow(['Experiment ID', 'Age', 'Gender', 'Location', 'Personality', 'Depressed'])
-    for obj in json['results']:
-        data = obj['validated_data']
-        writer.writerow([obj['experiment_id'], data['age'], data['gender'], data['location'], data['personality'], data['depressed']])
-    #messages.add_message(request, messages.SUCCESS, 'Export successfully completed.')
+    opts = request.POST.get("exportOptions")
+    if opts == 'demographic':
+        export_format = request.POST.get("demographicFormat")
+        response = export_demographic(request, export_format)
+    else:
+        export_format = request.POST.get("datasetFormat")
+        response = export_dataset(request, export_format)
     return response
+
+def export_demographic(request, export_format):
+    json_data = _api_request(request, '/api/export/')
+    if export_format == 'JSON':
+        response = JsonResponse(json_data, content_type='application/json', safe=False)
+        response['Content-Disposition'] = 'attachment; filename="export.json"'
+    else:
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="export.csv"'
+
+        writer = csv.writer(response)
+        writer.writerow(['Experiment ID', 'Age', 'Gender', 'Location', 'Personality', 'Depressed'])
+        for obj in json_data:
+            data = obj['validated_data']
+            writer.writerow([obj['experiment_id'], data['age'], data['gender'], data['location'], data['personality'], data['depressed']])
+    return response
+
+def export_dataset(request, export_format):
+    print('TODO: next sprint')
+    return 'OK'
 
 def loaddata(request):
     result = load_reddit_data.delay(request.user.id, request.is_secure(), request.get_host())

@@ -23,7 +23,7 @@
     </div>
     
     <div class="col-6">
-        <a href="{% url 'export' %}" class="menu-link">
+        <a href="#export" class="menu-link" data-toggle="modal">
             <div class="card shadow p-3 mb-5 bordershadow">
                 <div class="card-body text-center">
                     <h6 class="card-title mb-3"><em class="fas fa-download fa-4x"></em></h6>
@@ -32,4 +32,5 @@
             </div>
         </a>
     </div>
+    {% include "export_data_modal.html" %}
 </div>
