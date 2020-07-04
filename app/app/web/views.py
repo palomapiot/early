@@ -63,7 +63,6 @@ def profiles(request):
                 pages.append({'page': '...', 'active': False})
                 pages.append({'page': total_pages, 'active': False})
         globaldata = _api_request(request, '/api/globaldata/1/', 'GET')
-        print(globaldata)
         return render(request, 'profiles.html', {
             'results': json['results'],
             'previous': None if json['previous'] == None else active_page - 1,

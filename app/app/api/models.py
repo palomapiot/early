@@ -80,7 +80,7 @@ class Profile(models.Model):
     )
     is_valid = models.BooleanField(default=False)
     validated_by = models.ForeignKey(
-        User, 
+        User,
         on_delete=models.SET_NULL, 
         blank=True, 
         null=True
