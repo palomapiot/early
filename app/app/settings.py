@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'app.api',
     'rest_framework.authtoken',
     'django_countries',
-    'celery_progress'
+    'celery_progress',
+    'django_nose'
 ]
 
 MIDDLEWARE = [
@@ -82,7 +83,7 @@ WSGI_APPLICATION = 'app.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
-'default': {
+    'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.environ.get('DATABASE_NAME', 'postgres'),
         'USER': os.environ.get('DATABASE_USER', 'postgres'),
@@ -177,3 +178,17 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'UTC'
 CELERY_TRACK_STARTED = True
+
+# Use nose to run all tests
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+# Tell nose to measure coverage on the 'foo' and 'bar' apps
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=app.api',
+    '--cover-erase',
+    '--cover-xml',
+    '--with-xunit',
+    '--xunit-file=app/nosetests.xml',
+    '--cover-xml-file=app/coverage.xml'
+]

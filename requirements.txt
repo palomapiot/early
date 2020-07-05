@@ -8,3 +8,4 @@ praw==7.0.0
 redis==3.5.2
 celery==4.4.3
 celery-progress==0.0.10
+django-nose==1.4.6
