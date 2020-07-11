@@ -19,7 +19,6 @@ from app.api.serializers import (ExportSerializer, GroupSerializer,
                                  UserSerializer, GlobalDataSerializer)
 
 
-@csrf_exempt
 @api_view(["POST"])
 @permission_classes((AllowAny,))
 def login(request):
