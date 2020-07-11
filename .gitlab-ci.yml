@@ -9,8 +9,6 @@ services:
     - apk add --no-cache py-pip
     - cat $DEPLOY_PROD_ENV > deploy-production-var.env
     - cat $DEPLOY_STAG_ENV > deploy-staging-var.env
-    - export REDDIT_CLIENT_ID=$REDDIT_CLIENT_ID
-    - export REDDIT_SECRET=$REDDIT_SECRET
     - pip install docker-compose==1.23.2
     - docker info
     - docker-compose --version
