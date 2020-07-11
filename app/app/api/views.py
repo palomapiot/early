@@ -109,6 +109,6 @@ class GlobalDataViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows global data to be viewed or edited.
     """
-    queryset = GlobalData.objects.all()
+    queryset = GlobalData.objects.all().order_by('id')
     serializer_class = GlobalDataSerializer
     permission_classes = [permissions.IsAuthenticated]
