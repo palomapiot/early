@@ -41,8 +41,8 @@ def profiles(request):
     except:
         active_page = 1
     try:
-        json = _api_request(request, '/api/profiles/?page=' + str(active_page))
-        total_pages = math.ceil(json['count'] / REST_FRAMEWORK['PAGE_SIZE'])
+        json_request = _api_request(request, '/api/profiles/?page=' + str(active_page))
+        total_pages = math.ceil(json_request['count'] / REST_FRAMEWORK['PAGE_SIZE'])
         pages = []
         if total_pages <= 7:
             for page in range(1, total_pages + 1):
@@ -68,9 +68,9 @@ def profiles(request):
                 pages.append({'page': total_pages, 'active': False})
         globaldata = _api_request(request, GLOBALDATA_ENDPOINT, 'GET')
         return render(request, 'profiles.html', {
-            'results': json['results'],
-            'previous': None if json['previous'] == None else active_page - 1,
-            'next': None if json['next'] == None else active_page + 1,
+            'results': json_request['results'],
+            'previous': None if json_request['previous'] is None else active_page - 1,
+            'next': None if json_request['next'] is None else active_page + 1,
             'pages': pages,
             'globaldata': globaldata
         })
@@ -78,10 +78,10 @@ def profiles(request):
         raise Http404 
 
 def profile_detail(request, pk):
-    json = _api_request(request, '/api/profiles/' + str(pk))
+    json_request = _api_request(request, '/api/profiles/' + str(pk))
     globaldata = _api_request(request, GLOBALDATA_ENDPOINT, 'GET')
     return render(request, 'profile_detail.html', {
-        'profile': json,
+        'profile': json_request,
         'globaldata': globaldata
     })
 
@@ -97,10 +97,10 @@ def edit_profile(request, pk):
         },
         "validated_by": {"username": "me"}
     }
-    json = _api_request(request, '/api/profiles/' + str(pk) + '/', 'PUT', body)
+    json_request = _api_request(request, '/api/profiles/' + str(pk) + '/', 'PUT', body)
     globaldata = _api_request(request, GLOBALDATA_ENDPOINT, 'GET')
     return render(request, 'profile_detail.html', {
-        'profile': json,
+        'profile': json_request,
         'globaldata': globaldata
     })
 
@@ -109,7 +109,7 @@ def index(request):
     if request.user.is_authenticated:
         globaldata = _api_request(request, GLOBALDATA_ENDPOINT, 'GET')
         print(globaldata)
-        if request.user.groups.filter(name = "eadmin").exists():
+        if request.user.groups.filter(name="eadmin").exists():
             return render(request, 'administration.html', {'globaldata': globaldata})
         return profiles(request)
     return render(request, 'index.html', {'globaldata': globaldata})
@@ -125,9 +125,9 @@ def export(request):
     return response
 
 def export_demographic(request, export_format):
-    json_data = _api_request(request, '/api/export/')
+    json_request = _api_request(request, '/api/export/')
     if export_format == 'JSON':
-        response = JsonResponse(json_data, content_type='application/json', safe=False)
+        response = JsonResponse(json_request, content_type='application/json', safe=False)
         response['Content-Disposition'] = 'attachment; filename="export.json"'
     else:
         response = HttpResponse(content_type='text/csv')
@@ -135,7 +135,7 @@ def export_demographic(request, export_format):
 
         writer = csv.writer(response)
         writer.writerow(['Experiment ID', 'Age', 'Gender', 'Location', 'Personality', 'Depressed'])
-        for obj in json_data:
+        for obj in json_request:
             data = obj['validated_data']
             writer.writerow([obj['experiment_id'], data['age'], data['gender'], data['location'], data['personality'], data['depressed']])
     return response

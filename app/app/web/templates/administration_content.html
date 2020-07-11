@@ -10,7 +10,7 @@
   });
 </script>
 <div id="administration-content" class="row">
-    <h1 class="col-12 mb-4">{% trans 'Administration' %}</h1>
+    <h1 class="col-12 mb-4" name="administration">{% trans 'Administration' %}</h1>
     <div class="col-6">
         <a href="{% if globaldata.load_in_progress == False %}{% url 'loaddata' %}{% endif %}" class="menu-link load-data {% if globaldata.load_in_progress %}not-active{% endif %}">
             <div class="card shadow p-3 mb-5 bordershadow">

@@ -32,6 +32,8 @@ ALLOWED_HOSTS = ['earlydetection-staging.herokuapp.com', 'earlydetection.herokua
 # Application definition
 
 INSTALLED_APPS = [
+    'django_nose',
+    'behave_django',
     'app.web',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -43,8 +45,7 @@ INSTALLED_APPS = [
     'app.api',
     'rest_framework.authtoken',
     'django_countries',
-    'celery_progress',
-    'django_nose'
+    'celery_progress'
 ]
 
 MIDDLEWARE = [

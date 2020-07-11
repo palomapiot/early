@@ -7,7 +7,7 @@
 <div class="container">
     <div id="login-content" class="row">
         <h1 class="col-12 mb-4">Login</h1>
-        <div class="col-lg-6">
+        <div class="col-12">
             <form id="login-form" method="post" action="{% url 'login' %}">
                 {% csrf_token %}
                 <div class="form-group">
@@ -24,7 +24,7 @@
                 {% endif %}
 
                 <a href="{% url 'password_reset' %}"><p class="text-primary">{% trans 'Forgot password?' %}</p></a>
-                <input type="submit" value="Login" 
+                <input type="submit" name="submit" value="Login" 
                        class="btn btn-primary" />
                 <input type="hidden" name="next" value="{{ next }}" />
             </form>
