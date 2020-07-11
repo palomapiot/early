@@ -53,7 +53,7 @@ def load_reddit_data(self, request_user, request_is_secure, request_host):
     progress_recorder.set_progress(result, total_work_to_do)
     for user in users:
         print('cada usuarios')
-        time.sleep(30)
+        time.sleep(3)
         process_user.delay(request_user, request_is_secure, request_host, user)
         result += 1
         # tell the progress observer how many out of the total items we have processed

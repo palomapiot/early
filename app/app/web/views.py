@@ -4,6 +4,7 @@ from django.shortcuts import render
 from rest_framework.authtoken.models import Token
 from django.http import Http404, HttpResponse
 from django.contrib import messages
+from django.shortcuts import redirect
 from app.settings import REST_FRAMEWORK
 import math as math
 from app.tasks import load_reddit_data
@@ -61,6 +62,7 @@ def profiles(request):
                 pages.append({'page': '...', 'active': False})
                 pages.append({'page': total_pages, 'active': False})
         globaldata = _api_request(request, '/api/globaldata/1/', 'GET')
+        print(globaldata)
         return render(request, 'profiles.html', {
             'results': json['results'],
             'previous': None if json['previous'] == None else active_page - 1,
@@ -101,11 +103,11 @@ def edit_profile(request, pk):
 def index(request):
     globaldata = {}
     if request.user.is_authenticated:
+        globaldata = _api_request(request, '/api/globaldata/1/', 'GET')
+        print(globaldata)
         if request.user.groups.filter(name = "eadmin").exists():
-            globaldata = _api_request(request, '/api/globaldata/1/', 'GET')
             return render(request, 'administration.html', {'globaldata': globaldata})
         return profiles(request)
-        globaldata = _api_request(request, '/api/globaldata/1/', 'GET')
     return render(request, 'index.html', {'globaldata': globaldata})
 
 def export(request):
@@ -123,9 +125,10 @@ def export(request):
     return response
 
 def loaddata(request):
-    globaldata = _api_request(request, '/api/globaldata/1/', 'GET')
     result = load_reddit_data.delay(request.user.id, request.is_secure(), request.get_host())
-    return render(request, 'administration.html', {'task_id': result.task_id, 'globaldata': globaldata})
+    print('the result is:')
+    print(result)
+    return redirect('/')
 
 def password_change_done(request):
     messages.add_message(request, messages.SUCCESS, 'Password successfully changed.')
