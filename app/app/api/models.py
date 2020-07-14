@@ -55,7 +55,7 @@ class ProfileData(models.Model):
         choices=Personality.choices,
         default=Personality.UNKNOWN
     )
-    depressed = models.BooleanField(default=False)
+    depressed = models.BooleanField(blank=True, null=True, default=False)
 
     def __str__(self):
         """String for representing the Model object."""

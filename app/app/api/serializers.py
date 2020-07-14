@@ -19,10 +19,10 @@ class GroupSerializer(serializers.ModelSerializer):
         fields = ['url', 'name']
 
 class ProfileDataSerializer(serializers.ModelSerializer):
-    location = CountryField()
+    location = CountryField(required=False, allow_null=True)
     class Meta:
         model = ProfileData
-        fields = '__all__'
+        fields = ['id', 'age', 'gender', 'location', 'personality', 'depressed']
 
 class ExportSerializer(serializers.ModelSerializer):
     validated_data = ProfileDataSerializer()
@@ -42,17 +42,17 @@ class GlobalDataSerializer(serializers.ModelSerializer):
         fields = ['id', 'load_in_progress', 'task_id']
 
 class ProfileSerializer(serializers.ModelSerializer):
-    system_data = ProfileDataSerializer(read_only=True)
-    validated_data = ProfileDataSerializer()
-    validated_by = UserNameSerializer()
-    reasons = ReasonSerializer(many=True, read_only=True)
+    system_data = ProfileDataSerializer(required=False, allow_null=True)
+    validated_data = ProfileDataSerializer(required=False, allow_null=True)
+    validated_by = UserNameSerializer(required=False, allow_null=True)
+    reasons = ReasonSerializer(many=True, required=False, allow_null=True)
 
     # Create a custom method field
     data = serializers.SerializerMethodField('_datas')
 
     # Use this method for the custom field
     def _datas(self, obj):
-        if (obj.validated_data != None):
+        if (obj.validated_data is not None):
             return ProfileDataSerializer(obj.validated_data).data
         return ProfileDataSerializer(obj.system_data).data
 
@@ -62,15 +62,26 @@ class ProfileSerializer(serializers.ModelSerializer):
         read_only_fields = ['experiment_id', 'reddit_username', 'is_valid', 'validated_by', 'system_data', 'reasons']
 
     def update(self, instance, v_data):
-        validated_data_v_data = v_data.pop('validated_data')
-        validated_data_serializer = self.fields['validated_data']
-        if instance.validated_data != None:
-            instance.validated_data = validated_data_serializer.update(instance.validated_data, validated_data_v_data)
-        else:
-            instance.validated_data = validated_data_serializer.create(validated_data_v_data)
-        instance.is_valid = True
-        instance.processed = True
-        instance.validated_by = self.context['request'].user
+        # validated data
+        validated_data_v_data = v_data.pop('validated_data', None)
+        if validated_data_v_data is not None:
+            validated_data_serializer = self.fields['validated_data']
+            if instance.validated_data is not None:
+                instance.validated_data = validated_data_serializer.update(instance.validated_data, validated_data_v_data)
+            else:
+                instance.validated_data = validated_data_serializer.create(validated_data_v_data)
+            instance.is_valid = True
+            instance.processed = True
+            instance.validated_by = self.context['request'].user
+        # system data
+        system_data_v_data = v_data.pop('system_data', None)
+        if system_data_v_data is not None:
+            system_data_serializer = self.fields['system_data']
+            print(instance.system_data)
+            if instance.system_data is not None:
+                instance.system_data = system_data_serializer.update(instance.system_data, system_data_v_data)
+            else:
+                instance.system_data = system_data_serializer.create(system_data_v_data)
         instance.save()
         return instance
 
@@ -83,7 +94,7 @@ class ProfileNLPSerializer(serializers.ModelSerializer):
     system_data = ProfileDataSerializer(required=False)
     validated_data = ProfileDataSerializer(read_only=True)
     reasons = ReasonSerializer(many=True, required=False)
-    comments = CommentSerializer(many=True)
+    comments = CommentSerializer(many=True, required=False)
 
     class Meta:
         model = Profile        
@@ -106,14 +117,15 @@ class ProfileNLPSerializer(serializers.ModelSerializer):
         for reason in reasons_v_data:
             Reason.objects.create(profile=instance, **reason)
         for comment in comments_v_data:
+            print(comment)
             c_date = None
             for key, value in comment.items():
                 if key == 'date':
                     c_date = value
-            # TODO: create comment if date doesnt exist
-            if instance.last_retrieved_comment_date is None or instance.last_retrieved_comment_date < comment.date:
+            # create comment if date doesnt exist
+            if instance.last_retrieved_comment_date is None or instance.last_retrieved_comment_date < c_date:
                 Comment.objects.create(profile=instance, **comment)
 
-        instance.last_retrieved_comment_date = c_date
+            instance.last_retrieved_comment_date = c_date
         return instance
 
