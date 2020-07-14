@@ -117,7 +117,6 @@ class ProfileNLPSerializer(serializers.ModelSerializer):
         for reason in reasons_v_data:
             Reason.objects.create(profile=instance, **reason)
         for comment in comments_v_data:
-            print(comment)
             c_date = None
             for key, value in comment.items():
                 if key == 'date':
