@@ -165,7 +165,7 @@ REDDIT_CLIENT_ID = os.environ.get('REDDIT_CLIENT_ID', '')
 REDDIT_SECRET = os.environ.get('REDDIT_SECRET', '')
 
 # REDIS CONFIG
-REDIS_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379')
+REDIS_URL = os.environ.get('REDIS_URL', 'redis://redis:6379')
 BROKER_CONNECTION_MAX_RETRIES = os.environ.get('BROKER_CONNECTION_MAX_RETRIES', None)
 BROKER_POOL_LIMIT = os.environ.get('BROKER_POOL_LIMIT', None)
 
