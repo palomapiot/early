@@ -6,13 +6,19 @@ services:
     command: redis-server
     ports:
       - '6379:6379'
-    mem_limit: 300m
+    deploy:
+      resources:
+        limits:
+          memory: 400M
   web:
     build:
       context: .
     ports:
       - "8000:8000"
-    mem_limit: 300m
+    deploy:
+      resources:
+        limits:
+          memory: 400M
     env_file:
       - local-var.env
     volumes:
@@ -33,7 +39,10 @@ services:
   celery:
     build: .
     command: celery worker -A app -l info
-    mem_limit: 300m
+    deploy:
+      resources:
+        limits:
+          memory: 400M
     volumes:
       - ./app:/app
     links:
@@ -42,7 +51,10 @@ services:
   celery-beat:
     build: .
     command: celery beat -A app -l info
-    mem_limit: 300m
+    deploy:
+      resources:
+        limits:
+          memory: 400M
     volumes:
       - ./app:/app
     depends_on:
