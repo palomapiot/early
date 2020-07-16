@@ -3,14 +3,16 @@ version: '3'
 services:
   redis:
     image: redis
+    container_name: redis
     command: redis-server
     ports:
       - '6379:6379'
     deploy:
       resources:
         limits:
-          memory: 400M
+          memory: 100M
   web:
+    container_name: web
     build:
       context: .
     ports:
@@ -18,7 +20,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 400M
+          memory: 100M
     env_file:
       - local-var.env
     volumes:
@@ -30,6 +32,7 @@ services:
       - db
   db:
     image: postgres
+    container_name: db
     ports:
       - "5432:5432"
     environment:
@@ -37,24 +40,26 @@ services:
     volumes:
         - postgres_data:/var/lib/postgresql/data/
   celery:
+    container_name: celery
     build: .
     command: celery worker -A app -l info
     deploy:
       resources:
         limits:
-          memory: 400M
+          memory: 50M
     volumes:
       - ./app:/app
     links:
       - db
       - redis
   celery-beat:
+    container_name: celery-beat
     build: .
     command: celery beat -A app -l info
     deploy:
       resources:
         limits:
-          memory: 400M
+          memory: 50M
     volumes:
       - ./app:/app
     depends_on:
