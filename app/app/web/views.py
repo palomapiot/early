@@ -146,8 +146,6 @@ def export_dataset(request, export_format):
 
 def loaddata(request):
     result = load_reddit_data.delay(request.user.id, request.is_secure(), request.get_host())
-    print('the result is:')
-    print(result)
     return redirect('/')
 
 def password_change_done(request):
