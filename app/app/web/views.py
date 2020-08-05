@@ -108,7 +108,6 @@ def index(request):
     globaldata = {}
     if request.user.is_authenticated:
         globaldata = _api_request(request, GLOBALDATA_ENDPOINT, 'GET')
-        print(globaldata)
         if request.user.groups.filter(name="eadmin").exists():
             return render(request, 'administration.html', {'globaldata': globaldata})
         return profiles(request)
@@ -145,7 +144,8 @@ def export_dataset(request, export_format):
     return 'OK'
 
 def loaddata(request):
-    result = load_reddit_data.delay(request.user.id, request.is_secure(), request.get_host())
+    print('ENTRAMOS')
+    load_reddit_data.delay(request.user.id, request.is_secure(), request.get_host())
     return redirect('/')
 
 def password_change_done(request):

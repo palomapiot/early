@@ -26,7 +26,7 @@ SECRET_KEY = 'p*b@bm8!21=qr$!jtxxp@7=-)im&*ex=ma$$$dte0w2h55ft=c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['earlydetection-staging.herokuapp.com', 'earlydetection.herokuapp.com', '0.0.0.0', 'middle.dc.fi.udc.es', '193.144.51.31']
+ALLOWED_HOSTS = ['earlydetection-staging.herokuapp.com', 'earlydetection.herokuapp.com', '0.0.0.0', 'web', 'middle.dc.fi.udc.es', '193.144.51.31', '192.168.1.41']
 
 
 # Application definition
@@ -89,7 +89,7 @@ DATABASES = {
         'NAME': os.environ.get('DATABASE_NAME', 'postgres'),
         'USER': os.environ.get('DATABASE_USER', 'postgres'),
         'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
-        'HOST': os.environ.get('DATABASE_HOST', 'localhost'),
+        'HOST': os.environ.get('DATABASE_HOST', 'db'),
         'PORT': os.environ.get('DATABASE_PORT', '5432'),
     }
 }

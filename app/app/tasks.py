@@ -18,10 +18,7 @@ from sklearn.model_selection import train_test_split, KFold, RepeatedKFold
 from sklearn.utils.class_weight import compute_class_weight
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.svm import LinearSVC
-from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import AdaBoostClassifier
 
@@ -55,15 +52,15 @@ def process_user(request_user, request_is_secure, request_host, user):
     text = ':::'.join([comment['text'] for comment in comments])
 
     # preprocess comments
-    df = preprocess(str(user), text)
+    df = preprocess(str(user), text) 
 
-    df = df.drop(columns=['third_person_pron_count', 'square_brackets_count', 'CONJ', 'EOL', 'NO_TAG']) 
+    df = df.drop(columns=['third_person_pron_count', 'square_brackets_count', 'CONJ', 'EOL', 'NO_TAG'])
 
     # predict
     gender = GENDER_MODEL.predict(df.drop(['text', 'author_id'], axis=1))
 
     gender_output = 'Unknown'
-    if gender[0] == 'male':
+    if gender[0] == 'male': 
         gender_output = 'Male'
     elif gender[0] == 'female':
         gender_output = 'Female'
@@ -81,11 +78,14 @@ def process_user(request_user, request_is_secure, request_host, user):
             "depressed": None
         }
     }
+
+    print('Saving user...' + str(user))
     # create / update profile
     _api_request(request_user, request_is_secure, request_host, '/api/profiles/', 'POST', body)
 
 @app.task(bind=True, name="load_data")
 def load_reddit_data(self, request_user, request_is_secure, request_host):
+    print('CELERY INIT')
     from app.web.reddit import get_submissions, get_users
     body = {
         "load_in_progress": True,
@@ -95,7 +95,7 @@ def load_reddit_data(self, request_user, request_is_secure, request_host):
     # TODO: switch in order to have the complete funtionality
     #submissions = get_submissions("depression")
     #users = get_users(submissions)
-    users = ['SQLwitch', 'joshhelp155', 'tangerinetofu', 'SmellaShitsgerald']
+    users = ['throwRAluvee', 'MikaKoinu', 'ChunkyPuppyKissez', 'TheMightyBiz']
     total_work_to_do = len(users)
     progress_recorder = ProgressRecorder(self)
     result = 0

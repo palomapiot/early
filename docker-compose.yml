@@ -4,23 +4,16 @@ services:
   redis:
     image: redis
     container_name: redis
-    command: redis-server
+    hostname: redis
     ports:
-      - '6379:6379'
-    deploy:
-      resources:
-        limits:
-          memory: 100M
+      - "6379:6379"
   web:
     container_name: web
     build:
       context: .
+      dockerfile: Dockerfile
     ports:
       - "8000:8000"
-    deploy:
-      resources:
-        limits:
-          memory: 100M
     env_file:
       - local-var.env
     volumes:
@@ -30,40 +23,26 @@ services:
       - db
     links: 
       - db
+      - redis
   db:
     image: postgres
     container_name: db
     ports:
       - "5432:5432"
-    environment:
-        - "POSTGRES_HOST_AUTH_METHOD=trust"
     volumes:
         - postgres_data:/var/lib/postgresql/data/
+
   celery:
     container_name: celery
     build: .
     command: celery worker -A app -l info
-    deploy:
-      resources:
-        limits:
-          memory: 50M
     volumes:
       - ./app:/app
     links:
+      - web
       - db
       - redis
-  celery-beat:
-    container_name: celery-beat
-    build: .
-    command: celery beat -A app -l info
-    deploy:
-      resources:
-        limits:
-          memory: 50M
-    volumes:
-      - ./app:/app
-    depends_on:
-      - db
+    depends_on: 
       - redis
 
   deploy_staging:

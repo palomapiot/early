@@ -77,7 +77,6 @@ class ProfileSerializer(serializers.ModelSerializer):
         system_data_v_data = v_data.pop('system_data', None)
         if system_data_v_data is not None:
             system_data_serializer = self.fields['system_data']
-            print(instance.system_data)
             if instance.system_data is not None:
                 instance.system_data = system_data_serializer.update(instance.system_data, system_data_v_data)
             else:
