@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 from django.utils.translation import ugettext_lazy as _
 import os
+import sys
 from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -82,14 +83,16 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-
+DB_HOST = 'db'
+if 'test' in sys.argv:
+    DB_HOST = 'localhost'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.environ.get('DATABASE_NAME', 'postgres'),
         'USER': os.environ.get('DATABASE_USER', 'postgres'),
         'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
-        'HOST': os.environ.get('DATABASE_HOST', 'db'),
+        'HOST': os.environ.get('DATABASE_HOST', DB_HOST),
         'PORT': os.environ.get('DATABASE_PORT', '5432'),
     }
 }
