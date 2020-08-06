@@ -14,7 +14,6 @@ services:
     - docker-compose --version
 
 stages:
-  - test
   - build
   - sonar
   - deploy
@@ -30,7 +29,6 @@ test:
   extends: .before_script_template
   script:
     - echo "Starting tests"
-    - docker-compose run db
     - docker-compose run web sh -c "python manage.py test"
 
 build:
