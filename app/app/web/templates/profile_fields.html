@@ -42,7 +42,9 @@
             {% endif %}
             <span class="col-xs-8">
                 <em class="fas fa-birthday-cake">&nbsp;&nbsp;</em> 
-                {% if profile.data.age != "" and profile.data.age != None %} 
+                {% if profile.data.age == "Over65" %} 
+                65+ {% trans 'years' %}  
+                {% elif profile.data.age != "" and profile.data.age != None %} 
                 {{ profile.data.age }} {% trans 'years' %} 
                 {% else %} - {% endif %}
             </span>

@@ -20,7 +20,7 @@
                   <option value="12-20" {% if profile.data.age == "12-20" %} selected {% endif %}>12-20</option>
                   <option value="20-30" {% if profile.data.age == "20-30" %} selected {% endif %}>20-30</option>
                   <option value="30-65" {% if profile.data.age == "30-65" %} selected {% endif %}>30-65</option>
-                  <option value="65+" {% if profile.data.age == "65+" %} selected {% endif %}>65+</option>
+                  <option value="Over65" {% if profile.data.age == "Over65" %} selected {% endif %}>65+</option>
                   <option value="Unknown" {% if profile.data.age == "Unknown" or profile.data.age is None %} selected {% endif %}>{% trans 'Unknown' %}</option>
                 </select>
             </div>

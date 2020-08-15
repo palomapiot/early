@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import Group, User
+from django_filters.rest_framework import DjangoFilterBackend
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import permissions, viewsets
 from rest_framework.authtoken.models import Token
@@ -17,7 +18,8 @@ from app.api.serializers import (ExportSerializer, GroupSerializer,
                                  ProfileDataSerializer, ProfileNLPSerializer,
                                  ProfileSerializer, ReasonSerializer,
                                  UserSerializer, GlobalDataSerializer)
-
+import django_filters
+from django_filters.rest_framework import filters
 
 @api_view(["POST"])
 @permission_classes((AllowAny,))
@@ -61,6 +63,42 @@ class ExportViewSet(viewsets.ModelViewSet):
     serializer_class = ExportSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+from django_filters import rest_framework as filters
+
+class ProfileFilterSet(filters.FilterSet):
+    validated_data__age = filters.AllValuesMultipleFilter(
+        field_name='validated_data__age',
+        lookup_expr='contains'
+    )
+    validated_data__gender = filters.AllValuesMultipleFilter(
+        field_name='validated_data__gender',
+        lookup_expr='contains'
+    )
+    validated_data__location = filters.AllValuesMultipleFilter(
+        field_name='validated_data__location',
+        lookup_expr='contains'
+    )
+    validated_data__personality = filters.AllValuesMultipleFilter(
+        field_name='validated_data__personality',
+        lookup_expr='contains'
+    )
+    validated_data__depressed = filters.AllValuesMultipleFilter(
+        field_name='validated_data__depressed'
+    )
+    is_valid = filters.AllValuesMultipleFilter(
+        field_name='is_valid'
+    )
+    processed = filters.AllValuesMultipleFilter(
+        field_name='processed'
+    )
+
+    class Meta:
+        model = Profile
+        fields = ['validated_data__age', 'validated_data__gender', 'validated_data__location',
+        'validated_data__personality', 'validated_data__depressed', 'is_valid', 'processed']
+
+        
+
 class ProfileViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows profiles to be viewed or edited.
@@ -68,6 +106,9 @@ class ProfileViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all().order_by('experiment_id')
     serializer_class = ProfileSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filter_backends = [DjangoFilterBackend]
+
+    filter_class = ProfileFilterSet
 
     def get_serializer_context(self):
         context = super(ProfileViewSet, self).get_serializer_context()

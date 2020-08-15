@@ -1,12 +1,99 @@
 
 {% load i18n %}
+{% load countries %}
+{% get_countries as countries %}
 <script type="text/javascript">
     $(document).ready(function(){
-        $('[data-toggle="popover"]').popover();   
+        $('[data-toggle="popover"]').popover(); 
+        
+        $(this).on("click", ".more-filters", function(e) {
+            e.preventDefault();
+            $(this).parent().find(".filters-detail").toggle();
+            $(this).find(".fas").toggleClass('active');
+        });
+
+        $('#search-button').on('click', function(e) {
+            e.preventDefault();
+            var ages = $('#age').val().join(',');
+            console.log(ages);
+            $('#age').val(ages);
+            $('#search-form').submit();
+        });  
     });
 </script>
 <div id="profiles-content" class="row">
     <h1 class="col-12 mb-4" name="profiles">{% trans 'Profiles' %}</h1>
+
+    <div class="col-12 mb-4">
+        <form id="search-form" role="form" class="form-inline" method="GET" action="{% url 'profiles' %}">
+            <input class="form-control mr-sm-2 col-9" type="text" name="experiment_id" placeholder="Username">
+            <button class="btn btn-secondary mr-sm-2 my-2 my-sm-0 col-1" type="submit">{% trans 'Search' %}</button>
+            <button class="btn btn-secondary mr-sm-2 my-2 my-sm-0 col more-filters"><em class="fas fa-caret-down"></em></button>
+            <button class="btn btn-secondary my-2 my-sm-0 col" onClick="this.form.reset()"><em class="fas fa-times"></em></button>
+            <!-- advanced search -->
+            <div class="col-12 filters-detail hide">
+                <div class="form-group col-12 mt-4">
+                    <div class="form-group col-3">
+                        <select class="form-control col-12 selectpicker" name="age" id="age" title="Age" multiple>
+                        <option value="12-20">12-20</option>
+                        <option value="20-30">20-30</option>
+                        <option value="30-65">30-65</option>
+                        <option value="Over65">65+</option>
+                        <option value="Unknown">{% trans 'Unknown' %}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-3">
+                        <select multiple="" class="form-control col-12 selectpicker" name="gender" id="gender" title="Gender" multiple>
+                            <option value="Female">{% trans 'Female' %}</option>
+                            <option value="Male">{% trans 'Male' %}</option>
+                            <option value="Unknown">{% trans 'Unknown' %}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-3">
+                        <select multiple="" name="location" class="form-control col-12 selectpicker" id="location" title="Location" multiple>
+                        {% for country in countries %}
+                            <option value="{{ country.code }}">{{ country.name }}</option>
+                        {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group col-3">
+                        <select multiple="" class="form-control col-12 selectpicker" name="personality" id="personality" title="Personality" multiple>
+                        <option value="Extraversion">{% trans 'Extraversion' %}</option>
+                        <option value="Agreeableness">{% trans 'Agreeableness' %}</option>
+                        <option value="Conscientiousness">{% trans 'Conscientiousness' %}</option>
+                        <option value="Neuroticism">{% trans 'Neuroticism' %}</option>
+                        <option value="Openness">{% trans 'Openness' %}</option>
+                        <option value="Unknown">{% trans 'Unknown' %}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-12 mt-4">
+                    <div class="form-group col-4">
+                        <select multiple="" class="form-control col-12 selectpicker" name="depressed" id="depressed" title="Depression" multiple>
+                            <option value="True">{% trans 'True' %}</option>
+                            <option value="False">{% trans 'False' %}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-4">
+                        <select multiple="" class="form-control col-12 selectpicker" name="processed" id="processed" title="Processed" multiple>
+                            <option value="True">{% trans 'True' %}</option>
+                            <option value="False">{% trans 'False' %}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-4">
+                        <select multiple="" class="form-control col-12 selectpicker" name="is_valid" id="is_valid" title="Validated" multiple> 
+                            <option value="True">{% trans 'True' %}</option>
+                            <option value="False">{% trans 'False' %}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
     {% for profile in results %}
     <div class="col-lg-3 col-md-6 col-xs-12">
         <div class="card mb-3 bordershadow rounded shadow">

@@ -41,7 +41,40 @@ def profiles(request):
     except:
         active_page = 1
     try:
-        json_request = _api_request(request, '/api/profiles/?page=' + str(active_page))
+        path_vars = '&experiment_id=' + request.GET.get('experiment_id', '')
+        # Age filter
+        if request.GET.get('age', '') != '':
+            for age_val in request.GET.getlist('age', ''):
+                path_vars += '&validated_data__age=' + age_val
+        # Gender filter
+        if request.GET.get('gender', '') != '':
+            for gender_val in request.GET.getlist('gender', ''):
+                path_vars += '&validated_data__gender=' + gender_val
+        # Location filter
+        if request.GET.get('location', '') != '':
+            for location_val in request.GET.getlist('location', ''):
+                path_vars += '&validated_data__location=' + location_val
+        # Gender filter
+        if request.GET.get('personality', '') != '':
+            for personality_val in request.GET.getlist('personality', ''):
+                path_vars += '&validated_data__personality=' + personality_val
+        # Depression filter
+        if request.GET.get('depressed', '') != '':
+            for depressed_val in request.GET.getlist('depressed', ''):
+                path_vars += '&validated_data__depressed=' + depressed_val
+        # Processed filter
+        if request.GET.get('processed', '') != '':
+            for processed_val in request.GET.getlist('processed', ''):
+                path_vars += '&processed=' + processed_val
+        # Valid profile filter
+        if request.GET.get('is_valid', '') != '':
+            for is_valid_val in request.GET.getlist('is_valid', ''):
+                path_vars += '&is_valid=' + is_valid_val
+
+        json_request = _api_request(request, '/api/profiles/?page=' 
+            + str(active_page) 
+            + path_vars
+        )
         total_pages = math.ceil(json_request['count'] / REST_FRAMEWORK['PAGE_SIZE'])
         pages = []
         if total_pages <= 7:
@@ -75,7 +108,7 @@ def profiles(request):
             'globaldata': globaldata
         })
     except:
-        raise Http404 
+        raise Http404
 
 def profile_detail(request, pk):
     json_request = _api_request(request, '/api/profiles/' + str(pk))

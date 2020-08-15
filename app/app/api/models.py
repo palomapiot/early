@@ -26,7 +26,7 @@ class ProfileData(models.Model):
         ADOLESCENCE = '12-20', _('12-20')
         EARLY_ADULTHOOD = '20-30', _('20-30')
         MATURE_ADULTHOOD = '30-65', _('30-65')
-        OLD_AGE = '65+', _('65+')
+        OLD_AGE = 'Over65', _('Over65')
         UNKNOWN = 'Unknown', _('Unknown')
 
     class Gender(models.TextChoices):
@@ -50,7 +50,7 @@ class ProfileData(models.Model):
         choices=Gender.choices,
         default=Gender.UNKNOWN
     )
-    location = CountryField(blank=True, null=True)
+    location = CountryField(blank_label='', blank=True, null=True)
     personality = models.TextField(
         choices=Personality.choices,
         default=Personality.UNKNOWN
