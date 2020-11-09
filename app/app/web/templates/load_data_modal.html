@@ -4,7 +4,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
-        <h5 class="modal-title">{% trans 'Load data' %}</h5>
+        <h4 class="modal-title">{% trans 'Load data' %}</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -13,22 +13,52 @@
             <div class="modal-body">
                 {% csrf_token %}
                 <fieldset class="form-group">
-                    <legend><h4>{% trans 'Load data' %}</h4></legend>
                     <div class="form-group">
-                        <label class="col-form-label" for="inputDefault">{% trans 'Subreddit' %}</label>
-                        <input type="text" class="form-control" placeholder="{% trans 'Subreddit' %}" name="subreddit" id="subreddit" value="depression">
+                        <label class="col-form-label" for="subreddit">{% trans 'Subreddit' %}</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><em class="fab fa-reddit-alien"></em></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="{% trans 'Subreddit' %}" name="subreddit" id="subreddit" value="depression">
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-form-label" for="inputDefault">{% trans 'Number of users' %}</label>
-                        <input type="number" class="form-control" placeholder="{% trans 'Number of users' %}" name="nusers" id="nusers" min="1" value="10">
+                        <label class="col-form-label" for="nusers">{% trans 'Number of users' %}</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><em class="fas fa-users"></em></span>
+                            </div>
+                            <input type="number" class="form-control" placeholder="{% trans 'Number of users' %}" name="nusers" id="nusers" min="1" value="10">
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-form-label" for="inputDefault">{% trans 'Number of submissions' %}</label>
-                        <input type="number" class="form-control" placeholder="{% trans 'Number of submissions' %}" name="nsubmissions" id="nsubmissions" min="1" max="100" value="10">
+                        <label class="col-form-label" for="nsubmissions">{% trans 'Number of submissions' %}</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><em class="fas fa-book"></em></span>
+                            </div>
+                            <input type="number" class="form-control" placeholder="{% trans 'Number of submissions' %}" name="nsubmissions" id="nsubmissions" min="1" max="100" value="10">
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-form-label" for="inputDefault">{% trans 'Number of comments per user' %}</label>
-                        <input type="number" class="form-control" placeholder="{% trans 'Number of comments per user' %}" name="ncomments" id="ncomments" value="100">
+                        <label class="col-form-label" for="ncomments">{% trans 'Number of comments per user' %}</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><em class="fas fa-comments"></em></span>
+                            </div>
+                            <input type="number" class="form-control" placeholder="{% trans 'Number of comments per user' %}" name="ncomments" id="ncomments" value="100">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-form-label" for="corpus">{% trans 'Corpus' %}</label>
+                        <div class="form-group">
+                            <select class="form-control" id="corpus" name="corpus">
+                                {% for corpus in all_corpus %}
+                                    <option value='{{corpus.id}}'>{{ corpus.corpus_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
                     </div>
                 </fieldset>
             </div>

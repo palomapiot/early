@@ -6,11 +6,11 @@ from celery import Celery, current_task
 from django.conf import settings
 from celery_progress.backend import ProgressRecorder
 from app.web.reddit import get_user_comments
-from classifiers.gender import preprocess
+#from classifiers.gender import preprocess
 import json
 import time
 
-import sklearn
+"""import sklearn
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import confusion_matrix, classification_report
 from sklearn.metrics import accuracy_score
@@ -20,7 +20,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import AdaBoostClassifier
+from sklearn.ensemble import AdaBoostClassifier"""
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.settings')
 
@@ -30,7 +30,7 @@ app.autodiscover_tasks()
 
 
 # load gender model
-GENDER_MODEL = pickle.load(open(os.path.join('classifiers', 'gender'), 'rb'))
+#GENDER_MODEL = pickle.load(open(os.path.join('classifiers', 'gender'), 'rb'))
 
 def _api_request(request_user, request_is_secure, request_host, url, request_type='GET', body=None):
     from rest_framework.authtoken.models import Token
@@ -45,13 +45,13 @@ def _api_request(request_user, request_is_secure, request_host, url, request_typ
     return response.json()
 
 @app.task
-def process_user(request_user, request_is_secure, request_host, user, ncomments):
+def process_user(request_user, request_is_secure, request_host, user, ncomments, corpus):
     comments = get_user_comments(user, ncomments)
     print('number of comments')
     print(len(comments))
 
     # TODO: before creating -> classify calling the gender model and save the system data
-    text = ':::'.join([comment['text'] for comment in comments])
+    """text = ':::'.join([comment['text'] for comment in comments])
 
     # preprocess comments
     df = preprocess(str(user), text) 
@@ -59,17 +59,18 @@ def process_user(request_user, request_is_secure, request_host, user, ncomments)
     df = df.drop(columns=['third_person_pron_count', 'square_brackets_count', 'CONJ', 'EOL', 'NO_TAG'])
 
     # predict
-    gender = GENDER_MODEL.predict(df.drop(['text', 'author_id'], axis=1))
+    gender = GENDER_MODEL.predict(df.drop(['text', 'author_id'], axis=1))"""
 
     gender_output = 'Unknown'
-    if gender[0] == 'male': 
+    """if gender[0] == 'male': 
         gender_output = 'Male'
     elif gender[0] == 'female':
-        gender_output = 'Female'
+        gender_output = 'Female'"""
 
     body = {
         "experiment_id": str(user),
         "reddit_username": str(user),
+        "corpus": int(corpus),
         "comments": comments,
         "system_data":
         {
@@ -86,7 +87,12 @@ def process_user(request_user, request_is_secure, request_host, user, ncomments)
     _api_request(request_user, request_is_secure, request_host, '/api/profiles/', 'POST', body)
 
 @app.task(bind=True, name="load_data")
-def load_reddit_data(self, request_user, request_is_secure, request_host, subreddit, nsubmissions, nusers, ncomments):
+def load_reddit_data(self, request_user, request_is_secure, request_host, subreddit, nsubmissions, nusers, ncomments, corpus):
+    total_work_to_do = int(nusers)
+    progress_recorder = ProgressRecorder(self)
+    result = 0
+    progress_recorder.set_progress(result, total_work_to_do)
+    print('starting celery task...')
     from app.web.reddit import get_submissions, get_users
     body = {
         "load_in_progress": True,
@@ -96,13 +102,9 @@ def load_reddit_data(self, request_user, request_is_secure, request_host, subred
     submissions = get_submissions(subreddit, nsubmissions)
     users = get_users(submissions, nusers)
     #users = ['throwRAluvee', 'MikaKoinu', 'ChunkyPuppyKissez', 'TheMightyBiz']
-    total_work_to_do = len(users)
-    progress_recorder = ProgressRecorder(self)
-    result = 0
-    progress_recorder.set_progress(result, total_work_to_do)
     for user in users:
         time.sleep(3)
-        process_user.delay(request_user, request_is_secure, request_host, user, ncomments)
+        process_user.delay(request_user, request_is_secure, request_host, user, ncomments, corpus)
         result += 1
         # tell the progress observer how many out of the total items we have processed
         progress_recorder.set_progress(result, total_work_to_do)

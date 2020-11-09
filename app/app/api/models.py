@@ -61,6 +61,9 @@ class ProfileData(models.Model):
         """String for representing the Model object."""
         return '%s, %s, %s, %s' % (self.age, self.gender, self.location, self.personality)
 
+class Corpus(models.Model):
+    corpus_name = models.TextField(max_length=1000, blank=False, null=False, unique=True)
+
 # Comment class
 class Comment(models.Model):
     date = models.DateTimeField()
@@ -71,6 +74,13 @@ class Comment(models.Model):
 class Profile(models.Model):
     experiment_id = models.TextField(max_length=50)
     reddit_username = models.TextField(max_length=50, blank=True, null=True)
+    corpus = models.ForeignKey(
+        Corpus, 
+        on_delete=models.CASCADE,
+        related_name='%(class)s_corpus',
+        blank=True,
+        null=True
+    )
     system_data = models.ForeignKey(
         ProfileData, 
         on_delete=models.CASCADE,

@@ -24,6 +24,8 @@ router.register(r'groups', views.GroupViewSet)
 router.register(r'profiles', views.ProfileViewSet)
 router.register(r'export', views.ExportViewSet, 'export')
 router.register(r'globaldata', views.GlobalDataViewSet, 'globaldata')
+router.register(r'corpus', views.CorpusViewSet, 'corpus')
+router.register(r'comments', views.CommentViewSet, 'comments')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

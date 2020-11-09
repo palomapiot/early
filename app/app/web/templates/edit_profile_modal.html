@@ -51,10 +51,18 @@
                   <option value="Unknown" {% if profile.data.personality == "Unknown" or profile.data.personality is None %} selected {% endif %}>{% trans 'Unknown' %}</option>
                 </select>
             </div>
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="depressed" name="depressed" {% if profile.data.depressed %} checked="" {% endif %}>
-                <label class="custom-control-label" for="depressed">{% trans 'Depression' %}</label>
-            </div>
+            <div class="form-group">
+              <label class="col-form-label" for="corpus">{% trans 'Corpus' %}</label>
+              <select class="form-control" name="corpus" id="corpus">
+                  {% for corpus in all_corpus %}
+                      <option value='{{corpus.id}}'>{{ corpus.corpus_name }}</option>
+                  {% endfor %}
+              </select>
+          </div>
+          <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="depressed" name="depressed" {% if profile.data.depressed %} checked="" {% endif %}>
+              <label class="custom-control-label" for="depressed">{% trans 'Depression' %}</label>
+          </div>
           </div>
           <div class="modal-footer">
               <button type="submit" class="btn btn-primary" name="submit">{% trans 'Save and validate' %}</button>

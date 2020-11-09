@@ -113,13 +113,16 @@ def profiles(request):
 def profile_detail(request, pk):
     json_request = _api_request(request, '/api/profiles/' + str(pk))
     globaldata = _api_request(request, GLOBALDATA_ENDPOINT, 'GET')
+    corpus = _api_request(request, '/api/corpus/', 'GET')
     return render(request, 'profile_detail.html', {
         'profile': json_request,
-        'globaldata': globaldata
+        'globaldata': globaldata, 
+        'all_corpus': corpus['results']
     })
 
 def edit_profile(request, pk):
     body = {
+        "corpus": int(request.POST.get("corpus")),
         "validated_data":
         {
             "age": request.POST.get("age"),
@@ -142,7 +145,8 @@ def index(request):
     if request.user.is_authenticated:
         globaldata = _api_request(request, GLOBALDATA_ENDPOINT, 'GET')
         if request.user.groups.filter(name="eadmin").exists():
-            return render(request, 'administration.html', {'globaldata': globaldata})
+            corpus = _api_request(request, '/api/corpus/', 'GET')
+            return render(request, 'administration.html', {'globaldata': globaldata, 'all_corpus': corpus['results']})
         return profiles(request)
     return render(request, 'index.html', {'globaldata': globaldata})
 
@@ -152,8 +156,9 @@ def export(request):
         export_format = request.POST.get("demographicFormat")
         response = export_demographic(request, export_format)
     else:
+        corpus = request.POST.get("corpus")
         export_format = request.POST.get("datasetFormat")
-        response = export_dataset(request, export_format)
+        response = export_dataset(request, export_format, corpus)
     return response
 
 def export_demographic(request, export_format):
@@ -172,16 +177,27 @@ def export_demographic(request, export_format):
             writer.writerow([obj['experiment_id'], data['age'], data['gender'], data['location'], data['personality'], data['depressed']])
     return response
 
-def export_dataset(request, export_format):
+def export_dataset(request, export_format, corpus):
     print('TODO: next sprint')
-    return 'OK'
+    print(export_format)
+    print(corpus)
+    return redirect('/')
 
 def loaddata(request):
     subreddit = request.POST.get("subreddit")
     nsubmissions = request.POST.get("nsubmissions")
     nusers = request.POST.get("nusers")
     ncomments = request.POST.get("ncomments")
-    load_reddit_data.delay(request.user.id, request.is_secure(), request.get_host(), subreddit, nsubmissions, nusers, ncomments)
+    corpus = request.POST.get("corpus")
+    load_reddit_data.delay(request.user.id, request.is_secure(), 'web:8000', subreddit, nsubmissions, nusers, ncomments, corpus)
+    return redirect('/')
+
+
+def createcorpus(request):
+    body = {
+        "corpus_name": request.POST.get("corpus_name")
+    }
+    _api_request(request, '/api/corpus/', 'POST', body)
     return redirect('/')
 
 def password_change_done(request):

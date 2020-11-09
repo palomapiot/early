@@ -13,11 +13,12 @@ from rest_framework.status import (
     HTTP_200_OK
 )
 
-from app.api.models import Profile, ProfileData, Reason, GlobalData
+from app.api.models import Profile, ProfileData, Reason, GlobalData, Corpus, Comment
 from app.api.serializers import (ExportSerializer, GroupSerializer,
                                  ProfileDataSerializer, ProfileNLPSerializer,
                                  ProfileSerializer, ReasonSerializer,
-                                 UserSerializer, GlobalDataSerializer)
+                                 UserSerializer, GlobalDataSerializer,
+                                 CorpusSerializer, CommentSerializer)
 import django_filters
 from django_filters.rest_framework import filters
 
@@ -153,3 +154,29 @@ class GlobalDataViewSet(viewsets.ModelViewSet):
     queryset = GlobalData.objects.all().order_by('id')
     serializer_class = GlobalDataSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+class CorpusViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows global data to be viewed or edited.
+    """
+    queryset = Corpus.objects.all().order_by('id')
+    serializer_class = CorpusSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+class CommentViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows feching comments.
+    """
+    pagination_class = None
+    queryset = Comment.objects.all().order_by('id')
+    serializer_class = CommentSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    @action(detail=True)
+    def by_corpus(self, request, pk=None):
+        """
+        Returns a list of all the comments by corpus.
+        """
+        corpus = self.request.query_params.get('corpus')
+        reasons = Comment.objects.filter(profile__corpus=corpus).all().order_by('id')
+        return Response([reason.reason for reason in reasons])

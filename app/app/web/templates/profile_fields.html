@@ -140,6 +140,17 @@
             </div>
             {% endif %}
         </li>
+        {% if detail == "true" %}
+        <li class="list-group-item profile-list">
+            <h3 class="personality-data">{% trans 'Corpus' %}</h3>
+            <span class="col-xs-8">
+                <em class="flaticon-network">&nbsp;&nbsp;&nbsp;</em> 
+                {% if profile.corpus != "" and profile.corpus is not None %} 
+                {{ profile.corpus }} 
+                {% else %} - {% endif %}
+            </span>
+        </li>
+        {% endif %}
     </ul>
 
 {% if detail == "true" %}

@@ -1,4 +1,4 @@
-import gensim
+"""import gensim
 from gensim.matutils import softcossim 
 from gensim import corpora
 import gensim.downloader as api
@@ -256,4 +256,4 @@ def word_len_mean(text):
     return sum(len(word) for word in words) / len(words)
 
 def word_num_mean(text):
-  return sum([len(casual_tokenize(t)) for t in text]) * 1. / len(text)
+  return sum([len(casual_tokenize(t)) for t in text]) * 1. / len(text)"""

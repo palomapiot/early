@@ -11,16 +11,6 @@
 </script>
 <div id="administration-content" class="row">
     <h1 class="col-12 mb-4" name="administration">{% trans 'Administration' %}</h1>
-    <!--<div class="col-6">
-        <a href="{% if globaldata.load_in_progress == False %}{% url 'loaddata' %}{% endif %}" class="menu-link load-data {% if globaldata.load_in_progress %}not-active{% endif %}">
-            <div class="card shadow p-3 mb-5 bordershadow">
-                <div class="card-body text-center">
-                    <h6 class="card-title mb-3"><em class="fab fa-reddit-alien fa-4x"></em></h6>
-                    <h4 class="card-subtitle">{% trans 'Load Reddit data' %}</h4>
-                </div>
-            </div>
-        </a>
-    </div>-->
     <div class="col-6">
         <a href="#loaddata" class="menu-link load-data {% if globaldata.load_in_progress %}not-active{% endif %}" data-toggle="modal">
             <div class="card shadow p-3 mb-5 bordershadow">
@@ -44,4 +34,16 @@
         </a>
     </div>
     {% include "export_data_modal.html" %}
+
+    <div class="col-6">
+        <a href="#createcorpus" class="menu-link" data-toggle="modal">
+            <div class="card shadow p-3 mb-5 bordershadow">
+                <div class="card-body text-center">
+                    <h6 class="card-title mb-3"><em class="fas fa-book fa-4x"></em></h6>
+                    <h4 class="card-subtitle">{% trans 'Create corpus' %}</h4>
+                </div>
+            </div>
+        </a>
+    </div>
+    {% include "create_corpus_modal.html" %}
 </div>

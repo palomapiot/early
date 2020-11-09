@@ -15,6 +15,7 @@ urlpatterns = [
     path('profiles/<int:pk>/edit/', views.edit_profile, name='edit-profile'),
     path('export/', views.export, name='export'),
     path('loaddata/', views.loaddata, name='loaddata'),
+    path('createcorpus/', views.createcorpus, name='createcorpus'),
     path('administration/', TemplateView.as_view(template_name='administration.html'), name='administration'),
     path('about/', TemplateView.as_view(template_name='about.html'), name='about'),
 ]

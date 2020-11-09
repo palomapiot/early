@@ -4,7 +4,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
-        <h5 class="modal-title">{% trans 'Exporta data' %}</h5>
+        <h4 class="modal-title">{% trans 'Export data' %}</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -13,11 +13,10 @@
             <div class="modal-body">
                 {% csrf_token %}
                 <fieldset class="form-group">
-                    <legend><h4>{% trans 'Exporta data' %}</h4></legend>
                     <div class="form-check">
                         <label class="form-check-label">
-                        <input type="radio" class="form-check-input" name="exportOptions" id="exportOptionsDemographic" value="demographic" checked="">
-                        <h5>{% trans 'Export demographic data' %}</h5>
+                            <input type="radio" class="form-check-input" name="exportOptions" id="exportOptionsDemographic" value="demographic" checked="">
+                            <h5>{% trans 'Export demographic data' %}</h5>
                         </label>
                         <div class="form-group">
                             <select class="form-control" id="demographicFormat" name="demographicFormat">
@@ -27,10 +26,19 @@
                         </div>
                     </div>
                     <div class="form-check">
-                    <label class="form-check-label">
-                        <input type="radio" class="form-check-input" name="exportOptions" id="exportOptionsDataset" value="dataset">
-                        <h5>{% trans 'Export dataset' %}</h5>
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="exportOptions" id="exportOptionsDataset" value="dataset">
+                            <h5>{% trans 'Export corpus' %}</h5>
                         </label>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <select class="form-control" id="corpus" name="corpus">
+                                    {% for corpus in all_corpus %}
+                                        <option value='{{corpus.id}}'>{{ corpus.corpus_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <select class="form-control" id="datasetFormat" name="datasetFormat">
                                 <option>CSV</option>
