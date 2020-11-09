@@ -15,6 +15,7 @@ RUN pip3 install -r requirements.txt
 RUN mkdir /app
 WORKDIR /app
 COPY ./app /app
+EXPOSE 8000
 
 RUN useradd -ms /bin/bash user
 USER user

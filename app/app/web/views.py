@@ -177,8 +177,11 @@ def export_dataset(request, export_format):
     return 'OK'
 
 def loaddata(request):
-    print('ENTRAMOS')
-    load_reddit_data.delay(request.user.id, request.is_secure(), request.get_host())
+    subreddit = request.POST.get("subreddit")
+    nsubmissions = request.POST.get("nsubmissions")
+    nusers = request.POST.get("nusers")
+    ncomments = request.POST.get("ncomments")
+    load_reddit_data.delay(request.user.id, request.is_secure(), request.get_host(), subreddit, nsubmissions, nusers, ncomments)
     return redirect('/')
 
 def password_change_done(request):

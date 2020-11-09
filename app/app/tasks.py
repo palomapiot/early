@@ -45,8 +45,10 @@ def _api_request(request_user, request_is_secure, request_host, url, request_typ
     return response.json()
 
 @app.task
-def process_user(request_user, request_is_secure, request_host, user):
-    comments = get_user_comments(user)
+def process_user(request_user, request_is_secure, request_host, user, ncomments):
+    comments = get_user_comments(user, ncomments)
+    print('number of comments')
+    print(len(comments))
 
     # TODO: before creating -> classify calling the gender model and save the system data
     text = ':::'.join([comment['text'] for comment in comments])
@@ -84,25 +86,23 @@ def process_user(request_user, request_is_secure, request_host, user):
     _api_request(request_user, request_is_secure, request_host, '/api/profiles/', 'POST', body)
 
 @app.task(bind=True, name="load_data")
-def load_reddit_data(self, request_user, request_is_secure, request_host):
-    print('CELERY INIT')
+def load_reddit_data(self, request_user, request_is_secure, request_host, subreddit, nsubmissions, nusers, ncomments):
     from app.web.reddit import get_submissions, get_users
     body = {
         "load_in_progress": True,
         "task_id": str(current_task.request.id)
     }
     _api_request(request_user, request_is_secure, request_host, '/api/globaldata/1/', 'PUT', body)
-    # TODO: switch in order to have the complete funtionality
-    #submissions = get_submissions("depression")
-    #users = get_users(submissions)
-    users = ['throwRAluvee', 'MikaKoinu', 'ChunkyPuppyKissez', 'TheMightyBiz']
+    submissions = get_submissions(subreddit, nsubmissions)
+    users = get_users(submissions, nusers)
+    #users = ['throwRAluvee', 'MikaKoinu', 'ChunkyPuppyKissez', 'TheMightyBiz']
     total_work_to_do = len(users)
     progress_recorder = ProgressRecorder(self)
     result = 0
     progress_recorder.set_progress(result, total_work_to_do)
     for user in users:
         time.sleep(3)
-        process_user.delay(request_user, request_is_secure, request_host, user)
+        process_user.delay(request_user, request_is_secure, request_host, user, ncomments)
         result += 1
         # tell the progress observer how many out of the total items we have processed
         progress_recorder.set_progress(result, total_work_to_do)
