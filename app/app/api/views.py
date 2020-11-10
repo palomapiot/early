@@ -18,7 +18,8 @@ from app.api.serializers import (ExportSerializer, GroupSerializer,
                                  ProfileDataSerializer, ProfileNLPSerializer,
                                  ProfileSerializer, ReasonSerializer,
                                  UserSerializer, GlobalDataSerializer,
-                                 CorpusSerializer, CommentSerializer)
+                                 CorpusSerializer, CommentsCorpusSerializer,
+                                 LabeledDataSerializer)
 import django_filters
 from django_filters.rest_framework import filters
 
@@ -165,18 +166,42 @@ class CorpusViewSet(viewsets.ModelViewSet):
 
 class CommentViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows feching comments.
+    API endpoint that allows feching profiles with its comments.
     """
     pagination_class = None
-    queryset = Comment.objects.all().order_by('id')
-    serializer_class = CommentSerializer
+    queryset = Profile.objects.all().order_by('id')
+    serializer_class = CommentsCorpusSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-    @action(detail=True)
-    def by_corpus(self, request, pk=None):
+    def get_queryset(self):
         """
-        Returns a list of all the comments by corpus.
+        Optionally restricts the returned comments to a given corpus,
+        by filtering against a `corpus` query parameter in the URL.
         """
-        corpus = self.request.query_params.get('corpus')
-        reasons = Comment.objects.filter(profile__corpus=corpus).all().order_by('id')
-        return Response([reason.reason for reason in reasons])
+        queryset = Profile.objects.all()
+        corpus = self.request.query_params.get('corpus', None)
+        if corpus is not None:
+            queryset = queryset.filter(corpus=corpus)
+        return queryset
+
+
+class LabeledDataViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows profiles to export with labeled data
+    to be viewed.
+    """
+    pagination_class = None
+    queryset = Profile.objects.filter(validated_data__isnull=False).all()
+    serializer_class = LabeledDataSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get_queryset(self):
+        """
+        Optionally restricts the returned comments to a given corpus,
+        by filtering against a `corpus` query parameter in the URL.
+        """
+        queryset = Profile.objects.filter(validated_data__isnull=False).all()
+        corpus = self.request.query_params.get('corpus', None)
+        if corpus is not None:
+            queryset = queryset.filter(corpus=corpus)
+        return queryset

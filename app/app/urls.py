@@ -26,6 +26,7 @@ router.register(r'export', views.ExportViewSet, 'export')
 router.register(r'globaldata', views.GlobalDataViewSet, 'globaldata')
 router.register(r'corpus', views.CorpusViewSet, 'corpus')
 router.register(r'comments', views.CommentViewSet, 'comments')
+router.register(r'labeleddata', views.LabeledDataViewSet, 'labeleddata')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

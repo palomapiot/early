@@ -25,12 +25,17 @@ class ProfileDataSerializer(serializers.ModelSerializer):
         model = ProfileData
         fields = ['id', 'age', 'gender', 'location', 'personality', 'depressed']
 
+class ProfileDataExportSerializer(serializers.ModelSerializer):
+    location = CountryField(required=False, allow_null=True)
+    class Meta:
+        model = ProfileData
+        fields = ['age', 'gender', 'location', 'personality', 'depressed']
+
 class ExportSerializer(serializers.ModelSerializer):
-    validated_data = ProfileDataSerializer()
+    validated_data = ProfileDataExportSerializer()
     class Meta:
         model = Profile        
-        fields = ['date', 'text', 'profile']
-        read_only_fields = ['experiment_id', 'validated_data']
+        fields = ['id', 'experiment_id', 'validated_data']
 
 class ReasonSerializer(serializers.ModelSerializer):
     class Meta:
@@ -93,37 +98,23 @@ class ProfileSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
-class ProfileCorpusSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Profile
-        fields = ['id', 'corpus']
-
-class CommentListSerializer(serializers.ListSerializer):
-    def to_representation(self, data):
-        iterable = data.all() if isinstance(data, models.Manager) else data
-        rep = super(CommentListSerializer, self).to_representation(data)
-        #rep['comments'] = [profile.comments for profile in Profile.objects.all()]
-        return {
-            profile.id: super(CommentListSerializer, self).to_representation(Comment.objects.filter(profile=profile))
-            for profile in Profile.objects.all()
-        }
-
 class CommentSerializer(serializers.ModelSerializer):
-    profile = ProfileCorpusSerializer(read_only=True)
     class Meta:
         model = Comment
-        fields = ['date', 'text', 'profile']
-        list_serializer_class = CommentListSerializer
+        fields = ['date', 'text']
 
+class CommentsCorpusSerializer(serializers.ModelSerializer):
+    comments = CommentSerializer(many=True, required=False)
+    class Meta:
+        model = Profile
+        fields = ['id', 'corpus', 'comments']
 
-    """def to_representation(self, data):
-        profile = self.fields['profile']
-        comments = self.fields['text']
-        #p_comments = comments.filter(profile__id=profile.id)
-        return {
-            profile.id: super(CommentListSerializer, self).to_representation(Comment.objects.filter(profile=profile))
-            for profile in Profile.objects.all()
-        }"""
+class LabeledDataSerializer(serializers.ModelSerializer):
+    comments = CommentSerializer(many=True, required=False)
+    validated_data = ProfileDataExportSerializer()
+    class Meta:
+        model = Profile
+        fields = ['id', 'experiment_id', 'corpus', 'validated_data', 'comments']
 
 class ProfileNLPSerializer(serializers.ModelSerializer):
     system_data = ProfileDataSerializer(required=False)

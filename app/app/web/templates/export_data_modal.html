@@ -33,6 +33,7 @@
                         <div class="form-group">
                             <div class="form-group">
                                 <select class="form-control" id="corpus" name="corpus">
+                                    <option value="">{% trans 'All corpus' %}</option>
                                     {% for corpus in all_corpus %}
                                         <option value='{{corpus.id}}'>{{ corpus.corpus_name }}</option>
                                     {% endfor %}
@@ -44,6 +45,51 @@
                                 <option>CSV</option>
                                 <option>JSON</option>
                             </select>
+                        </div>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="exportOptions" id="exportOptionsLabeledData" value="labeled">
+                            <h5>{% trans 'Export labeled data' %}</h5>
+                        </label>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <select class="form-control" id="corpus" name="corpus">
+                                    <option value="">{% trans 'All corpus' %}</option>
+                                    {% for corpus in all_corpus %}
+                                        <option value='{{corpus.id}}'>{{ corpus.corpus_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" id="labeledDataFormat" name="labeledDataFormat">
+                                <option>CSV</option>
+                                <option>JSON</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <h6>{% trans 'Demographic labels to export' %}</h6>
+                            <div class="custom-control custom-checkbox">
+                                <input class="custom-control-input" type="checkbox" id="age" name="age" checked="">
+                                <label class="custom-control-label" for="age">{% trans 'Age' %}</label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input class="custom-control-input" type="checkbox" id="gender" name="gender" checked="">
+                                <label class="custom-control-label" for="gender">{% trans 'Gender' %}</label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input class="custom-control-input" type="checkbox" id="location" name="location" checked="">
+                                <label class="custom-control-label" for="location">{% trans 'Location' %}</label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input class="custom-control-input" type="checkbox" id="personality" name="personality" checked="">
+                                <label class="custom-control-label" for="personality">{% trans 'Personality' %}</label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input class="custom-control-input" type="checkbox" id="depression" name="depression" checked="">
+                                <label class="custom-control-label" for="depression">{% trans 'Depression' %}</label>
+                            </div>
                         </div>
                     </div>
                 </fieldset>
