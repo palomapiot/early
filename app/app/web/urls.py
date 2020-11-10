@@ -16,6 +16,7 @@ urlpatterns = [
     path('export/', views.export, name='export'),
     path('loaddata/', views.loaddata, name='loaddata'),
     path('createcorpus/', views.createcorpus, name='createcorpus'),
+    path('processuser/', views.processuser, name='processuser'),
     path('administration/', TemplateView.as_view(template_name='administration.html'), name='administration'),
     path('about/', TemplateView.as_view(template_name='about.html'), name='about'),
 ]

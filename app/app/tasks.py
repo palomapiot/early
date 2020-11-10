@@ -47,9 +47,7 @@ def _api_request(request_user, request_is_secure, request_host, url, request_typ
 @app.task
 def process_user(request_user, request_is_secure, request_host, user, ncomments, corpus):
     comments = get_user_comments(user, ncomments)
-    print('number of comments')
-    print(len(comments))
-
+    
     # TODO: before creating -> classify calling the gender model and save the system data
     """text = ':::'.join([comment['text'] for comment in comments])
 

@@ -8,7 +8,7 @@ from django.core import serializers
 from django.shortcuts import redirect
 from app.settings import REST_FRAMEWORK
 import math as math
-from app.tasks import load_reddit_data
+from app.tasks import load_reddit_data, process_user
 from celery.result import AsyncResult
 import json
 import time
@@ -260,6 +260,13 @@ def createcorpus(request):
         "corpus_name": request.POST.get("corpus_name")
     }
     _api_request(request, '/api/corpus/', 'POST', body)
+    return redirect('/')
+
+def processuser(request):
+    username = request.POST.get("username")
+    ncomments = request.POST.get("ncomments")
+    corpus = request.POST.get("corpus")
+    process_user.delay(request.user.id, request.is_secure(), 'web:8000', username, ncomments, corpus)
     return redirect('/')
 
 def password_change_done(request):

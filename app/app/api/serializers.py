@@ -142,6 +142,7 @@ class ProfileNLPSerializer(serializers.ModelSerializer):
             instance.save()
         for reason in reasons_v_data:
             Reason.objects.create(profile=instance, **reason)
+        last_date = None
         for comment in comments_v_data:
             c_date = None
             for key, value in comment.items():
@@ -149,8 +150,12 @@ class ProfileNLPSerializer(serializers.ModelSerializer):
                     c_date = value
             # create comment if date doesnt exist
             if instance.last_retrieved_comment_date is None or instance.last_retrieved_comment_date < c_date:
+                print('created comment')
                 Comment.objects.create(profile=instance, **comment)
+            if last_date is None or c_date > last_date:
+                print('updates recent date!')
+                last_date = c_date
 
-            instance.last_retrieved_comment_date = c_date
+        instance.last_retrieved_comment_date = last_date
         return instance
 
