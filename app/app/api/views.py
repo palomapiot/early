@@ -12,7 +12,6 @@ from rest_framework.status import (
     HTTP_404_NOT_FOUND,
     HTTP_200_OK
 )
-
 from app.api.models import Profile, ProfileData, Reason, GlobalData, Corpus, Comment
 from app.api.serializers import (ExportSerializer, GroupSerializer,
                                  ProfileDataSerializer, ProfileNLPSerializer,

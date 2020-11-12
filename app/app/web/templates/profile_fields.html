@@ -32,7 +32,7 @@
 <div class="col-lg-12 col-md-12 col-xs-12">
 {% endif %}
     <ul class="list-group list-group-flush ellipsis">
-        <li class="list-group-item profile-list">
+        <li class="list-group-item profile-list {% if detail == 'false' %}light-border{% endif %}">
             {% if detail == "true" %}
             <h3 class="age-data">{% trans 'Age' %} 
                 {% if profile.reasons != NoneType and profile.reasons|reason:'Age' %}
@@ -58,7 +58,7 @@
             </div>
             {% endif %}
         </li>
-        <li class="list-group-item profile-list">
+        <li class="list-group-item profile-list {% if detail == 'false' %}light-border{% endif %}">
             {% if detail == "true" %}
             <h3 class="gender-data">{% trans 'Gender' %} 
                 {% if profile.reasons != NoneType and profile.reasons|reason:'Gender' %}
@@ -89,7 +89,7 @@
             </div>
             {% endif %}
         </li>
-        <li class="list-group-item profile-list">
+        <li class="list-group-item profile-list {% if detail == 'false' %}light-border{% endif %}">
             {% if detail == "true" %}
             <h3 class="location-data">{% trans 'Location' %}                 
                 {% if profile.reasons != NoneType and profile.reasons|reason:'Location' %}
@@ -116,7 +116,7 @@
             </div>
             {% endif %}
         </li>
-        <li class="list-group-item profile-list">
+        <li class="list-group-item profile-list {% if detail == 'false' %}light-border{% endif %}">
             {% if detail == "true" %}
             <h3 class="personality-data">{% trans 'Personality' %} 
                 {% if profile.reasons != NoneType and profile.reasons|reason:'Personality' %}
@@ -125,14 +125,14 @@
             </h3>
             {% endif %}
             <span class="col-xs-8">
-                <em class="flaticon-network">&nbsp;&nbsp;&nbsp;</em> 
+                <em class="fas fa-theater-masks">&nbsp;</em> <!--<em class="flaticon-network">&nbsp;&nbsp;&nbsp;</em>-->
                 {% if profile.data.personality != "" and profile.data.personality is not None %} 
                 {{ profile.data.personality }} 
                 {% else %} - {% endif %}
             </span>
 
             {% if detail == "true" and profile.reasons|reason:'Personality' %}
-            <div class="personality-reasons mt-3 hide border">
+            <div class="personality-reasons mt-3 hide border"> 
                 <h5 class="mt-3 ml-3 mr-3">{% trans 'Reasons' %}</h5>
                 {% for reason in profile.reasons|reason:'Personality' %}
                 <p class="wordwrap mt-1 ml-3 mr-3">{{ reason.reason }}</p>
@@ -141,10 +141,10 @@
             {% endif %}
         </li>
         {% if detail == "true" %}
-        <li class="list-group-item profile-list">
+        <li class="list-group-item profile-list {% if detail == 'false' %}light-border{% endif %}">
             <h3 class="personality-data">{% trans 'Corpus' %}</h3>
             <span class="col-xs-8">
-                <em class="flaticon-network">&nbsp;&nbsp;&nbsp;</em> 
+                <em class="fas fa-book">&nbsp;&nbsp;&nbsp;</em> 
                 {% if profile.corpus != "" and profile.corpus is not None %} 
                 {{ profile.corpus }} 
                 {% else %} - {% endif %}

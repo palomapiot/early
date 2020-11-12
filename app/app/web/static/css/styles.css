@@ -3,10 +3,6 @@
     color: #373a3c !important;
 }
 
-.menu-link .card:hover {
-    background-color: #e2e2e2;
-}
-
 .not-active {
     pointer-events: none !important;
     cursor: not-allowed !important;
@@ -23,11 +19,12 @@
 }
 
 .bordershadow {
-    box-shadow: 3px 3px 3px 1px #ccc;
+    box-shadow: rgba(35, 35, 35, 0.1) 0px 10px 30px 0px;
+    border: none !important;
 }
 
 .bordershadow:hover {
-    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
+    box-shadow: rgba(35, 35, 35, 0.2) 0px 10px 40px 0px;
     transform: scale(1.01, 1.01);
     -webkit-transform: scale(1.01, 1.01);
 }
@@ -61,7 +58,8 @@
 }
 
 .card-header-color {
-    background-color: #dae1e7 !important;
+    background-color: white !important;
+    border-bottom: none !important;
 }
 
 footer.page-footer {
@@ -145,3 +143,16 @@ html, body {
   .h1-size {
       font-size: 2.34375rem;
   }
+
+  .custom-rounded {
+    border-radius: 1em !important;
+  }
+  .custom-rounded-top {
+    border-radius: 0.75em 0.75em 0em 0em;
+  }
+  .light-border {
+    border: 1px solid rgba(0, 0, 0, 0.050) !important;
+  }
+  .larger-badge {
+    font-size: 1em !important;
+}

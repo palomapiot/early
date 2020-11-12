@@ -96,8 +96,8 @@
 
     {% for profile in results %}
     <div class="col-lg-3 col-md-6 col-xs-12">
-        <div class="card mb-3 bordershadow rounded shadow">
-            <h5 class="tooltip-div card-header text-center card-header-color"><strong>{{ profile.experiment_id }}</strong>
+        <div class="card mb-3 bordershadow custom-rounded shadow">
+            <h5 class="tooltip-div card-header text-center card-header-color custom-rounded-top"><strong>{{ profile.experiment_id }}</strong>
                 {% if profile.is_valid %}
                 <a href="#" data-toggle="popover"
                     title="Valid profile"
@@ -111,11 +111,11 @@
                 {% include "profile_fields.html" with profile=profile detail="false" %}
                 <div class="p-2 text-muted text-center">
                     {% if profile.processed == False %}
-                    <span class="badge badge-pill badge-info">{% trans 'Not processed' %}</span> 
+                    <span class="badge badge-pill badge-info larger-badge">{% trans 'Not processed' %}</span> 
                     {% elif profile.data.depressed %}
-                    <span class="badge badge-pill badge-danger">{% trans 'Depression' %}</span> 
+                    <span class="badge badge-pill badge-danger larger-badge">{% trans 'Depression' %}</span> 
                     {% elif profile.data.depressed == False %}
-                    <span class="badge badge-pill early-badge-primary">{% trans 'No depression' %}</span> 
+                    <span class="badge badge-pill early-badge-primary larger-badge">{% trans 'No depression' %}</span> 
                     {% endif %}
                 </div>
             </a>
