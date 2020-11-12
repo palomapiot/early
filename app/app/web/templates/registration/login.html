@@ -12,11 +12,11 @@
                 {% csrf_token %}
                 <div class="form-group">
                     <label class="col-form-label" for="id_username">{% trans 'Username' %}</label>
-                    <input type="text" name="username" class="form-control" placeholder="{% trans 'Username' %}" id="id_username">
+                    <input type="text" name="username" class="custom-rounded-small form-control" placeholder="{% trans 'Username' %}" id="id_username">
                 </div>
                 <div class="form-group">
                     <label class="col-form-label" for="id_password">{% trans 'Password' %}</label>
-                    <input type="password" name="password" class="form-control" placeholder="{% trans 'Password' %}" id="id_password">
+                    <input type="password" name="password" class="custom-rounded-small form-control" placeholder="{% trans 'Password' %}" id="id_password">
                 </div>
 
                 {% if form.errors %}
@@ -24,8 +24,7 @@
                 {% endif %}
 
                 <a href="{% url 'password_reset' %}"><p class="text-primary">{% trans 'Forgot password?' %}</p></a>
-                <input type="submit" name="submit" value="Login" 
-                       class="btn btn-primary" />
+                <input type="submit" name="submit" value="Login" class="custom-rounded-small btn btn-primary" />
                 <input type="hidden" name="next" value="{{ next }}" />
             </form>
         </div>

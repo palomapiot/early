@@ -4,7 +4,7 @@
 {% get_countries as countries %}
 <div class="modal fade" id="edit-profile" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
+    <div class="modal-content custom-rounded-small">
       <div class="modal-header">
         <h5 class="modal-title">{% trans 'Validate and edit data' %}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -16,7 +16,7 @@
             {% csrf_token %}
             <div class="form-group">
                 <label class="col-form-label" for="age">{% trans 'Age' %}</label>
-                <select class="form-control" name="age" id="age">
+                <select class="custom-rounded-small form-control" name="age" id="age">
                   <option value="12-20" {% if profile.data.age == "12-20" %} selected {% endif %}>12-20</option>
                   <option value="20-30" {% if profile.data.age == "20-30" %} selected {% endif %}>20-30</option>
                   <option value="30-65" {% if profile.data.age == "30-65" %} selected {% endif %}>30-65</option>
@@ -26,7 +26,7 @@
             </div>
             <div class="form-group">
               <label class="col-form-label" for="gender">{% trans 'Gender' %}</label>
-              <select class="form-control" name="gender" id="gender">
+              <select class="custom-rounded-small form-control" name="gender" id="gender">
                 <option value="Female" {% if profile.data.gender == "Female" %} selected {% endif %}>{% trans 'Female' %}</option>
                 <option value="Male" {% if profile.data.gender == "Male" %} selected {% endif %}>{% trans 'Male' %}</option>
                 <option value="Unknown" {% if profile.data.gender == "Unknown" or profile.data.gender is None %} selected {% endif %}>{% trans 'Unknown' %}</option>
@@ -34,7 +34,7 @@
             </div>
             <div class="form-group">
                 <label class="col-form-label" for="location">{% trans 'Location' %}</label>
-                <select name="location" class="form-control" id="location">
+                <select name="location" class="custom-rounded-small form-control" id="location">
                 {% for country in countries %}
                     <option value="{{ country.code }}" {% if profile.data.location == country.code %} selected {% endif %}>{{ country.name }}</option>
                 {% endfor %}
@@ -42,7 +42,7 @@
             </div>
             <div class="form-group">
                 <label class="col-form-label" for="personality">{% trans 'Personality' %}</label>
-                <select class="form-control" name="personality" id="personality">
+                <select class="custom-rounded-small form-control" name="personality" id="personality">
                   <option value="Extraversion" {% if profile.data.personality == "Extraversion" %} selected {% endif %}>{% trans 'Extraversion' %}</option>
                   <option value="Agreeableness" {% if profile.data.personality == "Agreeableness" %} selected {% endif %}>{% trans 'Agreeableness' %}</option>
                   <option value="Conscientiousness" {% if profile.data.personality == "Conscientiousness" %} selected {% endif %}>{% trans 'Conscientiousness' %}</option>
@@ -53,7 +53,7 @@
             </div>
             <div class="form-group">
               <label class="col-form-label" for="corpus">{% trans 'Corpus' %}</label>
-              <select class="form-control" name="corpus" id="corpus">
+              <select class="custom-rounded-small form-control" name="corpus" id="corpus">
                   {% for corpus in all_corpus %}
                       <option value='{{corpus.id}}'>{{ corpus.corpus_name }}</option>
                   {% endfor %}
@@ -65,8 +65,8 @@
           </div>
           </div>
           <div class="modal-footer">
-              <button type="submit" class="btn btn-primary" name="submit">{% trans 'Save and validate' %}</button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal" name="close">{% trans 'Close' %}</button>
+              <button type="submit" class="custom-rounded-small btn btn-primary" name="submit">{% trans 'Save and validate' %}</button>
+              <button type="button" class="custom-rounded-small btn btn-secondary" data-dismiss="modal" name="close">{% trans 'Close' %}</button>
           </div>
 
         </form>

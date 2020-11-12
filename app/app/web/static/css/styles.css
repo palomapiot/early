@@ -119,40 +119,70 @@ html, body {
     white-space: -pre-wrap;     /* Opera <7 */   
     white-space: -o-pre-wrap;   /* Opera 7 */    
     word-wrap: break-word;      /* IE */
- }
+}
 
- .hide {
+.hide {
     display: none;
-  }
+}
 
-  .border {
+.border {
     border: 1px solid gray;
-  }
+}
   
-  .fas {
+.fas {
     font-size: 18px;
-  }
-  .fas {
+}
+.fas {
     transition: transform .2s;
-  }
+}
   
-  .fas.active {
+.fas.active {
     transform: rotateZ(180deg);
-  }
+}
 
-  .h1-size {
-      font-size: 2.34375rem;
-  }
+.h1-size {
+    font-size: 2.34375rem;
+}
 
-  .custom-rounded {
+.custom-rounded-small {
+    border-radius: 0.5em !important;
+}
+.custom-rounded {
     border-radius: 1em !important;
-  }
-  .custom-rounded-top {
+}
+.custom-rounded-top {
     border-radius: 0.75em 0.75em 0em 0em;
-  }
-  .light-border {
+}
+.custom-rounded-small-right {
+    border-radius: 0em 0.5em 0.5em 0em !important;
+}
+.custom-rounded-small-left {
+    border-radius: 0.5em 0em 0em 0.5em !important;
+}
+.light-border {
     border: 1px solid rgba(0, 0, 0, 0.050) !important;
-  }
-  .larger-badge {
+}
+.larger-badge {
     font-size: 1em !important;
+}
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: searchfield-cancel-button;
+}
+.profile-not-processed {
+    background-color: #9954BB;
+    border-radius: 0em 0em 1em 1em;
+}
+.profile-no-depression {
+    background-color: #27496d;
+    border-radius: 0em 0em 1em 1em;
+}
+.profile-depression {
+    background-color: #bd2e44;
+    border-radius: 0em 0em 1em 1em;
+}
+.bold {
+    font-weight: bold;
+}
+.no-right-padding {
+    padding-right: 0em !important;
 }

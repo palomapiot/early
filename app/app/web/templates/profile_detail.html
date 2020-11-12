@@ -22,11 +22,11 @@
             </h1>
             <h3>
                 {% if profile.processed == False %}
-                <span class="badge badge-pill badge-info">{% trans 'Not processed' %}</span> 
+                <span class="custom-rounded-small badge badge-pill badge-info">{% trans 'Not processed' %}</span> 
                 {% elif profile.data.depressed %}
-                <span class="badge badge-pill badge-danger">{% trans 'Depression' %}</span> 
+                <span class="custom-rounded-small badge badge-pill badge-danger">{% trans 'Depression' %}</span> 
                 {% elif profile.data.depressed == False %}
-                <span class="badge badge-pill early-badge-primary">{% trans 'No depression' %}</span> 
+                <span class="custom-rounded-small badge badge-pill early-badge-primary">{% trans 'No depression' %}</span> 
                 {% endif %}
                 
             </h3>
@@ -36,7 +36,7 @@
             {% include "profile_fields.html" with profile=profile detail="true" %}
         </div>
         <div class="row col-12">
-            <button type="button" data-toggle="modal" data-target="#edit-profile" class="btn btn-outline-primary btn-lg btn-block">{% trans 'Validate and edit data' %}</button>
+            <button type="button" data-toggle="modal" data-target="#edit-profile" class="custom-rounded btn btn-outline-primary btn-lg btn-block">{% trans 'Validate and edit data' %}</button>
             {% include "edit_profile_modal.html" with profile=profile %}
         </div>
     </div>

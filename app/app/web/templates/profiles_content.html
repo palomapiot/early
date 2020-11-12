@@ -8,7 +8,7 @@
         
         $(this).on("click", ".more-filters", function(e) {
             e.preventDefault();
-            $(this).parent().find(".filters-detail").toggle();
+            $(this).parent().parent().find(".filters-detail").toggle();
             $(this).find(".fas").toggleClass('active');
         });
 
@@ -25,21 +25,21 @@
     <h1 class="col-12 mb-4" name="profiles">{% trans 'Profiles' %}</h1>
 
     <div class="col-12 mb-4">
-        <form id="search-form" role="form" class="form-inline" method="GET" action="{% url 'profiles' %}">
-            <input class="form-control mr-sm-2 col-9" type="text" name="experiment_id" placeholder="Username">
-            <button class="btn btn-secondary mr-sm-2 my-2 my-sm-0 col-1" type="submit">{% trans 'Search' %}</button>
-            <button class="btn btn-secondary mr-sm-2 my-2 my-sm-0 col more-filters"><em class="fas fa-caret-down"></em></button>
-            <button class="btn btn-secondary my-2 my-sm-0 col" onClick="this.form.reset()"><em class="fas fa-times"></em></button>
-            <!-- advanced search -->
+        <form id="search-form" role="form" class="form-inline text-center" method="GET" action="{% url 'profiles' %}">
+            <input class="custom-rounded-small form-control col-10" type="text" name="experiment_id" placeholder="Username">
+            <div class="btn-group col-2" role="group">
+                <button class="custom-rounded-small-left btn btn-secondary" type="submit">{% trans 'Search' %}</button>
+                <button class="custom-rounded-small-right btn btn-secondary  more-filters"><em class="fas fa-caret-down"></em></button>
+              </div>
             <div class="col-12 filters-detail hide">
                 <div class="form-group col-12 mt-4">
                     <div class="form-group col-3">
                         <select class="form-control col-12 selectpicker" name="age" id="age" title="Age" multiple>
-                        <option value="12-20">12-20</option>
-                        <option value="20-30">20-30</option>
-                        <option value="30-65">30-65</option>
-                        <option value="Over65">65+</option>
-                        <option value="Unknown">{% trans 'Unknown' %}</option>
+                            <option value="12-20">12-20</option>
+                            <option value="20-30">20-30</option>
+                            <option value="30-65">30-65</option>
+                            <option value="Over65">65+</option>
+                            <option value="Unknown">{% trans 'Unknown' %}</option>
                         </select>
                     </div>
                     <div class="form-group col-3">
@@ -58,12 +58,12 @@
                     </div>
                     <div class="form-group col-3">
                         <select multiple="" class="form-control col-12 selectpicker" name="personality" id="personality" title="Personality" multiple>
-                        <option value="Extraversion">{% trans 'Extraversion' %}</option>
-                        <option value="Agreeableness">{% trans 'Agreeableness' %}</option>
-                        <option value="Conscientiousness">{% trans 'Conscientiousness' %}</option>
-                        <option value="Neuroticism">{% trans 'Neuroticism' %}</option>
-                        <option value="Openness">{% trans 'Openness' %}</option>
-                        <option value="Unknown">{% trans 'Unknown' %}</option>
+                            <option value="Extraversion">{% trans 'Extraversion' %}</option>
+                            <option value="Agreeableness">{% trans 'Agreeableness' %}</option>
+                            <option value="Conscientiousness">{% trans 'Conscientiousness' %}</option>
+                            <option value="Neuroticism">{% trans 'Neuroticism' %}</option>
+                            <option value="Openness">{% trans 'Openness' %}</option>
+                            <option value="Unknown">{% trans 'Unknown' %}</option>
                         </select>
                     </div>
                 </div>
@@ -97,7 +97,7 @@
     {% for profile in results %}
     <div class="col-lg-3 col-md-6 col-xs-12">
         <div class="card mb-3 bordershadow custom-rounded shadow">
-            <h5 class="tooltip-div card-header text-center card-header-color custom-rounded-top"><strong>{{ profile.experiment_id }}</strong>
+            <h5 class="tooltip-div card-header text-center card-header-color custom-rounded-top bold"><strong>{{ profile.experiment_id }}</strong>
                 {% if profile.is_valid %}
                 <a href="#" data-toggle="popover"
                     title="Valid profile"
@@ -109,15 +109,19 @@
             </h5>
             <a href="{% url 'profile-detail' profile.id %}" class="profile-link">
                 {% include "profile_fields.html" with profile=profile detail="false" %}
-                <div class="p-2 text-muted text-center">
                     {% if profile.processed == False %}
-                    <span class="badge badge-pill badge-info larger-badge">{% trans 'Not processed' %}</span> 
+                    <div class="p-2 text-muted text-center profile-not-processed">
+                        <span class="badge badge-pill badge-info larger-badge">{% trans 'Not processed' %}</span>
+                    </div>
                     {% elif profile.data.depressed %}
-                    <span class="badge badge-pill badge-danger larger-badge">{% trans 'Depression' %}</span> 
+                    <div class="p-2 text-muted text-center profile-depression">
+                        <span class="badge badge-pill badge-danger larger-badge">{% trans 'Depression' %}</span> 
+                    </div>
                     {% elif profile.data.depressed == False %}
-                    <span class="badge badge-pill early-badge-primary larger-badge">{% trans 'No depression' %}</span> 
+                    <div class="p-2 text-muted text-center profile-no-depression">
+                        <span class="badge badge-pill early-badge-primary larger-badge">{% trans 'No depression' %}</span> 
+                    </div>
                     {% endif %}
-                </div>
             </a>
         </div>
     </div>
@@ -127,7 +131,7 @@
 <div class="row d-flex justify-content-center">
     <ul class="pagination">
         <li class="page-item {% if previous is None %} disabled{% endif %}">
-            <a class="page-link" href="{% url 'profiles' %}?page={{previous}}">&laquo;</a>
+            <a class="custom-rounded-small-left page-link" href="{% url 'profiles' %}?page={{previous}}">&laquo;</a>
         </li>
         {% for page in pages %}
         <li class="page-item {% if page.active %} active{% endif %}{% if page.page == '...' %} disabled{% endif %}">
@@ -135,7 +139,7 @@
         </li>
         {% endfor %}
         <li class="page-item {% if next is None %} disabled{% endif %}">
-            <a class="page-link" href="{% url 'profiles' %}?page={{next}}">&raquo;</a>
+            <a class="custom-rounded-small-right page-link" href="{% url 'profiles' %}?page={{next}}">&raquo;</a>
         </li>
     </ul>
 </div>

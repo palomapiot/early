@@ -96,7 +96,7 @@ class ProfileFilterSet(filters.FilterSet):
     class Meta:
         model = Profile
         fields = ['validated_data__age', 'validated_data__gender', 'validated_data__location',
-        'validated_data__personality', 'validated_data__depressed', 'is_valid', 'processed']
+        'validated_data__personality', 'validated_data__depressed', 'is_valid', 'processed', 'experiment_id']
 
         
 

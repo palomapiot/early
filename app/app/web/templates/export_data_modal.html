@@ -2,7 +2,7 @@
 {% load i18n %}
 <div class="modal fade" id="export" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
+    <div class="custom-rounded modal-content">
         <div class="modal-header">
         <h4 class="modal-title">{% trans 'Export data' %}</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -15,11 +15,11 @@
                 <fieldset class="form-group">
                     <div class="form-check">
                         <label class="form-check-label">
-                            <input type="radio" class="form-check-input" name="exportOptions" id="exportOptionsDemographic" value="demographic" checked="">
+                            <input type="radio" class="custom-rounded-small form-check-input" name="exportOptions" id="exportOptionsDemographic" value="demographic" checked="">
                             <h5>{% trans 'Export demographic data' %}</h5>
                         </label>
                         <div class="form-group">
-                            <select class="form-control" id="demographicFormat" name="demographicFormat">
+                            <select class="custom-rounded-small form-control" id="demographicFormat" name="demographicFormat">
                                 <option>CSV</option>
                                 <option>JSON</option>
                             </select>
@@ -32,7 +32,7 @@
                         </label>
                         <div class="form-group">
                             <div class="form-group">
-                                <select class="form-control" id="corpus" name="corpus">
+                                <select class="custom-rounded-small form-control" id="corpus" name="corpus">
                                     <option value="">{% trans 'All corpus' %}</option>
                                     {% for corpus in all_corpus %}
                                         <option value='{{corpus.id}}'>{{ corpus.corpus_name }}</option>
@@ -41,7 +41,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <select class="form-control" id="datasetFormat" name="datasetFormat">
+                            <select class="custom-rounded-small form-control" id="datasetFormat" name="datasetFormat">
                                 <option>CSV</option>
                                 <option>JSON</option>
                             </select>
@@ -54,7 +54,7 @@
                         </label>
                         <div class="form-group">
                             <div class="form-group">
-                                <select class="form-control" id="corpus" name="corpus">
+                                <select class="custom-rounded-small form-control" id="corpus" name="corpus">
                                     <option value="">{% trans 'All corpus' %}</option>
                                     {% for corpus in all_corpus %}
                                         <option value='{{corpus.id}}'>{{ corpus.corpus_name }}</option>
@@ -63,7 +63,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <select class="form-control" id="labeledDataFormat" name="labeledDataFormat">
+                            <select class="custom-rounded-small form-control" id="labeledDataFormat" name="labeledDataFormat">
                                 <option>CSV</option>
                                 <option>JSON</option>
                             </select>
@@ -95,8 +95,8 @@
                 </fieldset>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">{% trans 'Export data' %}</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans 'Close' %}</button>
+                <button type="submit" class="custom-rounded-small btn btn-primary">{% trans 'Export data' %}</button>
+                <button type="button" class="custom-rounded-small btn btn-secondary" data-dismiss="modal">{% trans 'Close' %}</button>
             </div>
         </form>
     </div>
