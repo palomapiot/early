@@ -6,31 +6,14 @@ from celery import Celery, current_task
 from django.conf import settings
 from celery_progress.backend import ProgressRecorder
 from app.web.reddit import get_user_comments
-#from classifiers.gender import preprocess
 import json
 import time
-
-"""import sklearn
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import confusion_matrix, classification_report
-from sklearn.metrics import accuracy_score
-from sklearn.model_selection import train_test_split, KFold, RepeatedKFold
-from sklearn.utils.class_weight import compute_class_weight
-from sklearn.feature_extraction.text import TfidfVectorizer
-
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import AdaBoostClassifier"""
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.settings')
 
 app = Celery('app')
 app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
-
-
-# load gender model
-#GENDER_MODEL = pickle.load(open(os.path.join('classifiers', 'gender'), 'rb'))
 
 def _api_request(request_user, request_is_secure, request_host, url, request_type='GET', body=None):
     from rest_framework.authtoken.models import Token
@@ -48,22 +31,9 @@ def _api_request(request_user, request_is_secure, request_host, url, request_typ
 def process_user(request_user, request_is_secure, request_host, user, ncomments, corpus):
     comments = get_user_comments(user, ncomments)
     
-    # TODO: before creating -> classify calling the gender model and save the system data
-    """text = ':::'.join([comment['text'] for comment in comments])
-
-    # preprocess comments
-    df = preprocess(str(user), text) 
-
-    df = df.drop(columns=['third_person_pron_count', 'square_brackets_count', 'CONJ', 'EOL', 'NO_TAG'])
-
-    # predict
-    gender = GENDER_MODEL.predict(df.drop(['text', 'author_id'], axis=1))"""
+    # TODO: before creating -> classify calling the gender model endpoint and save the system data
 
     gender_output = 'Unknown'
-    """if gender[0] == 'male': 
-        gender_output = 'Male'
-    elif gender[0] == 'female':
-        gender_output = 'Female'"""
 
     body = {
         "experiment_id": str(user),

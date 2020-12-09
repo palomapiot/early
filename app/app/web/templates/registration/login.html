@@ -5,28 +5,30 @@
 
 {% block content %}
 <div class="container">
-    <div id="login-content" class="row">
-        <h1 class="col-12 mb-4">Login</h1>
-        <div class="col-12">
-            <form id="login-form" method="post" action="{% url 'login' %}">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label class="col-form-label" for="id_username">{% trans 'Username' %}</label>
-                    <input type="text" name="username" class="custom-rounded-small form-control" placeholder="{% trans 'Username' %}" id="id_username">
-                </div>
-                <div class="form-group">
-                    <label class="col-form-label" for="id_password">{% trans 'Password' %}</label>
-                    <input type="password" name="password" class="custom-rounded-small form-control" placeholder="{% trans 'Password' %}" id="id_password">
-                </div>
+    <div id="login-content" class="text-center p-3 col-lg-6 col-md-6 offset-lg-3 offset-md-3 col-sm-12 offset-sm-0">
+        <div class="card mb-3 bordershadow-form custom-rounded shadow p-3">
+            <h1 class="col-12 mb-4">Login</h1>
+            <div class="col-12">
+                <form id="login-form" method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label class="col-form-label" for="id_username">{% trans 'Username' %}</label>
+                        <input type="text" name="username" class="custom-rounded-small form-control" placeholder="{% trans 'Username' %}" id="id_username">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label" for="id_password">{% trans 'Password' %}</label>
+                        <input type="password" name="password" class="custom-rounded-small form-control" placeholder="{% trans 'Password' %}" id="id_password">
+                    </div>
 
-                {% if form.errors %}
-                    <p class="text-danger">{% trans 'Wrong username and/or password. Please try again.' %}</p>
-                {% endif %}
+                    {% if form.errors %}
+                        <p class="text-danger">{% trans 'Wrong username and/or password. Please try again.' %}</p>
+                    {% endif %}
 
-                <a href="{% url 'password_reset' %}"><p class="text-primary">{% trans 'Forgot password?' %}</p></a>
-                <input type="submit" name="submit" value="Login" class="custom-rounded-small btn btn-primary" />
-                <input type="hidden" name="next" value="{{ next }}" />
-            </form>
+                    <a href="{% url 'password_reset' %}"><p class="text-primary">{% trans 'Forgot password?' %}</p></a>
+                    <input type="submit" name="submit" value="Login" class="custom-rounded-small btn btn-primary" />
+                    <input type="hidden" name="next" value="{{ next }}" />
+                </form>
+            </div>
         </div>
     </div>
 </div>

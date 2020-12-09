@@ -8,8 +8,6 @@ ENV PYTHONUNBUFFERED 1
 
 COPY ./requirements.txt /requirements.txt
 
-RUN pip install -U spacy
-RUN python -m spacy download en_core_web_lg
 RUN pip3 install -r requirements.txt 
 
 RUN mkdir /app
@@ -19,5 +17,7 @@ EXPOSE 8000
 
 RUN useradd -ms /bin/bash user
 USER user
+
+RUN python manage.py makemigrations && python manage.py migrate
 
 CMD python manage.py runserver 0.0.0.0:$PORT
