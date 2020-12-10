@@ -30,7 +30,7 @@ test:
   extends: .before_script_template
   script:
     - echo "Starting tests"
-    - docker-compose run web sh -c "python manage.py test"
+    - docker-compose run web db sh -c "python manage.py test"
 
 build:
   stage: build
