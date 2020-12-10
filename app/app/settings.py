@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-DB_HOST = 'db'
+DB_HOST = 'localhost'
 if 'test' in sys.argv:
     DB_HOST = 'localhost'
 DATABASES = {
