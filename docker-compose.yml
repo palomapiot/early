@@ -26,6 +26,9 @@ services:
     links: 
       - db
       - redis
+    networks:
+      - "backend"
+
   db:
     image: postgres
     container_name: db
@@ -33,6 +36,8 @@ services:
       - "5432:5432"
     volumes:
         - postgres_data:/var/lib/postgresql/data/
+    networks:
+      - "backend"
 
   celery:
     container_name: celery
@@ -59,3 +64,6 @@ services:
       
 volumes:
     postgres_data:
+
+networks:
+  backend:
