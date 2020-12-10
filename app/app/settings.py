@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-DB_HOST = 'db'
+DB_HOST = 'localhost'
 print(sys.argv)
 if 'test' in sys.argv:
     DB_HOST = 'localhost'
@@ -94,7 +94,7 @@ DATABASES = {
         'NAME': os.environ.get('DATABASE_NAME', 'postgres'),
         'USER': os.environ.get('DATABASE_USER', 'postgres'),
         'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
-        'HOST': os.environ.get('DATABASE_HOST', 'localhost'),
+        'HOST': os.environ.get('DATABASE_HOST', DB_HOST),
         'PORT': os.environ.get('DATABASE_PORT', '5432'),
     }
 }
