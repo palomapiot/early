@@ -84,9 +84,9 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-DB_HOST = 'db'
-if 'test' in sys.argv:
-    DB_HOST = 'localhost'
+DB_HOST = 'localhost'
+if 'test' not in sys.argv:
+    DB_HOST = 'db'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
