@@ -18,6 +18,4 @@ EXPOSE 8000
 RUN useradd -ms /bin/bash user
 USER user
 
-RUN python manage.py makemigrations && python manage.py migrate
-
 CMD python manage.py runserver 0.0.0.0:$PORT
