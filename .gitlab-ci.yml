@@ -14,6 +14,9 @@ services:
     - docker-compose --version
 
 stages:
+  - test
+  - build
+  - sonar
   - deploy
 
 variables:
@@ -22,7 +25,40 @@ variables:
     GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
 
 
+test:
+  stage: test
+  extends: .before_script_template
+  script:
+    - echo "Starting tests"
+    - docker-compose run web sh -c "python manage.py test"
 
+build:
+  stage: build
+  extends: .before_script_template
+  script:
+    - echo "Building the app"
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+    - docker build -t $CONTAINER_IMAGE .
+    - docker push $CONTAINER_IMAGE
+
+sonarcloud-check:
+  stage: sonar
+  image:
+    name: sonarsource/sonar-scanner-cli:latest
+    entrypoint: [""]
+  allow_failure: true
+  cache:
+    key: "${CI_JOB_NAME}"
+    paths:
+      - .sonar/cache
+  script:
+    - sonar-scanner
+  only:
+    - merge_requests
+    - master
+    - develop
+    - staging
+    - production
 
 deploy_staging:
   stage: deploy
