@@ -197,8 +197,8 @@ def profile_detail(request, pk):
         ],
         "experiment_id": "test"
         }
-    ext_endpoint = requests.post('http://127.0.0.1:5000/profile', json=aux_body)
-    print(ext_endpoint)
+    #ext_endpoint = requests.post('http://127.0.0.1:5000/profile', json=aux_body)
+    #print(ext_endpoint)
     json_request = _api_request(request, '/api/profiles/' + str(pk))
     globaldata = _api_request(request, GLOBALDATA_ENDPOINT, 'GET')
     corpus = _api_request(request, '/api/corpus/', 'GET')

@@ -189,3 +189,15 @@ input[type="search"]::-webkit-search-cancel-button {
 .no-right-padding {
     padding-right: 0em !important;
 }
+.vertical-align{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.inline-block{
+    display:inline-block;
+}
+
+.bc-card{
+    background-color:#f1f1f1 !important; /*#00919e26*/
+}
