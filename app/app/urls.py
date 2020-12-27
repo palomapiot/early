@@ -17,6 +17,10 @@ from django.contrib import admin
 from django.urls import include, path, re_path
 from rest_framework import routers
 from app.api import views
+from django.conf.urls.static import static
+from django.contrib.staticfiles.views import serve as serve_static
+from django.contrib.staticfiles.storage import staticfiles_storage
+from django.views.generic.base import RedirectView
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
@@ -28,6 +32,11 @@ router.register(r'corpus', views.CorpusViewSet, 'corpus')
 router.register(r'comments', views.CommentViewSet, 'comments')
 router.register(r'labeleddata', views.LabeledDataViewSet, 'labeleddata')
 
+handler404 = 'app.web.views.handler404'
+
+def _static_butler(request, path, **kwargs):
+    return serve_static(request, path, insecure=True, **kwargs)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
@@ -35,4 +44,6 @@ urlpatterns = [
     path('', include('app.web.urls')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     re_path(r'^celery-progress/', include('celery_progress.urls')),
+    re_path(r'static/(.+)', _static_butler),
+    path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('images/favicon.ico')))
 ]

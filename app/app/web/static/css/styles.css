@@ -202,7 +202,6 @@ input[type="search"]::-webkit-search-cancel-button {
     background-color:#f1f1f1 !important; /*#00919e26*/
 }
 
-
 @media screen and (max-width: 991px) {
     #nlp-wrapper,#health-wrapper,#social-media-wrapper   { display: table; }
     #nlp-content,#health-content,#social-media-content  { display: table-header-group; }

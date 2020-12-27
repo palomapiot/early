@@ -10,6 +10,7 @@ from app.settings import REST_FRAMEWORK
 import math as math
 from app.tasks import load_reddit_data, process_user
 from celery.result import AsyncResult
+
 import json
 import time
 
@@ -305,3 +306,8 @@ def flatten_json(y):
 
     flatten(y)
     return out
+
+def handler404(request, *args, **argv):
+    response = render(request,'404.html', {})
+    response.status_code = 404
+    return response
