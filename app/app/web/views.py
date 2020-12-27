@@ -35,6 +35,75 @@ def _api_request(request, url, request_type='GET', body=None):
         headers={AUTHORIZATION:TOKEN + token.key}, json=body)
     return response.json()
 
+def _export_demographic(request, export_format):
+    json_request = _api_request(request, '/api/export/')
+    if export_format == 'JSON':
+        new_request = []
+        for element in json_request:
+            new_request.append(flatten_json(element))
+        response = JsonResponse(new_request, content_type='application/json', safe=False)
+        response['Content-Disposition'] = 'attachment; filename="demographics-export.json"'
+    else:
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="demographics-export.csv"'
+
+        writer = csv.writer(response)
+        writer.writerow(['id', 'experiment_id', 'age', 'gender', 'location', 'personality', 'depressed'])
+        for obj in json_request:
+            data = obj['validated_data']
+            writer.writerow([obj['id'], obj['experiment_id'], data['age'], data['gender'], data['location'], data['personality'], data['depressed']])
+    return response
+
+def _export_dataset(request, export_format, corpus):
+    if corpus == "":
+        json_request = _api_request(request, '/api/comments')
+    else:
+        json_request = _api_request(request, '/api/comments?corpus=' + corpus)
+    if export_format == 'JSON':
+        response = JsonResponse(json_request, content_type='application/json', safe=False)
+        response['Content-Disposition'] = 'attachment; filename="corpus-export.json"'
+    else:
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="corpus-export.csv"'
+
+        writer = csv.writer(response)
+        writer.writerow(['id', 'corpus', 'comments'])
+        for obj in json_request:
+            comments = obj['comments']
+            for comment in comments:
+                writer.writerow([obj['id'], obj['corpus'], comment['date'], comment['text']])
+    return response
+
+def _export_labeled_data(request, export_format, corpus, labels, drop):
+    if corpus == "":
+        json_request = _api_request(request, '/api/labeleddata')
+    else:
+        json_request = _api_request(request, '/api/labeleddata?corpus=' + corpus)
+    if export_format == 'JSON':
+        new_request = []
+        for element in json_request:
+            out = flatten_json(element)
+            for key in drop:
+                del out[key] 
+            new_request.append(out)
+        response = JsonResponse(new_request, content_type='application/json', safe=False)
+        response['Content-Disposition'] = 'attachment; filename="labeled-data-export.json"'
+    else:
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="labeled-data-export.csv"'
+
+        writer = csv.writer(response)
+        columns = ['id', 'corpus', 'date', 'text'] + labels
+        writer.writerow(columns)
+        for obj in json_request:
+            data = obj['validated_data']
+            comments = obj['comments']
+            for comment in comments:
+                data_list = [data[key] for key in labels]
+                row = [obj['id'], obj['corpus'], comment['date'], comment['text']] + data_list
+                writer.writerow(row)
+    return response
+
 def profiles(request):
     try:
         active_page = int(request.GET['page'])
@@ -111,6 +180,25 @@ def profiles(request):
         raise Http404
 
 def profile_detail(request, pk):
+    aux_body = {
+        "comments": [ 
+            { 
+            "comment": "adsfsfdasdfasdfadsf",
+            "date": "01-01-2020"
+            },
+            { 
+            "comment": "hola hola hola no vengas sola",
+            "date": "01-01-2020"
+            },
+            { 
+            "comment": "let's gooooooooooooooooo",
+            "date": "01-01-2020"
+            }
+        ],
+        "experiment_id": "test"
+        }
+    ext_endpoint = requests.post('http://127.0.0.1:5000/profile', json=aux_body)
+    print(ext_endpoint)
     json_request = _api_request(request, '/api/profiles/' + str(pk))
     globaldata = _api_request(request, GLOBALDATA_ENDPOINT, 'GET')
     corpus = _api_request(request, '/api/corpus/', 'GET')
@@ -154,11 +242,11 @@ def export(request):
     opts = request.POST.get("exportOptions")
     if opts == 'demographic':
         export_format = request.POST.get("demographicFormat")
-        response = export_demographic(request, export_format)
+        response = _export_demographic(request, export_format)
     elif opts == 'dataset':
         corpus = request.POST.get("corpus")
         export_format = request.POST.get("datasetFormat")
-        response = export_dataset(request, export_format, corpus)
+        response = _export_dataset(request, export_format, corpus)
     else:
         corpus = request.POST.get("corpus")
         export_format = request.POST.get("labeledDataFormat")
@@ -173,76 +261,7 @@ def export(request):
         labels = [key for key in labels_dict.keys()]
         drop_dict = { k: v for k, v in labels_obj.items() if v == False}
         drop = [key for key in drop_dict.keys()]
-        response = export_labeled_data(request, export_format, corpus, labels, drop)
-    return response
-
-def export_demographic(request, export_format):
-    json_request = _api_request(request, '/api/export/')
-    if export_format == 'JSON':
-        new_request = []
-        for element in json_request:
-            new_request.append(flatten_json(element))
-        response = JsonResponse(new_request, content_type='application/json', safe=False)
-        response['Content-Disposition'] = 'attachment; filename="demographics-export.json"'
-    else:
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="demographics-export.csv"'
-
-        writer = csv.writer(response)
-        writer.writerow(['id', 'experiment_id', 'age', 'gender', 'location', 'personality', 'depressed'])
-        for obj in json_request:
-            data = obj['validated_data']
-            writer.writerow([obj['id'], obj['experiment_id'], data['age'], data['gender'], data['location'], data['personality'], data['depressed']])
-    return response
-
-def export_dataset(request, export_format, corpus):
-    if corpus == "":
-        json_request = _api_request(request, '/api/comments')
-    else:
-        json_request = _api_request(request, '/api/comments?corpus=' + corpus)
-    if export_format == 'JSON':
-        response = JsonResponse(json_request, content_type='application/json', safe=False)
-        response['Content-Disposition'] = 'attachment; filename="corpus-export.json"'
-    else:
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="corpus-export.csv"'
-
-        writer = csv.writer(response)
-        writer.writerow(['id', 'corpus', 'comments'])
-        for obj in json_request:
-            comments = obj['comments']
-            for comment in comments:
-                writer.writerow([obj['id'], obj['corpus'], comment['date'], comment['text']])
-    return response
-
-def export_labeled_data(request, export_format, corpus, labels, drop):
-    if corpus == "":
-        json_request = _api_request(request, '/api/labeleddata')
-    else:
-        json_request = _api_request(request, '/api/labeleddata?corpus=' + corpus)
-    if export_format == 'JSON':
-        new_request = []
-        for element in json_request:
-            out = flatten_json(element)
-            for key in drop:
-                del out[key] 
-            new_request.append(out)
-        response = JsonResponse(new_request, content_type='application/json', safe=False)
-        response['Content-Disposition'] = 'attachment; filename="labeled-data-export.json"'
-    else:
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="labeled-data-export.csv"'
-
-        writer = csv.writer(response)
-        columns = ['id', 'corpus', 'date', 'text'] + labels
-        writer.writerow(columns)
-        for obj in json_request:
-            data = obj['validated_data']
-            comments = obj['comments']
-            for comment in comments:
-                data_list = [data[key] for key in labels]
-                row = [obj['id'], obj['corpus'], comment['date'], comment['text']] + data_list
-                writer.writerow(row)
+        response = _export_labeled_data(request, export_format, corpus, labels, drop)
     return response
 
 def loaddata(request):
