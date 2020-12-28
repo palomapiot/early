@@ -40,8 +40,18 @@
                 {% endif %}
             </h3>
             {% endif %}
-            <span class="col-xs-8">
+            <!--<span class="col-xs-8">
                 <em class="fas fa-birthday-cake fa-fw"></em> 
+                {% if profile.data.age == "Over65" %} 
+                65+ {% trans 'years' %}  
+                {% elif profile.data.age != "" and profile.data.age != None %} 
+                {{ profile.data.age }} {% trans 'years' %} 
+                {% else %} - {% endif %}
+            </span>-->
+            <span class="col-xs-8 svg-icon">
+                <img src="/static/images/age.svg" alt="Age"></img> 
+            </span>
+            <span class="col-xs-8">
                 {% if profile.data.age == "Over65" %} 
                 65+ {% trans 'years' %}  
                 {% elif profile.data.age != "" and profile.data.age != None %} 
@@ -66,7 +76,7 @@
                 {% endif %}
             </h3>
             {% endif %}
-            <span class="col-xs-8">
+            <!--<span class="col-xs-8">
                 {% if profile.data.gender == "Male" %}                
                 <em class="fas fa-male fa-fw "></em> 
                 {% elif profile.data.gender == "Female" %}            
@@ -75,6 +85,21 @@
                 <em class="fas fa-venus-mars fa-fw"></em> 
                 {% endif %}
 
+                {% if profile.data.gender is not None %} 
+                {% trans profile.data.gender %}
+                {% else %} - {% endif %}
+            </span>-->
+
+            <span class="col-xs-8 svg-icon">
+                {% if profile.data.gender == "Male" %}  
+                <img src="/static/images/male.svg" alt="Male"></img> 
+                {% elif profile.data.gender == "Female" %}  
+                <img src="/static/images/female.svg" alt="Female"></img> 
+                {% else %}
+                <img src="/static/images/unknown.svg" alt="Unknown"></img> 
+                {% endif %}
+            </span>
+            <span class="col-xs-8">
                 {% if profile.data.gender is not None %} 
                 {% trans profile.data.gender %}
                 {% else %} - {% endif %}
@@ -97,13 +122,26 @@
                 {% endif %}
             </h3>
             {% endif %}
-            <span class="col-xs-8">
+            <!--<span class="col-xs-8">
                 {% if profile.data.location %} 
                 {% get_country profile.data.location as country %}
                 <em class="{{ country.flag_css }}"></em>
                 &nbsp;&nbsp;{{ country.name }}
                 {% else %} 
                 <em class="fas fa-map-marker-alt fa-fw"></em> - 
+                {% endif %}
+            </span>-->
+
+            <span class="col-xs-8">
+                {% if profile.data.location %} 
+                {% get_country profile.data.location as country %}
+                <em class="flag2x {{ country.flag_css }}"></em>
+                <span style="vertical-align: top;">{{ country.name }}</span>
+                {% else %} 
+                <span class="col-xs-8 svg-icon">
+                    <img src="/static/images/location.svg" alt="Location"></img> 
+                </span>
+                {% trans 'Unknown' %} 
                 {% endif %}
             </span>
 
@@ -124,8 +162,16 @@
                 {% endif %}
             </h3>
             {% endif %}
-            <span class="col-xs-8">
+            <!--<span class="col-xs-8">
                 <em class="fas fa-theater-masks fa-fw"></em>
+                {% if profile.data.personality != "" and profile.data.personality is not None %} 
+                {{ profile.data.personality }} 
+                {% else %} - {% endif %}
+            </span>-->
+            <span class="col-xs-8 svg-icon">
+                <img src="/static/images/personality.svg" alt="Personality"></img> 
+            </span>
+            <span class="col-xs-8">
                 {% if profile.data.personality != "" and profile.data.personality is not None %} 
                 {{ profile.data.personality }} 
                 {% else %} - {% endif %}
@@ -143,8 +189,10 @@
         {% if detail == "true" %}
         <li class="list-group-item profile-list {% if detail == 'false' %}light-border{% endif %}">
             <h3 class="personality-data">{% trans 'Corpus' %}</h3>
+            <span class="col-xs-8 svg-icon">
+                <img src="/static/images/corpus.svg" alt="Corpus"></img> 
+            </span>
             <span class="col-xs-8">
-                <em class="fas fa-book fa-fw"></em> 
                 {% if profile.corpus != "" and profile.corpus is not None %} 
                 {{ profile.corpus }} 
                 {% else %} - {% endif %}

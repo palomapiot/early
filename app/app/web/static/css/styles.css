@@ -207,3 +207,11 @@ input[type="search"]::-webkit-search-cancel-button {
     #nlp-content,#health-content,#social-media-content  { display: table-header-group; }
     #nlp-text,#health-text,#social-media-text { display: table-footer-group; }
 }
+
+.svg-icon {
+    display: inline-block;
+    width: 2em;
+    height: 2.5em;
+    overflow: hidden;
+    vertical-align: middle;
+}

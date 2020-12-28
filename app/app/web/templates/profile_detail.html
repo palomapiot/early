@@ -7,40 +7,41 @@
     });
 </script>
 <div class="container">
-    <div id="account-content">
-        <div class="p-3 offset-lg-3 col-lg-6 col-md-6 col-sm-12 vertical-align inline-block">
-            <div class="card mb-3 bordershadow-form custom-rounded shadow p-3">
-                <div class="row col-12 d-flex justify-content-between align-items-end">
-                    <h1>
-                        {% trans 'Profile: ' %} {{ profile.experiment_id }} 
-                        {% if profile.is_valid %}
-                        <a href="#" data-toggle="popover"
-                            title="Valid profile"
-                            data-trigger="hover" 
-                            data-content="Data validated by {{ profile.validated_by.username }}">
-                            <em class="fas fa-check-circle green h1-size"></em>
-                        </a>
-                        {% endif %}
-                    </h1>
-                    <h3>
-                        {% if profile.processed == False %}
-                        <span class="custom-rounded-small badge badge-pill badge-info">{% trans 'Not processed' %}</span> 
-                        {% elif profile.data.depressed %}
-                        <span class="custom-rounded-small badge badge-pill badge-danger">{% trans 'Depression' %}</span> 
-                        {% elif profile.data.depressed == False %}
-                        <span class="custom-rounded-small badge badge-pill early-badge-primary">{% trans 'No depression' %}</span> 
-                        {% endif %}
-                        
-                    </h3>
-                </div>
-                <hr>
-                <div class="row col-12 mb-4">
-                    {% include "profile_fields.html" with profile=profile detail="true" %}
-                </div>
-                <div class="row col-12">
-                    <button type="button" data-toggle="modal" data-target="#edit-profile" class="custom-rounded btn btn-outline-primary btn-lg btn-block">{% trans 'Validate and edit data' %}</button>
-                    {% include "edit_profile_modal.html" with profile=profile %}
-                </div>
+    <div class="col-lg-5 col-md-5 col-sm-12 inline-block pt-3">
+        <img src="/static/images/edit-profile.svg" alt="Profile image">
+    </div>
+    <div id="account-content" class="p-3 col-lg-6 col-md-6 col-sm-12 vertical-align inline-block">
+        <div class="card mb-3 bordershadow-form custom-rounded shadow p-3">
+            <div class="row col-12 d-flex justify-content-between align-items-end">
+                <h1>
+                    {% trans 'Profile: ' %} {{ profile.experiment_id }} 
+                    {% if profile.is_valid %}
+                    <a href="#" data-toggle="popover"
+                        title="Valid profile"
+                        data-trigger="hover" 
+                        data-content="Data validated by {{ profile.validated_by.username }}">
+                        <em class="fas fa-check-circle green h1-size"></em>
+                    </a>
+                    {% endif %}
+                </h1>
+                <h3>
+                    {% if profile.processed == False %}
+                    <span class="custom-rounded-small badge badge-pill badge-info">{% trans 'Not processed' %}</span> 
+                    {% elif profile.data.depressed %}
+                    <span class="custom-rounded-small badge badge-pill badge-danger">{% trans 'Depression' %}</span> 
+                    {% elif profile.data.depressed == False %}
+                    <span class="custom-rounded-small badge badge-pill early-badge-primary">{% trans 'No depression' %}</span> 
+                    {% endif %}
+                    
+                </h3>
+            </div>
+            <hr>
+            <div class="col-12 mb-4">
+                {% include "profile_fields.html" with profile=profile detail="true" %}
+            </div>
+            <div class="col-12">
+                <button type="button" data-toggle="modal" data-target="#edit-profile" class="custom-rounded btn btn-outline-primary btn-lg btn-block">{% trans 'Validate and edit data' %}</button>
+                {% include "edit_profile_modal.html" with profile=profile %}
             </div>
         </div>
     </div>
