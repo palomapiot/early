@@ -40,14 +40,6 @@
                 {% endif %}
             </h3>
             {% endif %}
-            <!--<span class="col-xs-8">
-                <em class="fas fa-birthday-cake fa-fw"></em> 
-                {% if profile.data.age == "Over65" %} 
-                65+ {% trans 'years' %}  
-                {% elif profile.data.age != "" and profile.data.age != None %} 
-                {{ profile.data.age }} {% trans 'years' %} 
-                {% else %} - {% endif %}
-            </span>-->
             <span class="col-xs-8 svg-icon">
                 <img src="/static/images/age.svg" alt="Age"></img> 
             </span>
@@ -76,19 +68,6 @@
                 {% endif %}
             </h3>
             {% endif %}
-            <!--<span class="col-xs-8">
-                {% if profile.data.gender == "Male" %}                
-                <em class="fas fa-male fa-fw "></em> 
-                {% elif profile.data.gender == "Female" %}            
-                <em class="fas fa-female fa-fw"></em> 
-                {% else %}
-                <em class="fas fa-venus-mars fa-fw"></em> 
-                {% endif %}
-
-                {% if profile.data.gender is not None %} 
-                {% trans profile.data.gender %}
-                {% else %} - {% endif %}
-            </span>-->
 
             <span class="col-xs-8 svg-icon">
                 {% if profile.data.gender == "Male" %}  
@@ -122,15 +101,6 @@
                 {% endif %}
             </h3>
             {% endif %}
-            <!--<span class="col-xs-8">
-                {% if profile.data.location %} 
-                {% get_country profile.data.location as country %}
-                <em class="{{ country.flag_css }}"></em>
-                &nbsp;&nbsp;{{ country.name }}
-                {% else %} 
-                <em class="fas fa-map-marker-alt fa-fw"></em> - 
-                {% endif %}
-            </span>-->
 
             <span class="col-xs-8">
                 {% if profile.data.location %} 
@@ -162,12 +132,6 @@
                 {% endif %}
             </h3>
             {% endif %}
-            <!--<span class="col-xs-8">
-                <em class="fas fa-theater-masks fa-fw"></em>
-                {% if profile.data.personality != "" and profile.data.personality is not None %} 
-                {{ profile.data.personality }} 
-                {% else %} - {% endif %}
-            </span>-->
             <span class="col-xs-8 svg-icon">
                 <img src="/static/images/personality.svg" alt="Personality"></img> 
             </span>
