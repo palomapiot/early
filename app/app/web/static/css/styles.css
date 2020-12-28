@@ -148,7 +148,7 @@ html, body {
 }
 
 .custom-rounded-small {
-    border-radius: 0.5em !important;
+    border-radius: 0.625em !important;
 }
 .custom-rounded {
     border-radius: 1em !important;
@@ -157,10 +157,10 @@ html, body {
     border-radius: 0.75em 0.75em 0em 0em;
 }
 .custom-rounded-small-right {
-    border-radius: 0em 0.5em 0.5em 0em !important;
+    border-radius: 0em 0.625em 0.625em 0em !important;
 }
 .custom-rounded-small-left {
-    border-radius: 0.5em 0em 0em 0.5em !important;
+    border-radius: 0.625em 0em 0em 0.625em !important;
 }
 .light-border {
     border: 1px solid rgba(0, 0, 0, 0.050) !important;

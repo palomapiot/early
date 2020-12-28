@@ -10,6 +10,7 @@ urlpatterns = [
     path('account/', include('django.contrib.auth.urls')),
     path('', views.index, name='index'),
     path('account/', TemplateView.as_view(template_name='account.html'), name='account'),
+    path('account/update_user/', views.update_user, name='update_user'),
     path('profiles/', views.profiles, name='profiles'),
     path('profiles/<int:pk>/', views.profile_detail, name='profile-detail'),
     path('profiles/<int:pk>/edit/', views.edit_profile, name='edit-profile'),

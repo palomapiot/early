@@ -1,0 +1,43 @@
+{% extends "base_generic.html" %}
+
+{% load i18n %}
+{% block title %}Account details{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="col-lg-5 col-md-6 col-sm-12 inline-block pt-3">
+        <img src="/static/images/update-account.svg" alt="Account details image">
+    </div>
+    <div id="update-account-content" class="text-center p-3 col-lg-6 col-md-6 col-sm-12 vertical-align inline-block">
+        <div class="card mb-3 bordershadow-form custom-rounded shadow p-3">
+            <h1 class="col-12 mb-4">{% trans 'Account details' %}</h1>
+            <form action="" method="post" action="{% url 'update_user' %}">
+                {% csrf_token %}
+                <div class="col-12">
+                    <div class="form-group">
+                        <label class="col-form-label" for="first_name">{% trans 'First name' %}</label>
+                        <input type="text" name="first_name" value="{{ form.first_name }}" class="custom-rounded-small form-control {% if form.first_name.errors %}is-invalid{% endif %}" placeholder="{% trans 'First name' %}" id="first_name">
+                        <div class="invalid-feedback">{{ form.first_name.errors }}</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-form-label" for="last_name">{% trans 'Last name' %}</label>
+                        <input type="text" name="last_name" value="{{ form.last_name }}" class="custom-rounded-small form-control {% if form.last_name.errors %}is-invalid{% endif %}" placeholder="{% trans 'Last name' %}" id="last_name">
+                        <div class="invalid-feedback">{{ form.last_name.errors }}</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-form-label" for="email">{% trans 'Email' %}</label>
+                        <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="email" value="{{ form.email }}" class="custom-rounded-small form-control {% if form.email.errors %}is-invalid{% endif %}" placeholder="{% trans 'Email' %}" id="email">
+                        <div class="invalid-feedback">{{ form.email.errors }}</div>
+                    </div>
+
+                    <div class="submit-row">
+                        <input type="submit" value="{% trans 'Update' %}" class="custom-rounded-small btn btn-primary">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

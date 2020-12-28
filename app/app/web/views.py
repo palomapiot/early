@@ -294,6 +294,22 @@ def password_change_done(request):
     globaldata = _api_request(request, GLOBALDATA_ENDPOINT, 'GET')
     return render(request, 'account.html', {'globaldata': globaldata})
 
+def update_user(request):
+    globaldata = _api_request(request, GLOBALDATA_ENDPOINT, 'GET')
+    print(request.user.username)
+    if request.method == "POST":
+        body = {
+            "username": str(request.user.username),
+            "email": request.POST.get("email"),
+            "first_name": request.POST.get("first_name"),
+            "last_name": request.POST.get("last_name")
+        }
+        _api_request(request, '/api/users/' + str(request.user.id) + '/', 'PUT', body)
+        return render(request, 'account.html', {'globaldata': globaldata})
+    else:
+        data = _api_request(request, '/api/users/' + str(request.user.id), 'GET')
+        return render(request, 'update_user.html', {'globaldata': globaldata, 'form': data})
+
 def flatten_json(y):
     out = {}
 

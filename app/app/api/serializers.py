@@ -7,7 +7,8 @@ from django_countries.serializer_fields import CountryField
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['url', 'username', 'email', 'groups']
+        fields = ['id', 'url', 'username', 'email', 'groups', 'first_name', 'last_name']
+
 
 class UserNameSerializer(serializers.ModelSerializer):
     class Meta:
