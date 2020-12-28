@@ -51,12 +51,12 @@
             <span class="col-xs-8 svg-icon">
                 <img src="/static/images/age.svg" alt="Age"></img> 
             </span>
-            <span class="col-xs-8">
+            <span class="col-xs-8"> 
                 {% if profile.data.age == "Over65" %} 
                 65+ {% trans 'years' %}  
                 {% elif profile.data.age != "" and profile.data.age != None %} 
                 {{ profile.data.age }} {% trans 'years' %} 
-                {% else %} - {% endif %}
+                {% else %} {% trans 'Unknown' %} {% endif %}
             </span>
 
             {% if detail == "true" and profile.reasons|reason:'Age' %}
@@ -135,7 +135,7 @@
             <span class="col-xs-8">
                 {% if profile.data.location %} 
                 {% get_country profile.data.location as country %}
-                <em class="flag2x {{ country.flag_css }}"></em>
+                <em class="{{ country.flag_css }}"></em>
                 <span style="vertical-align: top;">{{ country.name }}</span>
                 {% else %} 
                 <span class="col-xs-8 svg-icon">
