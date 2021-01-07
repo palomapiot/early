@@ -14,6 +14,7 @@ urlpatterns = [
     path('profiles/', views.profiles, name='profiles'),
     path('profiles/<int:pk>/', views.profile_detail, name='profile-detail'),
     path('profiles/<int:pk>/edit/', views.edit_profile, name='edit-profile'),
+    path('profiles/<int:pk>/questionnaire/', views.questionnaire, name='questionnaire'),
     path('export/', views.export, name='export'),
     path('loaddata/', views.loaddata, name='loaddata'),
     path('createcorpus/', views.createcorpus, name='createcorpus'),

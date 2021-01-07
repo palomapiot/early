@@ -1,0 +1,354 @@
+
+{% load i18n %}
+<div class="modal fade" id="questionnaire" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content custom-rounded-small">
+      <div class="modal-header">
+        <h5 class="modal-title">{% trans 'Beck\'s Questionnaire' %}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form role="form" method="POST" action="{% url 'questionnaire' profile.id %}">
+          <div class="modal-body">
+            {% csrf_token %}
+            <legend>{% trans '1. Sadness' %}</legend>
+            <div class="form-group" id="q1">
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q1-a0" value="q1-a0" name="q1" class="custom-control-input" {% if profile.questionnaire.q1 == "q1-a0" %} checked {% endif %}>
+                <label class="custom-control-label" for="q1-a0">{% trans 'I do not feel sad.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q1-a1" value="q1-a1" name="q1" class="custom-control-input" {% if profile.questionnaire.q1 == "q1-a1" %} checked {% endif %}>
+                <label class="custom-control-label" for="q1-a1">{% trans 'I feel sad much of the time.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q1-a2" value="q1-a2" name="q1" class="custom-control-input" {% if profile.questionnaire.q1 == "q1-a2" %} checked {% endif %}>
+                <label class="custom-control-label" for="q1-a2">{% trans 'I am sad all the time.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q1-a3" value="q1-a3" name="q1" class="custom-control-input" {% if profile.questionnaire.q1 == "q1-a3" %} checked {% endif %}>
+                <label class="custom-control-label" for="q1-a3">{% trans 'I am so sad or unhappy that I can\'t stand it.' %}</label>
+              </div>
+            </div>
+            <hr>
+            <legend>{% trans '2. Pessimism' %}</legend>
+            <div class="form-group" id="q2">
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q2-a0" value="q2-a0" name="q2" class="custom-control-input" {% if profile.questionnaire.q2 == "q2-a0" %} checked {% endif %}>
+                <label class="custom-control-label" for="q2-a0">{% trans 'I am not discouraged about my future.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q2-a1" value="q2-a1" name="q2" class="custom-control-input" {% if profile.questionnaire.q2 == "q2-a1" %} checked {% endif %}>
+                <label class="custom-control-label" for="q2-a1">{% trans 'I feel more discouraged about my future than I used to be.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q2-a2" value="q2-a2" name="q2" class="custom-control-input" {% if profile.questionnaire.q2 == "q2-a2" %} checked {% endif %}>
+                <label class="custom-control-label" for="q2-a2">{% trans 'I do not expect things to work out for me.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q2-a3" value="q2-a3" name="q2" class="custom-control-input" {% if profile.questionnaire.q2 == "q2-a3" %} checked {% endif %}>
+                <label class="custom-control-label" for="q2-a3">{% trans 'I feel my future is hopeless and will only get worse.' %}</label>
+              </div>
+            </div>
+            <hr>
+            <legend>{% trans '3. Past Failure' %}</legend>
+            <div class="form-group" id="q3">
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q3-a0" value="q3-a0" name="q3" class="custom-control-input" {% if profile.questionnaire.q3 == "q3-a0" %} checked {% endif %}>
+                <label class="custom-control-label" for="q3-a0">{% trans 'I do not feel like a failure.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q3-a1" value="q3-a1" name="q3" class="custom-control-input" {% if profile.questionnaire.q3 == "q3-a1" %} checked {% endif %}>
+                <label class="custom-control-label" for="q3-a1">{% trans 'I have failed more than I should have.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q3-a2" value="q3-a2" name="q3" class="custom-control-input" {% if profile.questionnaire.q3 == "q3-a2" %} checked {% endif %}>
+                <label class="custom-control-label" for="q3-a2">{% trans 'As I look back, I see a lot of failures.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q3-a3" value="q3-a3" name="q3" class="custom-control-input" {% if profile.questionnaire.q3 == "q3-a3" %} checked {% endif %}>
+                <label class="custom-control-label" for="q3-a3">{% trans 'I feel I am a total failure as a person.' %}</label>
+              </div>
+            </div>
+            <hr>
+            <legend>{% trans '4. Loss of Pleasure' %}</legend>
+            <div class="form-group" id="q4">
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q4-0" value="q4-a0" name="q4" class="custom-control-input" {% if profile.questionnaire.q4 == "q4-a0" %} checked {% endif %}>
+                <label class="custom-control-label" for="q4-0">{% trans 'I get as much pleasure as I ever did from the things I enjoy.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q4-1" value="q4-a1" name="q4" class="custom-control-input" {% if profile.questionnaire.q4 == "q4-a1" %} checked {% endif %}>
+                <label class="custom-control-label" for="q4-1">{% trans 'I don\'t enjoy things as much as I used to.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q4-2" value="q4-a2" name="q4" class="custom-control-input" {% if profile.questionnaire.q4 == "q4-a2" %} checked {% endif %}>
+                <label class="custom-control-label" for="q4-2">{% trans 'I get very little pleasure from the things I used to enjoy.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q4-3" value="q4-a3" name="q4" class="custom-control-input" {% if profile.questionnaire.q4 == "q4-a3" %} checked {% endif %}>
+                <label class="custom-control-label" for="q4-3">{% trans 'I can\'t get any pleasure from the things I used to enjoy.' %}</label>
+              </div>
+            </div>
+            <hr>
+            <legend>{% trans '5. Guilty Feelings' %}</legend>
+            <div class="form-group" id="q5">
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q5-a0" value="q5-a0" name="q5" class="custom-control-input" {% if profile.questionnaire.q5 == "q5-a0" %} checked {% endif %}>
+                <label class="custom-control-label" for="q5-a0">{% trans 'I don\'t feel particularly guilty.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q5-a1" value="q5-a1" name="q5" class="custom-control-input" {% if profile.questionnaire.q5 == "q5-a1" %} checked {% endif %}>
+                <label class="custom-control-label" for="q5-a1">{% trans 'I feel guilty over many things I have done or should have done.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q5-a2" value="q5-a2" name="q5" class="custom-control-input" {% if profile.questionnaire.q5 == "q5-a2" %} checked {% endif %}>
+                <label class="custom-control-label" for="q5-a2">{% trans 'I feel quite guilty most of the time.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q5-a3" value="q5-a3" name="q5" class="custom-control-input" {% if profile.questionnaire.q5 == "q5-a3" %} checked {% endif %}>
+                <label class="custom-control-label" for="q5-a3">{% trans 'I feel guilty all of the time.' %}</label>
+              </div>
+            </div>
+            <hr>
+            <legend>{% trans '6. Punishment Feelings' %}</legend>
+            <div class="form-group" id="q6">
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q6-a0" value="q6-a0" name="q6" class="custom-control-input" {% if profile.questionnaire.q6 == "q6-a0" %} checked {% endif %}>
+                <label class="custom-control-label" for="q6-a0">{% trans 'I don\'t feel I am being punished.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q6-a1" value="q6-a1" name="q6" class="custom-control-input" {% if profile.questionnaire.q6 == "q6-a1" %} checked {% endif %}>
+                <label class="custom-control-label" for="q6-a1">{% trans 'I feel I may be punished.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q6-a2" value="q6-a2" name="q6" class="custom-control-input" {% if profile.questionnaire.q6 == "q6-a2" %} checked {% endif %}>
+                <label class="custom-control-label" for="q6-a2">{% trans 'I expect to be punished.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q6-a3" value="q6-a3" name="q6" class="custom-control-input" {% if profile.questionnaire.q6 == "q6-a3" %} checked {% endif %}>
+                <label class="custom-control-label" for="q6-a3">{% trans 'I feel I am being punished.' %}</label>
+              </div>
+            </div>
+            <hr>
+            <legend>{% trans '7. Self-Dislike' %}</legend>
+            <div class="form-group" id="q7">
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q7-a0" value="q7-a0" name="q7" class="custom-control-input" {% if profile.questionnaire.q7 == "q7-a0" %} checked {% endif %}>
+                <label class="custom-control-label" for="q7-a0">{% trans 'I feel the same about myself as ever.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q7-a1" value="q7-a1" name="q7" class="custom-control-input" {% if profile.questionnaire.q7 == "q7-a1" %} checked {% endif %}>
+                <label class="custom-control-label" for="q7-a1">{% trans 'I have lost confidence in myself.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q7-a2" value="q7-a2" name="q7" class="custom-control-input" {% if profile.questionnaire.q7 == "q7-a2" %} checked {% endif %}>
+                <label class="custom-control-label" for="q7-a2">{% trans 'I am disappointed in myself.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q7-a3" value="q7-a3" name="q7" class="custom-control-input" {% if profile.questionnaire.q7 == "q7-a3" %} checked {% endif %}>
+                <label class="custom-control-label" for="q7-a3">{% trans 'I dislike myself.' %}</label>
+              </div>
+            </div>
+            <hr>
+            <legend>{% trans '8. Self-Criticalness' %}</legend>
+            <div class="form-group" id="q8">
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q8-a0" value="q8-a0" name="q8" class="custom-control-input" {% if profile.questionnaire.q8 == "q8-a0" %} checked {% endif %}>
+                <label class="custom-control-label" for="q8-a0">{% trans 'I don\'t criticize or blame myself more than usual.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q8-a1" value="q8-a1" name="q8" class="custom-control-input" {% if profile.questionnaire.q8 == "q8-a1" %} checked {% endif %}>
+                <label class="custom-control-label" for="q8-a1">{% trans 'I am more critical of myself than I used to be.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q8-a2" value="q8-a2" name="q8" class="custom-control-input" {% if profile.questionnaire.q8 == "q8-a2" %} checked {% endif %}>
+                <label class="custom-control-label" for="q8-a2">{% trans 'I criticize myself for all of my faults.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q8-a3" value="q8-a3" name="q8" class="custom-control-input" {% if profile.questionnaire.q8 == "q8-a3" %} checked {% endif %}>
+                <label class="custom-control-label" for="q8-a3">{% trans 'I blame myself for everything bad that happens.' %}</label>
+              </div>
+            </div>
+            <hr>
+            <legend>{% trans '9. Suicidal Thoughts or Wishes' %}</legend>
+            <div class="form-group" id="q9">
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q9-a0" value="q9-a0" name="q9" class="custom-control-input" {% if profile.questionnaire.q9 == "q9-a0" %} checked {% endif %}>
+                <label class="custom-control-label" for="q9-a0">{% trans 'I don\'t have any thoughts of killing myself.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q9-a1" value="q9-a1" name="q9" class="custom-control-input" {% if profile.questionnaire.q9 == "q9-a1" %} checked {% endif %}>
+                <label class="custom-control-label" for="q9-a1">{% trans 'I have thoughts of killing myself, but I would not carry them out.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q9-a2" value="q9-a2" name="q9" class="custom-control-input" {% if profile.questionnaire.q9 == "q9-a2" %} checked {% endif %}>
+                <label class="custom-control-label" for="q9-a2">{% trans 'I would like to kill myself.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q9-a3" value="q9-a3" name="q9" class="custom-control-input" {% if profile.questionnaire.q9 == "q9-a3" %} checked {% endif %}>
+                <label class="custom-control-label" for="q9-a3">{% trans 'I would kill myself if I had the chance.' %}</label>
+              </div>
+            </div>
+            <hr>
+            <legend>{% trans '10. Crying' %}</legend>
+            <div class="form-group" id="q10">
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q10-a0" value="q10-a0" name="q10" class="custom-control-input" {% if profile.questionnaire.q10 == "q10-a0" %} checked {% endif %}>
+                <label class="custom-control-label" for="q10-a0">{% trans 'I don\'t cry anymore than I used to.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q10-a1" value="q10-a1" name="q10" class="custom-control-input" {% if profile.questionnaire.q10 == "q10-a1" %} checked {% endif %}>
+                <label class="custom-control-label" for="q10-a1">{% trans 'I cry more than I used to.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q10-a2" value="q10-a2" name="q10" class="custom-control-input" {% if profile.questionnaire.q10 == "q10-a2" %} checked {% endif %}>
+                <label class="custom-control-label" for="q10-a2">{% trans 'I cry over every little thing.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q10-a3" value="q10-a3" name="q10" class="custom-control-input" {% if profile.questionnaire.q10 == "q10-a3" %} checked {% endif %}>
+                <label class="custom-control-label" for="q10-a3">{% trans 'I feel like crying, but I can\'t.' %}</label>
+              </div>
+            </div>
+            <hr>
+            <legend>{% trans '11. Agitation' %}</legend>
+            <div class="form-group" id="q11">
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q11-a0" value="q11-a0" name="q11" class="custom-control-input" {% if profile.questionnaire.q11 == "q11-a0" %} checked {% endif %}>
+                <label class="custom-control-label" for="q11-a0">{% trans 'I am no more restless or wound up than usual.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q11-a1" value="q11-a1" name="q11" class="custom-control-input" {% if profile.questionnaire.q11 == "q11-a1" %} checked {% endif %}>
+                <label class="custom-control-label" for="q11-a1">{% trans 'I feel more restless or wound up than usual.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q11-a2" value="q11-a2" name="q11" class="custom-control-input" {% if profile.questionnaire.q11 == "q11-a2" %} checked {% endif %}>
+                <label class="custom-control-label" for="q11-a2">{% trans 'I am so restless or agitated that it\'s hard to stay still.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q11-a3" value="q11-a3" name="q11" class="custom-control-input" {% if profile.questionnaire.q11 == "q11-a3" %} checked {% endif %}>
+                <label class="custom-control-label" for="q11-a3">{% trans 'I am so restless or agitated that I have to keep moving or doing something.' %}</label>
+              </div>
+            </div>
+            <hr>
+            <legend>{% trans '12. Loss of Interest' %}</legend>
+            <div class="form-group" id="q12">
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q12-a0" value="q12-a0" name="q12" class="custom-control-input" {% if profile.questionnaire.q12 == "q12-a0" %} checked {% endif %}>
+                <label class="custom-control-label" for="q12-a0">{% trans 'I have not lost interest in other people or activities.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q12-a1" value="q12-a1" name="q12" class="custom-control-input" {% if profile.questionnaire.q12 == "q12-a1" %} checked {% endif %}>
+                <label class="custom-control-label" for="q12-a1">{% trans 'I am less interested in other people or things than before.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q12-a2" value="q12-a2" name="q12" class="custom-control-input" {% if profile.questionnaire.q12 == "q12-a2" %} checked {% endif %}>
+                <label class="custom-control-label" for="q12-a2">{% trans 'I have lost most of my interest in other people or things.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q12-a3" value="q12-a3" name="q12" class="custom-control-input" {% if profile.questionnaire.q12 == "q12-a3" %} checked {% endif %}>
+                <label class="custom-control-label" for="q12-a3">{% trans 'It\'s hard to get interested in anything.' %}</label>
+              </div>
+            </div>
+            <hr>
+            <legend>{% trans '13. Indecisiveness' %}</legend>
+            <div class="form-group" id="q13">
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q13-a0" value="q13-a0" name="q13" class="custom-control-input" {% if profile.questionnaire.q13 == "q13-a0" %} checked {% endif %}>
+                <label class="custom-control-label" for="q13-a0">{% trans 'I make decisions about as well as ever.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q13-a1" value="q13-a1" name="q13" class="custom-control-input" {% if profile.questionnaire.q13 == "q13-a1" %} checked {% endif %}>
+                <label class="custom-control-label" for="q13-a1">{% trans 'I find it more difficult to make decisions than usual.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q13-a2" value="q13-a2" name="q13" class="custom-control-input" {% if profile.questionnaire.q13 == "q13-a2" %} checked {% endif %}>
+                <label class="custom-control-label" for="q13-a2">{% trans 'I have much greater difficulty in making decisions than I used to.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q13-a3" value="q13-a3" name="q13" class="custom-control-input" {% if profile.questionnaire.q13 == "q13-a3" %} checked {% endif %}>
+                <label class="custom-control-label" for="q13-a3">{% trans 'I have trouble making any decisions.' %}</label>
+              </div>
+            </div>
+            <hr>
+            <legend>{% trans '14. Worthlessness' %}</legend>
+            <div class="form-group" id="q14">
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q14-a0" value="q14-a0" name="q14" class="custom-control-input" {% if profile.questionnaire.q14 == "q14-a0" %} checked {% endif %}>
+                <label class="custom-control-label" for="q14-a0">{% trans 'I do not feel I am worthless.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q14-a1" value="q14-a1" name="q14" class="custom-control-input" {% if profile.questionnaire.q14 == "q14-a1" %} checked {% endif %}>
+                <label class="custom-control-label" for="q14-a1">{% trans 'I don\'t consider myself as worthwhile and useful as I used to.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q14-a2" value="q14-a2" name="q14" class="custom-control-input" {% if profile.questionnaire.q14 == "q14-a2" %} checked {% endif %}>
+                <label class="custom-control-label" for="q14-a2">{% trans 'I feel more worthless as compared to other people.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q14-a3" value="q14-a3" name="q14" class="custom-control-input" {% if profile.questionnaire.q14 == "q14-a3" %} checked {% endif %}>
+                <label class="custom-control-label" for="q14-a3">{% trans 'I feel utterly worthless.' %}</label>
+              </div>
+            </div>
+            <hr>
+            <legend>{% trans '15. Loss of Energy' %}</legend>
+            <div class="form-group" id="q15">
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q15-a0" value="q15-a0" name="q15" class="custom-control-input" {% if profile.questionnaire.q15 == "q15-a0" %} checked {% endif %}>
+                <label class="custom-control-label" for="q15-a0">{% trans 'I have as much energy as ever.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q15-a1" value="q15-a1" name="q15" class="custom-control-input" {% if profile.questionnaire.q15 == "q15-a1" %} checked {% endif %}>
+                <label class="custom-control-label" for="q15-a1">{% trans 'I have less energy than I used to have.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q15-a2" value="q15-a2" name="q15" class="custom-control-input" {% if profile.questionnaire.q15 == "q15-a2" %} checked {% endif %}>
+                <label class="custom-control-label" for="q15-a2">{% trans 'I don\'t have enough energy to do very much.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q15-a3" value="q15-a3" name="q15" class="custom-control-input" {% if profile.questionnaire.q15 == "q15-a3" %} checked {% endif %}>
+                <label class="custom-control-label" for="q15-a3">{% trans 'I don\'t have enough energy to do anything.' %}</label>
+              </div>
+            </div>
+            <hr>
+            <legend>{% trans '16. Changes in Sleeping Pattern' %}</legend>
+            <div class="form-group" id="q16">
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q16-a0" value="q16-a0" name="q16" class="custom-control-input" {% if profile.questionnaire.q16 == "q16-a0" %} checked {% endif %}>
+                <label class="custom-control-label" for="q16-a0">{% trans 'I have not experienced any change in my sleeping pattern.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q16-ala" value="q16-ala" name="q16" class="custom-control-input" {% if profile.questionnaire.q16 == "q16-ala" %} checked {% endif %}>
+                <label class="custom-control-label" for="q16-ala">{% trans 'I sleep somewhat more than usual.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q16-alb" value="q16-alb" name="q16" class="custom-control-input" {% if profile.questionnaire.q16 == "q16-alb" %} checked {% endif %}>
+                <label class="custom-control-label" for="q16-alb">{% trans 'I sleep somewhat less than usual.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q16-a2a" value="q16-a2a" name="q16" class="custom-control-input" {% if profile.questionnaire.q16 == "q16-a2a" %} checked {% endif %}>
+                <label class="custom-control-label" for="q16-a2a">{% trans 'I sleep a lot more than usual.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q16-a2b" value="q16-a2b" name="q16" class="custom-control-input" {% if profile.questionnaire.q16 == "q16-a2b" %} checked {% endif %}>
+                <label class="custom-control-label" for="q16-a2b">{% trans 'I sleep a Iot less than usual.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q16-a3a" value="q16-a3a" name="q16" class="custom-control-input" {% if profile.questionnaire.q16 == "q16-a3a" %} checked {% endif %}>
+                <label class="custom-control-label" for="q16-a3a">{% trans 'I sleep most of the day.' %}</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="q16-a3b" value="q16-a3b" name="q16" class="custom-control-input" {% if profile.questionnaire.q16 == "q16-a3b" %} checked {% endif %}>
+                <label class="custom-control-label" for="q16-a3b">{% trans 'I wake up 1-2 hours early and can\'t get back to sleep.' %}</label>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+              <button type="submit" class="custom-rounded-small btn btn-primary" name="submit">{% trans 'Correct data' %}</button>
+              <button type="button" class="custom-rounded-small btn btn-secondary" data-dismiss="modal" name="close">{% trans 'Close' %}</button>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>

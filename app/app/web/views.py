@@ -209,6 +209,38 @@ def profile_detail(request, pk):
         'all_corpus': corpus['results']
     })
 
+def questionnaire(request, pk):
+    body = {
+        "questionnaire":
+        {
+            "q1": request.POST.get("q1"),
+            "q2": request.POST.get("q2"),
+            "q3": request.POST.get("q3"),
+            "q4": request.POST.get("q4"),
+            "q5": request.POST.get("q5"),
+            "q6": request.POST.get("q6"),
+            "q7": request.POST.get("q7"),
+            "q8": request.POST.get("q8"),
+            "q9": request.POST.get("q9"),
+            "q10": request.POST.get("q10"),
+            "q11": request.POST.get("q11"),
+            "q12": request.POST.get("q12"),
+            "q13": request.POST.get("q13"),
+            "q14": request.POST.get("q14"),
+            "q15": request.POST.get("q15"),
+            "q16": request.POST.get("q16")
+        },
+        "validated_by": {"username": "me"}
+    }
+    print(body)
+    json_request = _api_request(request, '/api/profiles/' + str(pk) + '/', 'PUT', body)
+    globaldata = _api_request(request, GLOBALDATA_ENDPOINT, 'GET')
+    print(json_request)
+    return render(request, 'profile_detail.html', {
+        'profile': json_request,
+        'globaldata': globaldata
+    })
+
 def edit_profile(request, pk):
     body = {
         "corpus": int(request.POST.get("corpus")),
@@ -220,7 +252,7 @@ def edit_profile(request, pk):
             "personality": request.POST.get("personality"),
             "depressed": request.POST.get("depressed") if request.POST.get("depressed") is not None else False
         },
-        "validated_by": {"username": "me"}
+        "validated_by": {"username": "mes"}
     }
     json_request = _api_request(request, '/api/profiles/' + str(pk) + '/', 'PUT', body)
     globaldata = _api_request(request, GLOBALDATA_ENDPOINT, 'GET')
@@ -296,7 +328,6 @@ def password_change_done(request):
 
 def update_user(request):
     globaldata = _api_request(request, GLOBALDATA_ENDPOINT, 'GET')
-    print(request.user.username)
     if request.method == "POST":
         body = {
             "username": str(request.user.username),

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.postgres.fields import JSONField
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 from django_countries.fields import CountryField
@@ -104,6 +105,7 @@ class Profile(models.Model):
     )
     processed = models.BooleanField(default=False)
     last_retrieved_comment_date = models.DateTimeField(blank=True, null=True)
+    questionnaire = JSONField(blank=True, null=True)
 
 class GlobalData(models.Model):
     load_in_progress = models.BooleanField(default=False)

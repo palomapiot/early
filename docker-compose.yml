@@ -27,7 +27,7 @@ services:
       - db
       - redis
   db:
-    image: postgres
+    image: postgres:12
     container_name: db
     ports:
       - "5432:5432"
