@@ -70,17 +70,20 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ['id', 'experiment_id', 'reddit_username', 'corpus', 'is_valid', 'validated_by', 'system_data', 'validated_data', 'data', 'reasons', 'processed', 'questionnaire']
+        fields = ['id', 'experiment_id', 'reddit_username', 'corpus', 'is_valid', 'validated_by', 'system_data', 'validated_data', 'data', 'reasons', 'processed', 'questionnaire', 'questionnaire_reasons']
         read_only_fields = ['experiment_id', 'reddit_username', 'is_valid', 'validated_by', 'system_data', 'reasons']
 
     def update(self, instance, v_data):
         # update corpus
         corpus_data = v_data.pop('corpus', None)
         questionnaire_v_data = v_data.pop('questionnaire', None)
+        questionnaire_reasons_v_data = v_data.pop('questionnaire_reasons', None)
         instance.corpus = corpus_data
         # questionnaire
         if questionnaire_v_data is not None:
             instance.questionnaire = questionnaire_v_data
+        if questionnaire_reasons_v_data is not None:
+            instance.questionnaire_reasons = questionnaire_reasons_v_data
         # validated data
         validated_data_v_data = v_data.pop('validated_data', None)
         if validated_data_v_data is not None:
@@ -129,7 +132,7 @@ class ProfileNLPSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile        
-        fields = ['id', 'experiment_id', 'reddit_username', 'corpus', 'system_data', 'validated_data', 'reasons', 'comments', 'questionnaire']
+        fields = ['id', 'experiment_id', 'reddit_username', 'corpus', 'system_data', 'validated_data', 'reasons', 'comments', 'questionnaire', 'questionnaire_reasons']
         read_only_fields = ['validated_data']
 
     def create(self, v_data):
@@ -137,6 +140,7 @@ class ProfileNLPSerializer(serializers.ModelSerializer):
         comments_v_data = v_data.pop('comments', [])
         system_data_v_data = v_data.pop('system_data', None)
         questionnaire_v_data = v_data.pop('questionnaire', None)
+        questionnaire_reasons_v_data = v_data.pop('questionnaire_reasons', None)
 
         try:
             instance = Profile.objects.get(reddit_username=v_data.get('reddit_username', None))
@@ -148,6 +152,9 @@ class ProfileNLPSerializer(serializers.ModelSerializer):
             instance.save()
         if questionnaire_v_data is not None:
             instance.questionnaire = questionnaire_v_data
+            instance.save()
+        if questionnaire_reasons_v_data is not None:
+            instance.questionnaire_reasons = questionnaire_reasons_v_data
             instance.save()
         for reason in reasons_v_data:
             Reason.objects.create(profile=instance, **reason)

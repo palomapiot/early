@@ -105,6 +105,24 @@ def _export_labeled_data(request, export_format, corpus, labels, drop):
                 writer.writerow(row)
     return response
 
+def _calculate_depression_level(questionnaire):
+    depression_level = "unknown"
+    if questionnaire != None:
+        print(questionnaire)
+        # depression level score
+        depression_levels = {
+            "minimal depression": range(0, 9),
+            "mild depression": range(10, 18),
+            "moderate depression": range(19, 29),
+            "severe depression": range(30, 63)
+        }
+        level_score = sum(int(i[0]) for i in questionnaire.values())
+        for key, value in depression_levels.items():
+            if level_score in value:
+                depression_level = key
+                break
+    return depression_level
+
 def profiles(request):
     try:
         active_page = int(request.GET['page'])
@@ -181,7 +199,7 @@ def profiles(request):
         raise Http404
 
 def profile_detail(request, pk):
-    aux_body = {
+    """aux_body = {
         "comments": [ 
             { 
             "comment": "adsfsfdasdfasdfadsf",
@@ -198,13 +216,15 @@ def profile_detail(request, pk):
         ],
         "experiment_id": "test"
         }
-    #ext_endpoint = requests.post('http://127.0.0.1:5000/profile', json=aux_body)
-    #print(ext_endpoint)
+    ext_endpoint = requests.post('http://127.0.0.1:5000/profile', json=aux_body)
+    print(ext_endpoint)"""
     json_request = _api_request(request, '/api/profiles/' + str(pk))
+    depression_level = _calculate_depression_level(json_request["questionnaire"])
     globaldata = _api_request(request, GLOBALDATA_ENDPOINT, 'GET')
     corpus = _api_request(request, '/api/corpus/', 'GET')
     return render(request, 'profile_detail.html', {
         'profile': json_request,
+        'depression_level': depression_level,
         'globaldata': globaldata, 
         'all_corpus': corpus['results']
     })
@@ -213,31 +233,36 @@ def questionnaire(request, pk):
     body = {
         "questionnaire":
         {
-            "q1": request.POST.get("q1"),
-            "q2": request.POST.get("q2"),
-            "q3": request.POST.get("q3"),
-            "q4": request.POST.get("q4"),
-            "q5": request.POST.get("q5"),
-            "q6": request.POST.get("q6"),
-            "q7": request.POST.get("q7"),
-            "q8": request.POST.get("q8"),
-            "q9": request.POST.get("q9"),
-            "q10": request.POST.get("q10"),
-            "q11": request.POST.get("q11"),
-            "q12": request.POST.get("q12"),
-            "q13": request.POST.get("q13"),
-            "q14": request.POST.get("q14"),
-            "q15": request.POST.get("q15"),
-            "q16": request.POST.get("q16")
+            "q1": request.POST.get("q1") if request.POST.get("q1") is not None else '0',
+            "q2": request.POST.get("q2") if request.POST.get("q2") is not None else '0',
+            "q3": request.POST.get("q3") if request.POST.get("q3") is not None else '0',
+            "q4": request.POST.get("q4") if request.POST.get("q4") is not None else '0',
+            "q5": request.POST.get("q5") if request.POST.get("q5") is not None else '0',
+            "q6": request.POST.get("q6") if request.POST.get("q6") is not None else '0',
+            "q7": request.POST.get("q7") if request.POST.get("q7") is not None else '0',
+            "q8": request.POST.get("q8") if request.POST.get("q8") is not None else '0',
+            "q9": request.POST.get("q9") if request.POST.get("q9") is not None else '0',
+            "q10": request.POST.get("q10") if request.POST.get("q10") is not None else '0',
+            "q11": request.POST.get("q11") if request.POST.get("q11") is not None else '0',
+            "q12": request.POST.get("q12") if request.POST.get("q12") is not None else '0',
+            "q13": request.POST.get("q13") if request.POST.get("q13") is not None else '0',
+            "q14": request.POST.get("q14") if request.POST.get("q14") is not None else '0',
+            "q15": request.POST.get("q15") if request.POST.get("q15") is not None else '0',
+            "q16": request.POST.get("q16") if request.POST.get("q16") is not None else '0',
+            "q17": request.POST.get("q17") if request.POST.get("q17") is not None else '0',
+            "q18": request.POST.get("q18") if request.POST.get("q18") is not None else '0',
+            "q19": request.POST.get("q19") if request.POST.get("q19") is not None else '0',
+            "q20": request.POST.get("q20") if request.POST.get("q20") is not None else '0',
+            "q21": request.POST.get("q21") if request.POST.get("q21") is not None else '0'
         },
         "validated_by": {"username": "me"}
     }
-    print(body)
     json_request = _api_request(request, '/api/profiles/' + str(pk) + '/', 'PUT', body)
+    depression_level = _calculate_depression_level(json_request["questionnaire"])
     globaldata = _api_request(request, GLOBALDATA_ENDPOINT, 'GET')
-    print(json_request)
     return render(request, 'profile_detail.html', {
         'profile': json_request,
+        'depression_level': depression_level,
         'globaldata': globaldata
     })
 
@@ -255,9 +280,11 @@ def edit_profile(request, pk):
         "validated_by": {"username": "mes"}
     }
     json_request = _api_request(request, '/api/profiles/' + str(pk) + '/', 'PUT', body)
+    depression_level = _calculate_depression_level(json_request["questionnaire"])
     globaldata = _api_request(request, GLOBALDATA_ENDPOINT, 'GET')
     return render(request, 'profile_detail.html', {
         'profile': json_request,
+        'depression_level': depression_level,
         'globaldata': globaldata
     })
 

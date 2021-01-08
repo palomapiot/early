@@ -62,6 +62,7 @@
           <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="depressed" name="depressed" {% if profile.data.depressed %} checked="" {% endif %}>
               <label class="custom-control-label" for="depressed">{% trans 'Depression' %}</label>
+              <p class="text-info">{% trans 'Depression level by Beck Depression Inventory is ' %}<strong>{{ depression_level }}</strong></p>
           </div>
           </div>
           <div class="modal-footer">
