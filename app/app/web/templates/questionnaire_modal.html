@@ -33,10 +33,12 @@
                 <label class="custom-control-label" for="q1-a3">{% trans 'I am so sad or unhappy that I can\'t stand it.' %}</label>
               </div>
             </div>
+            {% if profile.questionnaire_reasons.q1 != None and profile.questionnaire_reasons.q1 != "" %}
             <div class="same-row">
               <h6>{% trans 'Context:' %}</h6>
-              <p class="text-info">{{ profile.questionnaire_reasons.q1|safe }}</p>
+              <p class="text-info">{{ profile.questionnaire_reasons.q1.context|safe }}</p>
             </div>
+            {% endif %}
             <hr>
             <legend>{% trans '2. Pessimism' %}</legend>
             <div class="form-group" id="q2">
@@ -60,7 +62,7 @@
             {% if profile.questionnaire_reasons.q2 != None and profile.questionnaire_reasons.q2 != "" %}
             <div class="same-row">
               <h6>{% trans 'Context:' %}</h6>
-              <p class="text-info">{{ profile.questionnaire_reasons.q2|safe }}</p>
+              <p class="text-info">{{ profile.questionnaire_reasons.q2.context|safe }}</p>
             </div>
             {% endif %}
             <hr>
@@ -86,7 +88,7 @@
             {% if profile.questionnaire_reasons.q3 != None and profile.questionnaire_reasons.q3 != "" %}
             <div class="same-row">
               <h6>{% trans 'Context:' %}</h6>
-              <p class="text-info">{{ profile.questionnaire_reasons.q3|safe }}</p>
+              <p class="text-info">{{ profile.questionnaire_reasons.q3.context|safe }}</p>
             </div>
             {% endif %}
             <hr>
@@ -112,7 +114,7 @@
             {% if profile.questionnaire_reasons.q4 != None and profile.questionnaire_reasons.q4 != "" %}
             <div class="same-row">
               <h6>{% trans 'Context:' %}</h6>
-              <p class="text-info">{{ profile.questionnaire_reasons.q4|safe }}</p>
+              <p class="text-info">{{ profile.questionnaire_reasons.q4.context|safe }}</p>
             </div>
             {% endif %}
             <hr>
@@ -138,7 +140,7 @@
             {% if profile.questionnaire_reasons.q5 != None and profile.questionnaire_reasons.q5 != "" %}
             <div class="same-row">
               <h6>{% trans 'Context:' %}</h6>
-              <p class="text-info">{{ profile.questionnaire_reasons.q5|safe }}</p>
+              <p class="text-info">{{ profile.questionnaire_reasons.q5.context|safe }}</p>
             </div>
             {% endif %}
             <hr>
@@ -164,7 +166,7 @@
             {% if profile.questionnaire_reasons.q6 != None and profile.questionnaire_reasons.q6 != "" %}
             <div class="same-row">
               <h6>{% trans 'Context:' %}</h6>
-              <p class="text-info">{{ profile.questionnaire_reasons.q6|safe }}</p>
+              <p class="text-info">{{ profile.questionnaire_reasons.q6.context|safe }}</p>
             </div>
             {% endif %}
             <hr>
@@ -190,7 +192,7 @@
             {% if profile.questionnaire_reasons.q7 != None and profile.questionnaire_reasons.q7 != "" %}
             <div class="same-row">
               <h6>{% trans 'Context:' %}</h6>
-              <p class="text-info">{{ profile.questionnaire_reasons.q7|safe }}</p>
+              <p class="text-info">{{ profile.questionnaire_reasons.q7.context|safe }}</p>
             </div>
             {% endif %}
             <hr>
@@ -216,7 +218,7 @@
             {% if profile.questionnaire_reasons.q8 != None and profile.questionnaire_reasons.q8 != "" %}
             <div class="same-row">
               <h6>{% trans 'Context:' %}</h6>
-              <p class="text-info">{{ profile.questionnaire_reasons.q8|safe }}</p>
+              <p class="text-info">{{ profile.questionnaire_reasons.q8.context|safe }}</p>
             </div>
             {% endif %}
             <hr>
@@ -242,7 +244,7 @@
             {% if profile.questionnaire_reasons.q9 != None and profile.questionnaire_reasons.q9 != "" %}
             <div class="same-row">
               <h6>{% trans 'Context:' %}</h6>
-              <p class="text-info">{{ profile.questionnaire_reasons.q9|safe }}</p>
+              <p class="text-info">{{ profile.questionnaire_reasons.q9.context|safe }}</p>
             </div>
             {% endif %}
             <hr>
@@ -268,7 +270,7 @@
             {% if profile.questionnaire_reasons.q10 != None and profile.questionnaire_reasons.q10 != "" %}
             <div class="same-row">
               <h6>{% trans 'Context:' %}</h6>
-              <p class="text-info">{{ profile.questionnaire_reasons.q10|safe }}</p>
+              <p class="text-info">{{ profile.questionnaire_reasons.q10.context|safe }}</p>
             </div>
             {% endif %}
             <hr>
@@ -294,7 +296,7 @@
             {% if profile.questionnaire_reasons.q11 != None and profile.questionnaire_reasons.q11 != "" %}
             <div class="same-row">
               <h6>{% trans 'Context:' %}</h6>
-              <p class="text-info">{{ profile.questionnaire_reasons.q11|safe }}</p>
+              <p class="text-info">{{ profile.questionnaire_reasons.q11.context|safe }}</p>
             </div>
             {% endif %}
             <hr>
@@ -320,7 +322,7 @@
             {% if profile.questionnaire_reasons.q12 != None and profile.questionnaire_reasons.q12 != "" %}
             <div class="same-row">
               <h6>{% trans 'Context:' %}</h6>
-              <p class="text-info">{{ profile.questionnaire_reasons.q12|safe }}</p>
+              <p class="text-info">{{ profile.questionnaire_reasons.q12.context|safe }}</p>
             </div>
             {% endif %}
             <hr>
@@ -346,7 +348,7 @@
             {% if profile.questionnaire_reasons.q13 != None and profile.questionnaire_reasons.q13 != "" %}
             <div class="same-row">
               <h6>{% trans 'Context:' %}</h6>
-              <p class="text-info">{{ profile.questionnaire_reasons.q13|safe }}</p>
+              <p class="text-info">{{ profile.questionnaire_reasons.q13.context|safe }}</p>
             </div>
             {% endif %}
             <hr>
@@ -372,7 +374,7 @@
             {% if profile.questionnaire_reasons.q14 != None and profile.questionnaire_reasons.q14 != "" %}
             <div class="same-row">
               <h6>{% trans 'Context:' %}</h6>
-              <p class="text-info">{{ profile.questionnaire_reasons.q14|safe }}</p>
+              <p class="text-info">{{ profile.questionnaire_reasons.q14.context|safe }}</p>
             </div>
             {% endif %}
             <hr>
@@ -398,7 +400,7 @@
             {% if profile.questionnaire_reasons.q15 != None and profile.questionnaire_reasons.q15 != "" %}
             <div class="same-row">
               <h6>{% trans 'Context:' %}</h6>
-              <p class="text-info">{{ profile.questionnaire_reasons.q15|safe }}</p>
+              <p class="text-info">{{ profile.questionnaire_reasons.q15.context|safe }}</p>
             </div>
             {% endif %}
             <hr>
@@ -436,7 +438,7 @@
             {% if profile.questionnaire_reasons.q16 != None and profile.questionnaire_reasons.q16 != "" %}
             <div class="same-row">
               <h6>{% trans 'Context:' %}</h6>
-              <p class="text-info">{{ profile.questionnaire_reasons.q16|safe }}</p>
+              <p class="text-info">{{ profile.questionnaire_reasons.q16.context|safe }}</p>
             </div>
             {% endif %}
             <hr>
@@ -462,7 +464,7 @@
             {% if profile.questionnaire_reasons.q17 != None and profile.questionnaire_reasons.q17 != "" %}
             <div class="same-row">
               <h6>{% trans 'Context:' %}</h6>
-              <p class="text-info">{{ profile.questionnaire_reasons.q17|safe }}</p>
+              <p class="text-info">{{ profile.questionnaire_reasons.q17.context|safe }}</p>
             </div>
             {% endif %}
             <hr>
@@ -477,7 +479,7 @@
                 <label class="custom-control-label" for="q18-a1a">{% trans 'My appetite is somewhat less than usual.' %}</label>
               </div>
               <div class="custom-control custom-radio">
-                <input type="radio" id="q18-a2b" value="2b" name="q18" class="custom-control-input" {% if profile.questionnaire.q18 == "2b" %} checked {% endif %}>
+                <input type="radio" id="q18-a2b" value="2b" name="q18" class="custom-control-input" {% if profile.questionnaire.q18 == "1b" %} checked {% endif %}>
                 <label class="custom-control-label" for="q18-a2b">{% trans 'My appetite is somewhat greater than usual.' %}</label>
               </div>
               <div class="custom-control custom-radio">
@@ -500,7 +502,7 @@
             {% if profile.questionnaire_reasons.q18 != None and profile.questionnaire_reasons.q18 != "" %}
             <div class="same-row">
               <h6>{% trans 'Context:' %}</h6>
-              <p class="text-info">{{ profile.questionnaire_reasons.q18|safe }}</p>
+              <p class="text-info">{{ profile.questionnaire_reasons.q18.context|safe }}</p>
             </div>
             {% endif %}
             <hr>
@@ -526,7 +528,7 @@
             {% if profile.questionnaire_reasons.q19 != None and profile.questionnaire_reasons.q19 != "" %}
             <div class="same-row">
               <h6>{% trans 'Context:' %}</h6>
-              <p class="text-info">{{ profile.questionnaire_reasons.q19|safe }}</p>
+              <p class="text-info">{{ profile.questionnaire_reasons.q19.context|safe }}</p>
             </div>
             {% endif %}
             <hr>
@@ -552,7 +554,7 @@
             {% if profile.questionnaire_reasons.q20 != None and profile.questionnaire_reasons.q20 != "" %}
             <div class="same-row">
               <h6>{% trans 'Context:' %}</h6>
-              <p class="text-info">{{ profile.questionnaire_reasons.q20|safe }}</p>
+              <p class="text-info">{{ profile.questionnaire_reasons.q20.context|safe }}</p>
             </div>
             {% endif %}
             <hr>
@@ -578,7 +580,7 @@
             {% if profile.questionnaire_reasons.q21 != None and profile.questionnaire_reasons.q21 != "" %}
             <div class="same-row">
               <h6>{% trans 'Context:' %}</h6>
-              <p class="text-info">{{ profile.questionnaire_reasons.q21|safe }}</p>
+              <p class="text-info">{{ profile.questionnaire_reasons.q21.context|safe }}</p>
             </div>
             {% endif %}
           </div>

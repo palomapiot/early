@@ -108,7 +108,6 @@ def _export_labeled_data(request, export_format, corpus, labels, drop):
 def _calculate_depression_level(questionnaire):
     depression_level = "unknown"
     if questionnaire != None:
-        print(questionnaire)
         # depression level score
         depression_levels = {
             "minimal depression": range(0, 9),
@@ -199,25 +198,6 @@ def profiles(request):
         raise Http404
 
 def profile_detail(request, pk):
-    """aux_body = {
-        "comments": [ 
-            { 
-            "comment": "adsfsfdasdfasdfadsf",
-            "date": "01-01-2020"
-            },
-            { 
-            "comment": "hola hola hola no vengas sola",
-            "date": "01-01-2020"
-            },
-            { 
-            "comment": "let's gooooooooooooooooo",
-            "date": "01-01-2020"
-            }
-        ],
-        "experiment_id": "test"
-        }
-    ext_endpoint = requests.post('http://127.0.0.1:5000/profile', json=aux_body)
-    print(ext_endpoint)"""
     json_request = _api_request(request, '/api/profiles/' + str(pk))
     depression_level = _calculate_depression_level(json_request["questionnaire"])
     globaldata = _api_request(request, GLOBALDATA_ENDPOINT, 'GET')
@@ -330,7 +310,8 @@ def loaddata(request):
     nusers = request.POST.get("nusers")
     ncomments = request.POST.get("ncomments")
     corpus = request.POST.get("corpus")
-    load_reddit_data.delay(request.user.id, request.is_secure(), 'web:8000', subreddit, nsubmissions, nusers, ncomments, corpus)
+    host = 'web:8000'
+    load_reddit_data.delay(request.user.id, request.is_secure(), host, subreddit, nsubmissions, nusers, ncomments, corpus)
     return redirect('/')
 
 
@@ -345,7 +326,8 @@ def processuser(request):
     username = request.POST.get("username")
     ncomments = request.POST.get("ncomments")
     corpus = request.POST.get("corpus")
-    process_user.delay(request.user.id, request.is_secure(), 'web:8000', username, ncomments, corpus)
+    host =  'web:8000' # request.get_host() 
+    process_user.delay(request.user.id, request.is_secure(), host, username, ncomments, corpus)
     return redirect('/')
 
 def password_change_done(request):

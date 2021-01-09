@@ -27,7 +27,7 @@ SECRET_KEY = 'p*b@bm8!21=qr$!jtxxp@7=-)im&*ex=ma$$$dte0w2h55ft=c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['earlydetection-staging.herokuapp.com', 'earlydetection.herokuapp.com', '0.0.0.0', 'web', 'middle.dc.fi.udc.es', '193.144.51.31', '192.168.1.41', '192.168.0.143']
+ALLOWED_HOSTS = ['earlydetection-staging.herokuapp.com', 'earlydetection.herokuapp.com', '0.0.0.0', 'db', 'web', 'middle.dc.fi.udc.es', '193.144.51.31', '192.168.1.41', '192.168.0.143']
 
 
 # Application definition
@@ -85,8 +85,7 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-DB_HOST = 'localhost'
-print(sys.argv)
+DB_HOST = 'db' # 'localhost
 if 'test' in sys.argv:
     DB_HOST = 'localhost'
 DATABASES = {

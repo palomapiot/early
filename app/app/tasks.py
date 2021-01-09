@@ -30,10 +30,17 @@ def _api_request(request_user, request_is_secure, request_host, url, request_typ
 @app.task
 def process_user(request_user, request_is_secure, request_host, user, ncomments, corpus):
     comments = get_user_comments(user, ncomments)
-    
     # TODO: before creating -> classify calling the gender model endpoint and save the system data
 
     gender_output = 'Unknown'
+
+    # call profiler-buddy POST /questionnaire
+    questionnaire_body = {
+        "comments": comments,
+        "experiment_id": str(user)
+    }
+    pb_questionnaire = requests.post('http://192.168.1.44:5000/questionnaire', json=questionnaire_body)
+    questionnaire = json.loads(pb_questionnaire.content)
 
     body = {
         "experiment_id": str(user),
@@ -47,10 +54,11 @@ def process_user(request_user, request_is_secure, request_host, user, ncomments,
             "location": None,
             "personality": "Unknown",
             "depressed": None
-        }
+        },
+        "questionnaire": questionnaire["questionnaire"],
+        "questionnaire_reasons": questionnaire["questionnaire_reasons"]
     }
-
-    print('Saving user...' + str(user))
+    print('saving user...' + str(user))
     # create / update profile
     _api_request(request_user, request_is_secure, request_host, '/api/profiles/', 'POST', body)
 
@@ -69,7 +77,6 @@ def load_reddit_data(self, request_user, request_is_secure, request_host, subred
     _api_request(request_user, request_is_secure, request_host, '/api/globaldata/1/', 'PUT', body)
     submissions = get_submissions(subreddit, nsubmissions)
     users = get_users(submissions, nusers)
-    #users = ['throwRAluvee', 'MikaKoinu', 'ChunkyPuppyKissez', 'TheMightyBiz']
     for user in users:
         time.sleep(3)
         process_user.delay(request_user, request_is_secure, request_host, user, ncomments, corpus)
