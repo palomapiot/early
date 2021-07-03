@@ -18,4 +18,4 @@ EXPOSE 8000
 RUN useradd -ms /bin/bash user
 USER user
 
-CMD python manage.py runserver 0.0.0.0:$PORT
+CMD python manage.py runserver 0.0.0.0:8000

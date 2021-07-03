@@ -30,16 +30,16 @@ def _api_request(request_user, request_is_secure, request_host, url, request_typ
 @app.task
 def process_user(request_user, request_is_secure, request_host, user, ncomments, corpus):
     comments = get_user_comments(user, ncomments)
-    # TODO: before creating -> classify calling the gender model endpoint and save the system data
-
-    gender_output = 'Unknown'
-
-    # call profiler-buddy POST /questionnaire
-    questionnaire_body = {
+    request_body = {
         "comments": comments,
         "experiment_id": str(user)
     }
-    pb_questionnaire = requests.post('http://192.168.1.44:5000/questionnaire', json=questionnaire_body)
+    # call profiler-buddy POST /profile
+    pb_profile = requests.post('http://192.168.0.143:5000/profile', json=request_body) #192.168.0.143 // 192.168.1.44
+    gender_output = json.loads(pb_profile.content)
+
+    # call profiler-buddy POST /questionnaire
+    pb_questionnaire = requests.post('http://192.168.0.143:5000/questionnaire', json=request_body)
     questionnaire = json.loads(pb_questionnaire.content)
 
     body = {
@@ -50,11 +50,17 @@ def process_user(request_user, request_is_secure, request_host, user, ncomments,
         "system_data":
         {
             "age": "Unknown",
-            "gender": gender_output,
+            "gender": gender_output["gender"],
             "location": None,
             "personality": "Unknown",
             "depressed": None
         },
+        "reasons": [
+            {
+                "profile_data_type": "Gender",
+                "reason": "Classification score: " + str(gender_output["gender_score"]),
+            }
+        ],
         "questionnaire": questionnaire["questionnaire"],
         "questionnaire_reasons": questionnaire["questionnaire_reasons"]
     }

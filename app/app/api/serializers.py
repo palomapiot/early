@@ -157,7 +157,12 @@ class ProfileNLPSerializer(serializers.ModelSerializer):
             instance.questionnaire_reasons = questionnaire_reasons_v_data
             instance.save()
         for reason in reasons_v_data:
-            Reason.objects.create(profile=instance, **reason)
+            # if clasification score of same type -> update
+            if "Classification score" in reason['reason']:
+                Reason.objects.update_or_create(profile=instance, **reason)
+            # if new reason -> only create if it's completely
+            else:
+                Reason.objects.get_or_create(profile=instance, **reason)
         last_date = None
         for comment in comments_v_data:
             c_date = None
@@ -166,10 +171,8 @@ class ProfileNLPSerializer(serializers.ModelSerializer):
                     c_date = value
             # create comment if date doesnt exist
             if instance.last_retrieved_comment_date is None or instance.last_retrieved_comment_date < c_date:
-                print('created comment')
                 Comment.objects.create(profile=instance, **comment)
             if last_date is None or c_date > last_date:
-                print('updates recent date!')
                 last_date = c_date
 
         instance.last_retrieved_comment_date = last_date
