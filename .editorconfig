@@ -1,5 +1,4 @@
-<!--
-"""
+ file_header_template = """
     Copyright 2020-2021 Paloma Piot Pérez-Abadín
 	
 	This file is part of early.
@@ -13,14 +12,4 @@
     GNU General Public License for more details.
     You should have received a copy of the GNU General Public License
     along with early.  If not, see <https://www.gnu.org/licenses/>.
-"""    
--->
-
-{% load static %}
-<div class="container">
-    <div style="
-    display: flex;
-    justify-content: center;">
-        <img src="/static/images/404-400px.png" alt="Page not found">
-    </div>
-</div>
+"""

@@ -5,6 +5,7 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 .history
+.editorconfig
 
 ### Django ###
 *.log
