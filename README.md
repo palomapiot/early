@@ -46,6 +46,8 @@ Run as a container with:
 
 Clone the project, install docker and start the service with `docker-compose up`
 
+For create the database super user run the following command `docker exec -it <early_web_container_id> python manage.py createsuperuser`
+
 ## Roadmap
 
 - Retrieve data from Twitter
