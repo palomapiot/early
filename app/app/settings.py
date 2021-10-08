@@ -43,7 +43,7 @@ SECRET_KEY = 'p*b@bm8!21=qr$!jtxxp@7=-)im&*ex=ma$$$dte0w2h55ft=c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['earlydetection-staging.herokuapp.com', 'earlydetection.herokuapp.com', '0.0.0.0', 'db', 'web', 'middle.dc.fi.udc.es', '193.144.51.31', '192.168.1.41', '192.168.0.143']
+ALLOWED_HOSTS = ['earlydetection-staging.herokuapp.com', 'earlydetection.herokuapp.com', '0.0.0.0', 'db', 'web', 'middle.dc.fi.udc.es', '193.144.51.31', '192.168.1.41', '192.168.0.143', 'localhost', '127.0.0.1']
 
 
 # Application definition

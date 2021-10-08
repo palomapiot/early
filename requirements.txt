@@ -27,7 +27,6 @@ Flask==1.1.2
 Flask-BasicAuth==0.2.0
 gevent==20.12.1
 geventhttpclient==1.4.4
-greenlet==0.4.17
 idna==2.10
 itsdangerous==1.1.0
 Jinja2==2.11.2
