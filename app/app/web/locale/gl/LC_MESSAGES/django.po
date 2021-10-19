@@ -1,0 +1,788 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-08 22:56+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\templates\account.html:25
+msgid "Account"
+msgstr "Conta"
+
+#: .\templates\account.html:32 .\templates\update_user.html:30
+msgid "Account details"
+msgstr "Detalles conta"
+
+#: .\templates\account.html:43
+#: .\templates\registration\password_change_form.html:56
+msgid "Change password"
+msgstr "Cambiar contrasinal"
+
+#: .\templates\administration_content.html:30
+msgid "Administration"
+msgstr "Administración"
+
+#: .\templates\administration_content.html:36
+msgid "Load Reddit data"
+msgstr "Cargar datos de Reddit"
+
+#: .\templates\administration_content.html:48
+#: .\templates\export_data_modal.html:24 .\templates\export_data_modal.html:115
+msgid "Export data"
+msgstr "Exportar datos"
+
+#: .\templates\administration_content.html:60
+#: .\templates\create_corpus_modal.html:24
+#: .\templates\create_corpus_modal.html:40
+msgid "Create corpus"
+msgstr "Crear corpus"
+
+#: .\templates\administration_content.html:71
+#: .\templates\process_user_modal.html:24
+msgid "Process Reddit user"
+msgstr "Procesar usuario de Reddit"
+
+#: .\templates\base_generic.html:64 .\templates\profiles_content.html:42
+msgid "Profiles"
+msgstr "Perfís"
+
+#: .\templates\base_generic.html:77
+msgid "Logout"
+msgstr "Pechar sesión"
+
+#: .\templates\base_generic.html:81
+msgid "Login"
+msgstr "Iniciar sesión"
+
+#: .\templates\create_corpus_modal.html:34
+#: .\templates\create_corpus_modal.html:35
+msgid "Name"
+msgstr "Nome"
+
+#: .\templates\create_corpus_modal.html:41
+#: .\templates\edit_profile_modal.html:87
+#: .\templates\export_data_modal.html:116 .\templates\load_data_modal.html:84
+#: .\templates\process_user_modal.html:66
+#: .\templates\questionnaire_modal.html:606
+msgid "Close"
+msgstr "Pechar"
+
+#: .\templates\edit_profile_modal.html:26 .\templates\profile_detail.html:65
+msgid "Validate and edit data"
+msgstr "Validar e editar datos"
+
+#: .\templates\edit_profile_modal.html:35 .\templates\export_data_modal.html:92
+#: .\templates\profile_fields.html:54
+msgid "Age"
+msgstr "Idade"
+
+#: .\templates\edit_profile_modal.html:41
+#: .\templates\edit_profile_modal.html:49
+#: .\templates\edit_profile_modal.html:68 .\templates\profile_fields.html:68
+#: .\templates\profile_fields.html:131 .\templates\profiles_content.html:59
+#: .\templates\profiles_content.html:66 .\templates\profiles_content.html:83
+msgid "Unknown"
+msgstr "Descoñecido"
+
+#: .\templates\edit_profile_modal.html:45 .\templates\export_data_modal.html:96
+#: .\templates\profile_fields.html:82
+msgid "Gender"
+msgstr "Xénero"
+
+#: .\templates\edit_profile_modal.html:47 .\templates\profiles_content.html:64
+msgid "Female"
+msgstr "Muller"
+
+#: .\templates\edit_profile_modal.html:48 .\templates\profiles_content.html:65
+msgid "Male"
+msgstr "Home"
+
+#: .\templates\edit_profile_modal.html:53
+#: .\templates\export_data_modal.html:100 .\templates\profile_fields.html:115
+msgid "Location"
+msgstr "Ubicación"
+
+#: .\templates\edit_profile_modal.html:61
+#: .\templates\export_data_modal.html:104 .\templates\profile_fields.html:146
+msgid "Personality"
+msgstr "Personalidade"
+
+#: .\templates\edit_profile_modal.html:63 .\templates\profiles_content.html:78
+msgid "Extraversion"
+msgstr "Extroversión"
+
+#: .\templates\edit_profile_modal.html:64 .\templates\profiles_content.html:79
+msgid "Agreeableness"
+msgstr "Amabilidade"
+
+#: .\templates\edit_profile_modal.html:65 .\templates\profiles_content.html:80
+msgid "Conscientiousness"
+msgstr "Escrupulosidade"
+
+#: .\templates\edit_profile_modal.html:66 .\templates\profiles_content.html:81
+msgid "Neuroticism"
+msgstr "Neurosis"
+
+#: .\templates\edit_profile_modal.html:67 .\templates\profiles_content.html:82
+msgid "Openness"
+msgstr "Franqueza"
+
+#: .\templates\edit_profile_modal.html:72 .\templates\load_data_modal.html:71
+#: .\templates\process_user_modal.html:53 .\templates\profile_fields.html:172
+msgid "Corpus"
+msgstr "Corpus"
+
+#: .\templates\edit_profile_modal.html:81
+#: .\templates\export_data_modal.html:108 .\templates\profile_detail.html:49
+#: .\templates\profiles_content.html:135
+msgid "Depression"
+msgstr "Con depresión"
+
+#: .\templates\edit_profile_modal.html:82
+msgid "Depression level by Beck Depression Inventory is "
+msgstr "Nivel de depresión segundo o Inventario para a Depresión de Beck "
+
+#: .\templates\edit_profile_modal.html:86
+msgid "Save and validate"
+msgstr "Gardar e validar"
+
+#: .\templates\export_data_modal.html:36
+msgid "Export demographic data"
+msgstr "Exportar datos demográficos"
+
+#: .\templates\export_data_modal.html:48
+msgid "Export corpus"
+msgstr "Exportar corpus"
+
+#: .\templates\export_data_modal.html:53 .\templates\export_data_modal.html:75
+msgid "All corpus"
+msgstr "Todo o corpus"
+
+#: .\templates\export_data_modal.html:70
+msgid "Export labeled data"
+msgstr "Exportar datos etiquetados"
+
+#: .\templates\export_data_modal.html:89
+msgid "Demographic labels to export"
+msgstr "Etiquetas demográficas para exportar"
+
+#: .\templates\load_data_modal.html:24 .\templates\load_data_modal.html:83
+msgid "Load data"
+msgstr "Cargar datos"
+
+#: .\templates\load_data_modal.html:34 .\templates\load_data_modal.html:39
+msgid "Subreddit"
+msgstr "Subreddit"
+
+#: .\templates\load_data_modal.html:43 .\templates\load_data_modal.html:48
+msgid "Number of users"
+msgstr "Número de usuarios"
+
+#: .\templates\load_data_modal.html:52 .\templates\load_data_modal.html:57
+msgid "Number of submissions"
+msgstr "Número de envíos"
+
+#: .\templates\load_data_modal.html:61 .\templates\load_data_modal.html:66
+#: .\templates\process_user_modal.html:43
+#: .\templates\process_user_modal.html:48
+msgid "Number of comments per user"
+msgstr "Número de comentarios por usuario"
+
+#: .\templates\process_user_modal.html:34
+#: .\templates\process_user_modal.html:39
+msgid "Reddit username"
+msgstr "Nome de usuario de Reddit"
+
+#: .\templates\process_user_modal.html:65
+msgid "Process user"
+msgstr "Procesar usuario"
+
+#: .\templates\profile_detail.html:35
+msgid "Profile: "
+msgstr "Perfil"
+
+#: .\templates\profile_detail.html:47 .\templates\profiles_content.html:131
+msgid "Not processed"
+msgstr "Non procesado"
+
+#: .\templates\profile_detail.html:51 .\templates\profiles_content.html:139
+msgid "No depression"
+msgstr "Sen depresión"
+
+#: .\templates\profile_detail.html:61 .\templates\questionnaire_modal.html:24
+msgid "Beck Depression Inventory"
+msgstr "Inventario para a Depresión de Beck"
+
+#: .\templates\profile_fields.html:65 .\templates\profile_fields.html:67
+msgid "years"
+msgstr "anos"
+
+#: .\templates\profile_fields.html:73 .\templates\profile_fields.html:106
+#: .\templates\profile_fields.html:137 .\templates\profile_fields.html:163
+msgid "Reasons"
+msgstr "Motivos"
+
+#: .\templates\profiles_content.html:48
+msgid "Search"
+msgstr "Buscar"
+
+#: .\templates\profiles_content.html:91 .\templates\profiles_content.html:98
+#: .\templates\profiles_content.html:105
+msgid "True"
+msgstr "Verdadeiro"
+
+#: .\templates\profiles_content.html:92 .\templates\profiles_content.html:99
+#: .\templates\profiles_content.html:106
+msgid "False"
+msgstr "Falso"
+
+#: .\templates\questionnaire_modal.html:34
+msgid "1. Sadness"
+msgstr "1. Tristeza"
+
+#: .\templates\questionnaire_modal.html:38
+msgid "I do not feel sad."
+msgstr "Non me sinto triste."
+
+#: .\templates\questionnaire_modal.html:42
+msgid "I feel sad much of the time."
+msgstr "Síntome triste a maior parte do tempo."
+
+#: .\templates\questionnaire_modal.html:46
+msgid "I am sad all the time."
+msgstr "Estou triste todo o tempo."
+
+#: .\templates\questionnaire_modal.html:50
+msgid "I am so sad or unhappy that I can\\"
+msgstr "Estou tan triste que podo\\"
+
+#: .\templates\questionnaire_modal.html:55
+#: .\templates\questionnaire_modal.html:81
+#: .\templates\questionnaire_modal.html:107
+#: .\templates\questionnaire_modal.html:133
+#: .\templates\questionnaire_modal.html:159
+#: .\templates\questionnaire_modal.html:185
+#: .\templates\questionnaire_modal.html:211
+#: .\templates\questionnaire_modal.html:237
+#: .\templates\questionnaire_modal.html:263
+#: .\templates\questionnaire_modal.html:289
+#: .\templates\questionnaire_modal.html:315
+#: .\templates\questionnaire_modal.html:341
+#: .\templates\questionnaire_modal.html:367
+#: .\templates\questionnaire_modal.html:393
+#: .\templates\questionnaire_modal.html:419
+#: .\templates\questionnaire_modal.html:457
+#: .\templates\questionnaire_modal.html:483
+#: .\templates\questionnaire_modal.html:521
+#: .\templates\questionnaire_modal.html:547
+#: .\templates\questionnaire_modal.html:573
+#: .\templates\questionnaire_modal.html:599
+msgid "Context:"
+msgstr "Contexto:"
+
+#: .\templates\questionnaire_modal.html:60
+msgid "2. Pessimism"
+msgstr "2. Pesimismo"
+
+#: .\templates\questionnaire_modal.html:64
+msgid "I am not discouraged about my future."
+msgstr "Non estou desanimado/a a cerca do meu futuro."
+
+#: .\templates\questionnaire_modal.html:68
+msgid "I feel more discouraged about my future than I used to be."
+msgstr "Síntome máis desanimado/a a cerca do meu futuro do que adoitaba fai tempo."
+
+#: .\templates\questionnaire_modal.html:72
+msgid "I do not expect things to work out for me."
+msgstr "Non espero que as cousas me saian ben."
+
+#: .\templates\questionnaire_modal.html:76
+msgid "I feel my future is hopeless and will only get worse."
+msgstr "Sinto que non teño esperanza no meu futuro e so vai ir a peor."
+
+#: .\templates\questionnaire_modal.html:86
+msgid "3. Past Failure"
+msgstr "3. Fracaso pasado"
+
+#: .\templates\questionnaire_modal.html:90
+msgid "I do not feel like a failure."
+msgstr "Non me sinto un/unha fracasado/a."
+
+#: .\templates\questionnaire_modal.html:94
+msgid "I have failed more than I should have."
+msgstr "Fallei máis do que debería."
+
+#: .\templates\questionnaire_modal.html:98
+msgid "As I look back, I see a lot of failures."
+msgstr "Se miro cara atrás, vexo un montón de fallos."
+
+#: .\templates\questionnaire_modal.html:102
+msgid "I feel I am a total failure as a person."
+msgstr "Sinto que son un fracaso total como persoa."
+
+#: .\templates\questionnaire_modal.html:112
+msgid "4. Loss of Pleasure"
+msgstr "4. Perda do pracer"
+
+#: .\templates\questionnaire_modal.html:116
+msgid "I get as much pleasure as I ever did from the things I enjoy."
+msgstr "Sinto tanto pracer coma sempre das cousas que disfruto."
+
+#: .\templates\questionnaire_modal.html:120
+#: .\templates\questionnaire_modal.html:142
+#: .\templates\questionnaire_modal.html:168
+#: .\templates\questionnaire_modal.html:220
+#: .\templates\questionnaire_modal.html:246
+#: .\templates\questionnaire_modal.html:272
+#: .\templates\questionnaire_modal.html:380
+#: .\templates\questionnaire_modal.html:410
+#: .\templates\questionnaire_modal.html:414
+msgid "I don\\"
+msgstr "Non\\"
+
+#: .\templates\questionnaire_modal.html:124
+msgid "I get very little pleasure from the things I used to enjoy."
+msgstr "Divírtome moi pouco as cousas que antes adoitaba disfrutar."
+
+#: .\templates\questionnaire_modal.html:128
+#: .\templates\questionnaire_modal.html:534
+msgid "I can\\"
+msgstr "Podo\\"
+
+#: .\templates\questionnaire_modal.html:138
+msgid "5. Guilty Feelings"
+msgstr "5. Sensación de culpa"
+
+#: .\templates\questionnaire_modal.html:146
+msgid "I feel guilty over many things I have done or should have done."
+msgstr "Síntome culpable de moitas cousas que fixen ou debería ter feito."
+
+#: .\templates\questionnaire_modal.html:150
+msgid "I feel quite guilty most of the time."
+msgstr "Síntome bastante culpable a maioría do tempo."
+
+#: .\templates\questionnaire_modal.html:154
+msgid "I feel guilty all of the time."
+msgstr "Síntome culpable todo o tempo."
+
+#: .\templates\questionnaire_modal.html:164
+msgid "6. Punishment Feelings"
+msgstr "6. Sentimento de castigo"
+
+#: .\templates\questionnaire_modal.html:172
+msgid "I feel I may be punished."
+msgstr "Sinto que debería ser castigado/a."
+
+#: .\templates\questionnaire_modal.html:176
+msgid "I expect to be punished."
+msgstr "Espero que alguén me castigue."
+
+#: .\templates\questionnaire_modal.html:180
+msgid "I feel I am being punished."
+msgstr "Sinto que estou sendo castigado/a."
+
+#: .\templates\questionnaire_modal.html:190
+msgid "7. Self-Dislike"
+msgstr "7. Auto-desprecio"
+
+#: .\templates\questionnaire_modal.html:194
+msgid "I feel the same about myself as ever."
+msgstr "Síntome igual ca sempre."
+
+#: .\templates\questionnaire_modal.html:198
+msgid "I have lost confidence in myself."
+msgstr "Perdín confianza en min mesmo/a."
+
+#: .\templates\questionnaire_modal.html:202
+msgid "I am disappointed in myself."
+msgstr "Estou decepcionado/a comigo mesmo/a."
+
+#: .\templates\questionnaire_modal.html:206
+msgid "I dislike myself."
+msgstr "Non me gusto."
+
+#: .\templates\questionnaire_modal.html:216
+msgid "8. Self-Criticalness"
+msgstr "8. Autocrítica"
+
+#: .\templates\questionnaire_modal.html:224
+msgid "I am more critical of myself than I used to be."
+msgstr "Son máis crítico/a comigo/a mesmo/a do que adoitaba ser."
+
+#: .\templates\questionnaire_modal.html:228
+msgid "I criticize myself for all of my faults."
+msgstr "Critícomo por todos os meus fallos."
+
+#: .\templates\questionnaire_modal.html:232
+msgid "I blame myself for everything bad that happens."
+msgstr "Cúlpome de todo o malo que me pasa."
+
+#: .\templates\questionnaire_modal.html:242
+msgid "9. Suicidal Thoughts or Wishes"
+msgstr "9. Pensamentos ou desexos suicidas"
+
+#: .\templates\questionnaire_modal.html:250
+msgid "I have thoughts of killing myself, but I would not carry them out."
+msgstr "Penso en suicidarme, pero non o fago."
+
+#: .\templates\questionnaire_modal.html:254
+msgid "I would like to kill myself."
+msgstr "Gustaríame suicidarme."
+
+#: .\templates\questionnaire_modal.html:258
+msgid "I would kill myself if I had the chance."
+msgstr "Suicidaríame se tivese a oportunidade."
+
+#: .\templates\questionnaire_modal.html:268
+msgid "10. Crying"
+msgstr "10. Chorar"
+
+#: .\templates\questionnaire_modal.html:276
+msgid "I cry more than I used to."
+msgstr "Choro máis do que adoitaba facelo."
+
+#: .\templates\questionnaire_modal.html:280
+msgid "I cry over every little thing."
+msgstr "Choro por calquera cousa."
+
+#: .\templates\questionnaire_modal.html:284
+msgid "I feel like crying, but I can\\"
+msgstr "Sinto que quero chorar, pero non son capaz."
+
+#: .\templates\questionnaire_modal.html:294
+msgid "11. Agitation"
+msgstr "11. Nerviosismo"
+
+#: .\templates\questionnaire_modal.html:298
+msgid "I am no more restless or wound up than usual."
+msgstr ""
+
+#: .\templates\questionnaire_modal.html:302
+msgid "I feel more restless or wound up than usual."
+msgstr "Non me sinto máis inquieto/a ou tenso/a que de costume."
+
+#: .\templates\questionnaire_modal.html:306
+msgid "I am so restless or agitated that it\\"
+msgstr "Estou tan inquieto/a ou axitado/a que..."
+
+#: .\templates\questionnaire_modal.html:310
+msgid ""
+"I am so restless or agitated that I have to keep moving or doing something."
+msgstr "Estou tan inquieto/a ou axitado/a que teño que moverme ou facer algo."
+
+#: .\templates\questionnaire_modal.html:320
+msgid "12. Loss of Interest"
+msgstr "12. Perda de interés"
+
+#: .\templates\questionnaire_modal.html:324
+msgid "I have not lost interest in other people or activities."
+msgstr "Non perdín o interés noutras persoas ou actividades."
+
+#: .\templates\questionnaire_modal.html:328
+msgid "I am less interested in other people or things than before."
+msgstr "Síntome menos interesado/a noutras persoas ou cousas que antes."
+
+#: .\templates\questionnaire_modal.html:332
+msgid "I have lost most of my interest in other people or things."
+msgstr "Perdín case todo o meu interés noutras persoas ou cousas."
+
+#: .\templates\questionnaire_modal.html:336
+#: .\templates\questionnaire_modal.html:538
+msgid "It\\"
+msgstr ""
+
+#: .\templates\questionnaire_modal.html:346
+msgid "13. Indecisiveness"
+msgstr "13. Indecisión"
+
+#: .\templates\questionnaire_modal.html:350
+msgid "I make decisions about as well as ever."
+msgstr "Tomo decisións tan ben coma sempre."
+
+#: .\templates\questionnaire_modal.html:354
+msgid "I find it more difficult to make decisions than usual."
+msgstr "Resúltame máis difícil do normal tomar decisións."
+
+#: .\templates\questionnaire_modal.html:358
+msgid "I have much greater difficulty in making decisions than I used to."
+msgstr "Teño moitas máis dificultades do normal para tomar decisións."
+
+#: .\templates\questionnaire_modal.html:362
+msgid "I have trouble making any decisions."
+msgstr "Teño problemas tomando decisións."
+
+#: .\templates\questionnaire_modal.html:372
+msgid "14. Worthlessness"
+msgstr "14. Inutilidade"
+
+#: .\templates\questionnaire_modal.html:376
+msgid "I do not feel I am worthless."
+msgstr "Non sinto que sexa inútil."
+
+#: .\templates\questionnaire_modal.html:384
+msgid "I feel more worthless as compared to other people."
+msgstr "Síntome máis inútil que outras personas."
+
+#: .\templates\questionnaire_modal.html:388
+msgid "I feel utterly worthless."
+msgstr "Síntome completamente inútil."
+
+#: .\templates\questionnaire_modal.html:398
+msgid "15. Loss of Energy"
+msgstr "15. Perda de enerxía"
+
+#: .\templates\questionnaire_modal.html:402
+msgid "I have as much energy as ever."
+msgstr "Teño a mesma enerxía que sempre."
+
+#: .\templates\questionnaire_modal.html:406
+msgid "I have less energy than I used to have."
+msgstr "Teño menos enerxía da que adoitaba ter."
+
+#: .\templates\questionnaire_modal.html:424
+msgid "16. Changes in Sleeping Pattern"
+msgstr "16. Cambios no padrón do sono"
+
+#: .\templates\questionnaire_modal.html:428
+msgid "I have not experienced any change in my sleeping pattern."
+msgstr "Non notei ningún cambio no meu padrón do sono."
+
+#: .\templates\questionnaire_modal.html:432
+msgid "I sleep somewhat more than usual."
+msgstr "Durmo algo máis do normal."
+
+#: .\templates\questionnaire_modal.html:436
+msgid "I sleep somewhat less than usual."
+msgstr "Durmo algo menos do normal."
+
+#: .\templates\questionnaire_modal.html:440
+msgid "I sleep a lot more than usual."
+msgstr "Durmo moito máis do normal."
+
+#: .\templates\questionnaire_modal.html:444
+msgid "I sleep a lot less than usual."
+msgstr "Durmo moito menos do normal."
+
+#: .\templates\questionnaire_modal.html:448
+msgid "I sleep most of the day."
+msgstr "Durmo durante gran parte do día."
+
+#: .\templates\questionnaire_modal.html:452
+msgid "I wake up 1-2 hours early and can\\"
+msgstr "Esperto 1-2 horas antes e ..."
+
+#: .\templates\questionnaire_modal.html:462
+msgid "17. Irritability"
+msgstr "17. Irritabilidade"
+
+#: .\templates\questionnaire_modal.html:466
+msgid "I am no more irritable than usual."
+msgstr "Non me sinto máis irritable do normal."
+
+#: .\templates\questionnaire_modal.html:470
+msgid "I am more irritable than usual."
+msgstr "Síntome máis irritable do normal."
+
+#: .\templates\questionnaire_modal.html:474
+msgid "I am much more irritable than usual."
+msgstr "Síntome moito máis irritable do normal."
+
+#: .\templates\questionnaire_modal.html:478
+msgid "I am irritable all the time."
+msgstr "Síntome irritable todo o tempo."
+
+#: .\templates\questionnaire_modal.html:488
+msgid "18. Changes in Appetite"
+msgstr "18. Cambios no apetito"
+
+#: .\templates\questionnaire_modal.html:492
+msgid "I have not experienced any change in my appetite."
+msgstr "Non sentín ningún cambio no apetito."
+
+#: .\templates\questionnaire_modal.html:496
+msgid "My appetite is somewhat less than usual."
+msgstr "O meu apetito é algo menor do que adoitaba ser."
+
+#: .\templates\questionnaire_modal.html:500
+msgid "My appetite is somewhat greater than usual."
+msgstr "O meu apetito é algo maior do que adoitaba ser."
+
+#: .\templates\questionnaire_modal.html:504
+msgid "My appetite is much less than before."
+msgstr "O meu apetito é moito menor do que adoitaba ser."
+
+#: .\templates\questionnaire_modal.html:508
+msgid "My appetite is much greater than usual."
+msgstr "O meu apetito é moito maior do que adoitaba ser."
+
+#: .\templates\questionnaire_modal.html:512
+msgid "I have no appetite."
+msgstr "Non teño apetito."
+
+#: .\templates\questionnaire_modal.html:516
+msgid "I crave food all the time."
+msgstr "Teño ganas de comer todo o tempo."
+
+#: .\templates\questionnaire_modal.html:526
+msgid "19. Concentration Difficulty"
+msgstr "19. Dificultade para concentrarse"
+
+#: .\templates\questionnaire_modal.html:530
+msgid "I can concentrate as well as ever."
+msgstr "Son capaz de concentrarme igual de ben que sempre."
+
+#: .\templates\questionnaire_modal.html:542
+msgid "I find I can\\"
+msgstr "Sinto que non son capaz de ..."
+
+#: .\templates\questionnaire_modal.html:552
+msgid "20. Tiredness or Fatigue"
+msgstr "20. Cansancio ou fatiga"
+
+#: .\templates\questionnaire_modal.html:556
+msgid "I am no more tired or fatigued than usual."
+msgstr "Non me sinto máis canso/a ou fatigado/a do normal."
+
+#: .\templates\questionnaire_modal.html:560
+msgid "I get more tired or fatigued more easily than usual."
+msgstr "Cánsome ou fatígome máis facilmente que de costume."
+
+#: .\templates\questionnaire_modal.html:564
+msgid "I am too tired or fatigued to do a lot of the things I used to do."
+msgstr ""
+
+#: .\templates\questionnaire_modal.html:568
+msgid "I am too tired or fatigued to do most of the things I used to do."
+msgstr "Estou demaisado canso/a ou fatigado/a para facer a maioría de cousas que adoitaba facer."
+
+#: .\templates\questionnaire_modal.html:578
+msgid "21. Loss of Interest in Sex"
+msgstr "21. Perda de interese no sexo"
+
+#: .\templates\questionnaire_modal.html:582
+msgid "I have not noticed any recent change in my interest in sex."
+msgstr "Non notei ningún cambio recente no meu interese polo sexo."
+
+#: .\templates\questionnaire_modal.html:586
+msgid "I am less interested in sex than I used to be."
+msgstr "Síntome menos interesado/a no sexo ca de costume."
+
+#: .\templates\questionnaire_modal.html:590
+msgid "I am much less interested in sex now."
+msgstr "Síntome moito menos interesado/a no sexo ca de costume."
+
+#: .\templates\questionnaire_modal.html:594
+msgid "I have lost interest in sex completely at all."
+msgstr "Perdín o interese no sexo por completo."
+
+#: .\templates\questionnaire_modal.html:605
+msgid "Correct data"
+msgstr "Datos correctos"
+
+#: .\templates\registration\login.html:36
+#: .\templates\registration\login.html:37
+msgid "Username"
+msgstr "Nome de usuario"
+
+#: .\templates\registration\login.html:40
+#: .\templates\registration\login.html:41
+msgid "Password"
+msgstr "Contrasinal"
+
+#: .\templates\registration\login.html:45
+msgid "Wrong username and/or password. Please try again."
+msgstr "Nome de usuario ou contrasinal incorrectos. Por favor, proba de novo."
+
+#: .\templates\registration\login.html:48
+msgid "Forgot password?"
+msgstr "Esqueciches o contrasinal?"
+
+#: .\templates\registration\password_change_done.html:27
+msgid "Password change successful"
+msgstr "O cambio de contrasinal realizouse con éxito"
+
+#: .\templates\registration\password_change_done.html:30
+msgid "Your password was changed."
+msgstr "Cambiouse o teu contrasinal."
+
+#: .\templates\registration\password_change_form.html:31
+msgid "Password change"
+msgstr "Cambio de contrasinal"
+
+#: .\templates\registration\password_change_form.html:35
+msgid ""
+"Please enter your old password, for security’s sake, and then enter your new "
+"password twice so we can verify you typed it in correctly."
+msgstr "Por motivos de seguridade, por favor, introduce o teu contrasinal antigo, "
+"despois introduce o novo contrasinal dúas veces para verificar que se escribiu "
+"correctamente."
+
+#: .\templates\registration\password_change_form.html:38
+#: .\templates\registration\password_change_form.html:39
+msgid "Old password"
+msgstr "Contrasinal antigo"
+
+#: .\templates\registration\password_change_form.html:44
+#: .\templates\registration\password_change_form.html:45
+msgid "New password"
+msgstr "Contrasinal novo"
+
+#: .\templates\registration\password_change_form.html:50
+#: .\templates\registration\password_change_form.html:51
+msgid "New password confirmation"
+msgstr "Confirmación de contrasinal novo"
+
+#: .\templates\registration\password_reset_done.html:28
+#: .\templates\registration\password_reset_form.html:31
+msgid "Password reset"
+msgstr "Restaurar contrasinal"
+
+#: .\templates\registration\password_reset_done.html:31
+msgid ""
+"We’ve emailed you instructions for setting your password, if an account "
+"exists with the email you entered. You should receive them shortly."
+msgstr "Acabamos de enviarlle as intrucións para configurar o contrasinal "
+"por correo electrónico, se existe unha conta co correo electrónico "
+"introducido. Debería recibilo en breves momentos."
+
+#: .\templates\registration\password_reset_done.html:32
+msgid ""
+"If you don’t receive an email, please make sure you’ve entered the address "
+"you registered with, and check your spam folder."
+msgstr "Se non recibiu o correo electrónico, por favor, asegúrese de que "
+"introduceu a dirección coa que se rexistrou correctamente, e comprobe tamén "
+" a súa bandexa de correo non desexado."
+
+#: .\templates\registration\password_reset_form.html:36
+#: .\templates\update_user.html:47 .\templates\update_user.html:48
+msgid "Email"
+msgstr "Correo electrónico"
+
+#: .\templates\registration\password_reset_form.html:41
+msgid "Reset password"
+msgstr "Restaurar contrasinal"
+
+#: .\templates\update_user.html:35 .\templates\update_user.html:36
+msgid "First name"
+msgstr "Nome"
+
+#: .\templates\update_user.html:41 .\templates\update_user.html:42
+msgid "Last name"
+msgstr "Apelido(s)"
+
+#: .\templates\update_user.html:53
+msgid "Update"
+msgstr "Actualizar"
